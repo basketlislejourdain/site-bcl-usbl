@@ -14,9 +14,15 @@ let ns = (await api('storage/kv/namespaces?per_page=100')).find((n) => n.title =
 if (!ns) { ns = await api('storage/kv/namespaces', { method: 'POST', body: JSON.stringify({ title: TITLE }) }); console.log('Stockage créé :', ns.id); }
 const toml = 'worker/wrangler.toml';
 writeFileSync(toml, readFileSync(toml, 'utf8').replace('__KV_ID__', ns.id));
+// Adresse ….workers.dev du compte : créée ici si elle n'existe pas encore
 let sub = null;
-try { sub = (await api('workers/subdomain')).subdomain; } catch (e) { console.log('Sous-domaine workers.dev introuvable :', e.message); }
-if (!sub) throw new Error('Ouvrez une fois « Workers & Pages » dans le tableau de bord Cloudflare pour créer votre adresse workers.dev, puis relancez.');
+try { sub = (await api('workers/subdomain')).subdomain; } catch (e) { console.log('Pas encore d’adresse workers.dev :', e.message); }
+for (const name of ['basket-lislejourdain', 'basket-lislejourdain-32', 'bcl-usbl-' + Math.random().toString(36).slice(2, 6)]) {
+  if (sub) break;
+  try { sub = (await api('workers/subdomain', { method: 'PUT', body: JSON.stringify({ subdomain: name }) })).subdomain; console.log('Adresse workers.dev créée :', sub); }
+  catch (e) { console.log('Nom « ' + name + ' » indisponible :', e.message); }
+}
+if (!sub) throw new Error('Impossible de créer l’adresse workers.dev : ouvrez « Workers & Pages » dans Cloudflare et choisissez un sous-domaine, puis relancez.');
 const url = `https://admin-bcl-usbl.${sub}.workers.dev`;
 mkdirSync('docs/admin', { recursive: true });
 writeFileSync('docs/admin/api.json', JSON.stringify({ url }, null, 1) + '\n');
