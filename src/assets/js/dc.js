@@ -191,6 +191,7 @@
       morph(menuEl(), mf);
     }
     loadWidgets();
+    try { document.dispatchEvent(new Event('dc:render')); } catch (e) { /* ancien navigateur */ }
     var m = mounted; mounted = [];
     m.forEach(function (inst) { if (inst.componentDidMount) { try { inst.componentDidMount(); } catch (e) { console.error(e); } } });
   }
