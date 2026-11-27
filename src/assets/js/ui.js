@@ -60,3 +60,19 @@
     });
   });
 })();
+
+/* « Lire la suite » : bouton data-more-toggle qui affiche / masque le bloc data-more juste avant lui. */
+(function () {
+  'use strict';
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest && e.target.closest('[data-more-toggle]');
+    if (!btn) return;
+    var more = btn.previousElementSibling;
+    if (!more || !more.hasAttribute('data-more')) return;
+    var open = more.hidden;
+    more.hidden = !open;
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.textContent = open ? 'Réduire ↑' : 'Lire la suite ↓';
+    if (!open) btn.closest('article, section, div').scrollIntoView({ block: 'nearest' });
+  });
+})();

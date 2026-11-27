@@ -49,10 +49,7 @@ a{color:#0D1117}a:hover{color:#C2361B}
           <div style="padding: 28px 28px 0">
             <h3 style="margin: 0 0 8px; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 24px; text-transform: uppercase">Notre histoire</h3>
             <sc-if value="{{c.histTitle}}" hint-placeholder-val="{{ false }}"><p style="margin: 0 0 10px; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 20px; line-height: 1.15; color: {{c.accent}}">{{c.histTitle}}</p></sc-if>
-            <div style="display: flex; flex-direction: column; gap: 10px">
-              <sc-for list="{{c.history}}" as="hp" hint-placeholder-count="2"><p style="margin: 0; font-size: 16px; line-height: 1.55; color: #2B3340">{{hp}}</p></sc-for>
-            </div>
-            <sc-if value="{{c.tagline}}" hint-placeholder-val="{{ false }}"><p style="margin: 12px 0 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 24px; line-height: 1.1; text-transform: uppercase; color: {{c.accent}}">{{c.tagline}}</p></sc-if>
+            <div style="display: flex; flex-direction: column; gap: 10px"><p style="margin: 0; font-size: 16px; line-height: 1.55; color: #2B3340">{{c.histFirst}}</p><sc-if value="{{c.histOpen}}"><sc-for list="{{c.histRest}}" as="hp"><p style="margin: 0; font-size: 16px; line-height: 1.55; color: #2B3340">{{hp}}</p></sc-for><sc-if value="{{c.tagline}}" hint-placeholder-val="{{ false }}"><p style="margin: 12px 0 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 24px; line-height: 1.1; text-transform: uppercase; color: {{c.accent}}">{{c.tagline}}</p></sc-if></sc-if></div><button type="button" onClick="{{c.toggleHist}}" aria-expanded="{{c.histExpanded}}" style="align-self: flex-start; margin-top: 10px; border: 0; background: transparent; padding: 0; cursor: pointer; color: {{c.accent}}; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 17px; text-transform: uppercase; letter-spacing: 0.02em">{{c.histLabel}}</button>
           </div>
           <div style="padding: 24px 28px 0">
             <h3 style="margin: 0 0 10px; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 24px; text-transform: uppercase">Le bureau</h3>
@@ -238,6 +235,20 @@ class Component extends DCLogic {
     return { clubs, shared, docs, venues: venuesView };
   }
 }
+
+// Histoire repliable : seul le premier paragraphe est affiché, « Lire la suite » déroule le reste
+const __renderVals = Component.prototype.renderVals;
+Component.prototype.renderVals = function () {
+  const v = __renderVals.call(this);
+  const open = this.state.histOpen || {};
+  v.clubs = (v.clubs || []).map((c, i) => {
+    const on = !!open[i], h = c.history || [];
+    return { ...c, histFirst: h[0] || '', histRest: h.slice(1), histOpen: on, histExpanded: on ? 'true' : 'false',
+      histLabel: on ? 'Réduire ↑' : 'Lire la suite ↓',
+      toggleHist: () => this.setState({ histOpen: { ...open, [i]: !on } }) };
+  });
+  return v;
+};
 </script>
 </body>
 </html>
