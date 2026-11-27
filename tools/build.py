@@ -54,7 +54,8 @@ def asset_url(m):
     p = ASSETS.get(m.group(1))
     if not p:
         raise SystemExit(f"Image introuvable : {m.group(1)}")
-    return f"assets/{p.parent.name}/{p.name}"
+    v = hashlib.sha1(p.read_bytes()).hexdigest()[:8]   # change quand la photo change : contourne le cache
+    return f"assets/{p.parent.name}/{p.name}?v={v}"
 
 
 def link_url(m):
