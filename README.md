@@ -71,7 +71,7 @@ attention aux **adresses e-mail** liées au domaine avant de le résilier.
 ## Reste à compléter avant le lancement
 
 - **Tarifs 2026-2027** et réductions familles (page Infos) : `[xxx €]`, « [à préciser] ».
-- **Matchs et résultats** : données d'exemple (`[Adversaire]`, `[hh:mm]`) à remplacer par la récupération automatique FFBB.
+- **Matchs** : widgets gratuits Score'n'co « Matchs de la semaine » (BCL n° 196218, USBL n° 49060) sur l'accueil et la page Matchs. Les blocs de démonstration de la page Matchs (onglets, calendrier, « Suivre une équipe ») sont masqués (`showDemo`).
 - **Actus de l'accueil** : deux visuels `[Photo]`, et `[x] jours` dans le texte des partenaires.
 - **Carte des salles** (accueil, infos).
 - Photos Halle Louise-Michel et salle polyvalente ; documents à télécharger (statuts, règlement, PV d'AG, projet de club).

@@ -35,3 +35,23 @@
     });
   });
 })();
+
+/* Onglets (bloc « Matchs du week-end » de l'accueil) : boutons data-mtab, panneaux data-mpanel. */
+(function () {
+  'use strict';
+  document.addEventListener('click', function (e) {
+    var tab = e.target.closest && e.target.closest('[data-mtab]');
+    if (!tab) return;
+    var group = tab.closest('[data-mtabs]'), n = tab.getAttribute('data-mtab');
+    group.querySelectorAll('[data-mtab]').forEach(function (t) {
+      var on = t === tab;
+      t.setAttribute('style', t.getAttribute(on ? 'data-style-on' : 'data-style-off'));
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+    group.querySelectorAll('[data-mpanel]').forEach(function (p) {
+      var on = p.getAttribute('data-mpanel') === n;
+      p.style.visibility = on ? 'visible' : 'hidden';
+      p.setAttribute('aria-hidden', on ? 'false' : 'true');
+    });
+  });
+})();
