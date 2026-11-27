@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Espace admin — Basketball à L'Isle-Jourdain</title>
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<style>
+:root{--rouge:#E0301E;--or:#F2C14E;--nuit:#0D1117;--fond:#F4F2EE;--gris:#4A5260;--ligne:#E4E0D8;--ok:#1E7F45}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fond);color:var(--nuit);font-family:'Barlow',system-ui,sans-serif;font-size:16px;line-height:1.45}
+h1,h2,h3{font-family:'Big Shoulders Display',sans-serif;font-weight:900;text-transform:uppercase;line-height:1.05;margin:0}
+h1{font-size:30px}h2{font-size:28px}h3{font-size:20px}
+a{color:#C2361B}
+button,input,select,textarea{font:inherit;color:inherit}
+.top{background:var(--nuit);color:#fff;border-bottom:4px solid var(--rouge);padding:12px 20px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.top .titre{flex:1;min-width:200px}
+.top .titre small{display:block;color:#B8C0CC;font-size:13px}
+.wrap{max-width:1040px;margin:0 auto;padding:20px 16px 80px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 18px}
+.tabs button{border:1px solid var(--nuit);background:transparent;border-radius:999px;height:40px;padding:0 16px;font-family:'Barlow Condensed',sans-serif;font-weight:800;text-transform:uppercase;cursor:pointer}
+.tabs button[aria-pressed=true]{background:var(--nuit);color:#fff}
+.card{background:#fff;border-radius:10px;padding:18px;margin:0 0 12px}
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.item{background:#fff;border-radius:8px;padding:12px 14px;margin:0 0 8px;display:flex;gap:12px;align-items:center}
+.item .txt{flex:1;min-width:0}
+.item .txt strong{display:block;overflow:hidden;text-overflow:ellipsis}
+.item .meta{font-size:13px;color:var(--gris)}
+.item img{width:72px;height:52px;object-fit:cover;border-radius:6px;flex:none}
+.tag{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:12px;text-transform:uppercase;padding:1px 7px;border-radius:3px;margin-right:6px;vertical-align:1px}
+.tag.bcl{background:var(--rouge);color:#fff}.tag.usbl{background:var(--or);color:var(--nuit)}.tag.commun{background:var(--nuit);color:#fff}
+.btn{border:0;border-radius:4px;height:44px;padding:0 18px;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:16px;text-transform:uppercase;background:var(--nuit);color:#fff;display:inline-flex;align-items:center;gap:6px;text-decoration:none}
+.btn.rouge{background:var(--rouge)}.btn.or{background:var(--or);color:var(--nuit)}.btn.clair{background:#fff;color:var(--nuit);border:1px solid var(--nuit)}.btn.petit{height:36px;padding:0 12px;font-size:14px}
+.btn[disabled]{opacity:.5;cursor:default}
+.lien{border:0;background:none;padding:6px;cursor:pointer;color:#C2361B;font-weight:700}
+label.f{display:flex;flex-direction:column;gap:4px;font-weight:600;font-size:14px;margin:0 0 12px}
+label.f small{font-weight:400;color:var(--gris)}
+input[type=text],input[type=email],input[type=password],input[type=date],input[type=month],input[type=url],select,textarea{border:2px solid #C9C4BA;border-radius:6px;padding:10px 12px;background:#fff;width:100%}
+input:focus,select:focus,textarea:focus,button:focus-visible,a:focus-visible{outline:3px solid var(--or);outline-offset:1px}
+textarea{min-height:110px;resize:vertical}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+@media(max-width:640px){.grid2{grid-template-columns:1fr}.item{flex-wrap:wrap}}
+.check{display:flex;gap:10px;align-items:flex-start;background:#FFF6DB;border:2px solid var(--or);border-radius:8px;padding:12px;font-weight:600;margin:0 0 12px}
+.check input{width:22px;height:22px;flex:none;margin-top:1px}
+.msg{border-radius:8px;padding:12px 14px;margin:0 0 14px;font-weight:600}
+.msg.ok{background:#E3F3E8;color:#14532D}.msg.err{background:#FDE7E4;color:#8A1C10}.msg.info{background:#E9ECF1}
+.photos{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}
+.photos figure{margin:0;position:relative}
+.photos img{width:110px;height:80px;object-fit:cover;border-radius:6px;display:block}
+.photos button{position:absolute;top:4px;right:4px;width:28px;height:28px;border-radius:50%;border:0;background:rgba(13,17,23,.8);color:#fff;cursor:pointer}
+.lock{opacity:.6}
+.center{max-width:440px;margin:40px auto}
+.statut{font-weight:700}
+dialog{border:0;border-radius:12px;padding:0;max-width:720px;width:calc(100% - 24px)}
+dialog::backdrop{background:rgba(13,17,23,.6)}
+dialog .in{padding:20px}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="titre"><h1>Espace admin</h1><small>Site du basket à L'Isle-Jourdain · BCL × USBL</small></div>
+  <div id="qui" class="row"></div>
+</header>
+<main class="wrap" id="app"><p>Chargement…</p></main>
+<dialog id="dlg"><div class="in" id="dlgIn"></div></dialog>
+
+<script>
+(function () {
+  'use strict';
+  // ---------------------------------------------------------------- outils
+  var API = null, TOKEN = null, ME = null;
+  var app = document.getElementById('app'), qui = document.getElementById('qui');
+  var dlg = document.getElementById('dlg'), dlgIn = document.getElementById('dlgIn');
+  var SITE = new URL('../', location.href).href;
+  var CLUB_LAB = { bcl: 'BCL · filles', usbl: 'USBL · garçons', commun: 'Commun (BCL + USBL)' };
+  var TYPES_EV = ['Tournois', 'Stages', 'Soirées', 'Engagement', 'Assemblées'];
+
+  function h(tag, attrs) {
+    var el = document.createElement(tag);
+    Object.keys(attrs || {}).forEach(function (k) {
+      var v = attrs[k];
+      if (v == null || v === false) return;
+      if (k === 'class') el.className = v;
+      else if (k === 'text') el.textContent = v;
+      else if (k.slice(0, 2) === 'on') el.addEventListener(k.slice(2), v);
+      else if (k === 'value') el.value = v;
+      else if (k === 'checked') el.checked = !!v;
+      else el.setAttribute(k, v === true ? '' : v);
+    });
+    for (var i = 2; i < arguments.length; i++) put(el, arguments[i]);
+    return el;
+  }
+  function add(el) {
+    for (var i = 1; i < arguments.length; i++) put(el, arguments[i]);
+  }
+  function put(el, c) {
+    if (c == null || c === false) return;
+    if (Array.isArray(c)) c.forEach(function (x) { put(el, x); });
+    else el.appendChild(typeof c === 'string' ? document.createTextNode(c) : c);
+  }
+  function clear(el) { while (el.firstChild) el.removeChild(el.firstChild); return el; }
+  function msg(type, text) { return h('div', { class: 'msg ' + type, role: type === 'err' ? 'alert' : 'status', text: text }); }
+  function field(label, input, help) { return h('label', { class: 'f' }, label, help ? h('small', { text: help }) : null, input); }
+  function input(type, value, attrs) { return h('input', Object.assign({ type: type, value: value || '' }, attrs || {})); }
+  function select(options, value) {
+    var s = h('select');
+    options.forEach(function (o) { s.appendChild(h('option', { value: o[0], text: o[1], selected: o[0] === value ? 'selected' : null })); });
+    return s;
+  }
+  function tag(club) { return h('span', { class: 'tag ' + club, text: club === 'commun' ? 'BCL + USBL' : club.toUpperCase() }); }
+  function slug(s) { return String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 50); }
+  function uid(t) { return (slug(t) || 'element') + '-' + Date.now().toString(36); }
+  function fmtDate(iso) { if (!iso) return ''; var p = iso.split('-'); return p.length === 3 ? p[2] + '/' + p[1] + '/' + p[0] : p[1] + '/' + p[0]; }
+  function canEdit(club) { return ME.role === 'superadmin' || club === ME.club || club === 'commun'; }
+  function clubOptions() {
+    var all = [['commun', CLUB_LAB.commun], ['bcl', CLUB_LAB.bcl], ['usbl', CLUB_LAB.usbl]];
+    return ME.role === 'superadmin' ? all : all.filter(function (o) { return o[0] === 'commun' || o[0] === ME.club; });
+  }
+  function photoUrl(p) { return /^(data:|https?:)/.test(p) ? p : SITE + p; }
+
+  function call(method, path, body) {
+    return fetch(API + path, {
+      method: method,
+      headers: Object.assign({ 'Content-Type': 'application/json' }, TOKEN ? { Authorization: 'Bearer ' + TOKEN } : {}),
+      body: body ? JSON.stringify(body) : undefined
+    }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (d) {
+        if (r.status === 401 && TOKEN) { logout('Votre session a expiré : reconnectez-vous.'); throw new Error('Session expirée.'); }
+        if (!r.ok) throw new Error(d.erreur || 'Erreur (' + r.status + ')');
+        return d;
+      });
+    }, function () { throw new Error('Impossible de joindre le service. Vérifiez votre connexion internet.'); });
+  }
+  function busy(btn, on, label) { btn.disabled = on; if (label) btn.textContent = on ? 'Enregistrement…' : label; }
+
+  // ---------------------------------------------------------------- démarrage
+  fetch('api.json', { cache: 'no-cache' }).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }).then(function (cfg) {
+    if (!cfg || !cfg.url) { clear(app); add(app, h('div', { class: 'center' }, msg('info', 'L’espace admin est en cours d’installation. Revenez dans quelques minutes.'))); return; }
+    API = cfg.url.replace(/\/$/, '');
+    try { TOKEN = sessionStorage.getItem('admin-jeton'); } catch (e) { TOKEN = null; }
+    var hash = decodeURIComponent(location.hash.slice(1));
+    if (hash.indexOf('invitation=') === 0) return inviteScreen(hash.slice(11));
+    if (hash === 'installation') return setupScreen();
+    if (!TOKEN) return loginScreen();
+    call('GET', '/me').then(function (u) { ME = u; home('actus'); }, function () { loginScreen(); });
+  });
+
+  function saveSession(d) {
+    TOKEN = d.jeton; ME = d.compte;
+    try { sessionStorage.setItem('admin-jeton', TOKEN); } catch (e) { /* navigation privée */ }
+    history.replaceState(null, '', location.pathname);
+    home('actus');
+  }
+  function logout(text) {
+    TOKEN = null; ME = null;
+    try { sessionStorage.removeItem('admin-jeton'); } catch (e) { /* rien */ }
+    loginScreen(text);
+  }
+
+  // ---------------------------------------------------------------- écrans d'accès
+  function authForm(title, intro, fields, label, onsubmit, foot) {
+    clear(qui); clear(app);
+    var out = h('div');
+    var btn = h('button', { class: 'btn rouge', type: 'submit', text: label });
+    var form = h('form', { class: 'card', onsubmit: function (e) {
+      e.preventDefault(); clear(out); busy(btn, true);
+      onsubmit().then(null, function (er) { add(out, msg('err', er.message)); busy(btn, false); btn.textContent = label; });
+    } }, h('h2', { text: title }), intro ? h('p', { text: intro }) : null, out, fields, btn);
+    add(app, h('div', { class: 'center' }, form, foot || null));
+  }
+  function loginScreen(info) {
+    var email = input('email', '', { autocomplete: 'username', required: true });
+    var pwd = input('password', '', { autocomplete: 'current-password', required: true });
+    authForm('Connexion', null, [info ? msg('info', info) : null, field('E-mail', email), field('Mot de passe', pwd)], 'Se connecter', function () {
+      return call('POST', '/login', { email: email.value, motDePasse: pwd.value }).then(saveSession);
+    }, h('p', { class: 'meta' }, 'Mot de passe oublié ? Demandez à Eric ou à Sabine de vous renvoyer une invitation. ', h('a', { href: SITE, text: 'Retour au site' })));
+  }
+  function setupScreen() {
+    var code = input('password', '', { required: true, autocomplete: 'off' });
+    var nom = input('text', '', { required: true, autocomplete: 'name' });
+    var email = input('email', '', { required: true, autocomplete: 'username' });
+    var pwd = input('password', '', { required: true, autocomplete: 'new-password', minlength: 10 });
+    authForm('Installation', 'À n’utiliser qu’une fois, pour créer les comptes de super admin (Eric et Sabine).',
+      [field('Code d’installation', code), field('Prénom et nom', nom), field('E-mail', email), field('Mot de passe', pwd, '10 caractères minimum. Une phrase de plusieurs mots, c’est le plus simple et le plus sûr.')], 'Créer mon compte', function () {
+        return call('POST', '/setup', { code: code.value, nom: nom.value, email: email.value, motDePasse: pwd.value }).then(saveSession);
+      });
+  }
+  function inviteScreen(v) {
+    var i = v.lastIndexOf(':'), email = v.slice(0, i), code = v.slice(i + 1);
+    var pwd = input('password', '', { required: true, autocomplete: 'new-password', minlength: 10 });
+    var pwd2 = input('password', '', { required: true, autocomplete: 'new-password' });
+    authForm('Bienvenue !', 'Choisissez votre mot de passe pour activer votre compte (' + email + ').',
+      [field('Mot de passe', pwd, '10 caractères minimum.'), field('Confirmez le mot de passe', pwd2)], 'Activer mon compte', function () {
+        if (pwd.value !== pwd2.value) return Promise.reject(new Error('Les deux mots de passe ne sont pas identiques.'));
+        return call('POST', '/invitation', { email: email, code: code, motDePasse: pwd.value }).then(saveSession);
+      });
+  }
+
+  // ---------------------------------------------------------------- tableau de bord
+  var TABS = [['actus', 'Actus'], ['evenements', 'Agenda'], ['albums', 'Photos'], ['bandeau', 'Bandeau d’alerte'], ['demandes', 'Demandes'], ['comptes', 'Comptes'], ['moncompte', 'Mon compte']];
+  function home(tab) {
+    clear(qui);
+    add(qui, h('span', {}, ME.nom + ' · ', ME.role === 'superadmin' ? 'super admin' : 'éditeur ' + ME.club.toUpperCase()),
+      h('a', { class: 'btn petit clair', href: SITE, target: '_blank', rel: 'noopener', text: 'Voir le site ↗' }),
+      h('button', { class: 'btn petit or', text: 'Déconnexion', onclick: function () { logout('Vous êtes déconnecté.'); } }));
+    clear(app);
+    var nav = h('nav', { class: 'tabs', 'aria-label': 'Rubriques' });
+    TABS.forEach(function (t) {
+      if (t[0] === 'comptes' && ME.role !== 'superadmin') return;
+      add(nav, h('button', { type: 'button', 'aria-pressed': t[0] === tab ? 'true' : 'false', text: t[1], onclick: function () { home(t[0]); } }));
+    });
+    var zone = h('section', { 'aria-live': 'polite' });
+    add(app, [nav, zone]);
+    ({ actus: actusTab, evenements: agendaTab, albums: albumsTab, bandeau: bandeauTab, demandes: demandesTab, comptes: comptesTab, moncompte: moncompteTab })[tab](zone);
+  }
+
+  // Liste générique (actus, agenda, albums) : lecture, édition dans une fenêtre, enregistrement de toute la liste
+  function listTab(zone, name, opts) {
+    add(zone, h('p', {}, 'Chargement…'));
+    call('GET', '/contenu/' + name).then(function (res) {
+      var state = { data: res.data, version: res.version };
+      function draw(note) {
+        clear(zone);
+        add(zone, h('div', { class: 'row', style: 'justify-content:space-between;margin:0 0 12px' }, h('h2', { text: opts.title }),
+          h('button', { class: 'btn rouge', text: '+ ' + opts.addLabel, onclick: function () { edit(null); } })));
+        if (note) add(zone, note);
+        add(zone, h('p', { class: 'meta', text: opts.help }));
+        var items = opts.sort ? state.data.slice().sort(opts.sort) : state.data;
+        if (!items.length) add(zone, h('p', { text: 'Rien pour le moment.' }));
+        items.forEach(function (x) {
+          var ok = canEdit(x.club);
+          add(zone, h('div', { class: 'item' + (ok ? '' : ' lock') }, opts.thumb && opts.thumb(x) ? h('img', { src: photoUrl(opts.thumb(x)), alt: '' }) : null,
+            h('div', { class: 'txt' }, h('strong', {}, tag(x.club), x.titre), h('span', { class: 'meta', text: opts.meta(x) })),
+            ok ? h('button', { class: 'btn petit clair', text: 'Modifier', onclick: function () { edit(x); } }) : h('span', { class: 'meta', text: 'Géré par l’autre club' }),
+            ok ? h('button', { class: 'lien', text: 'Supprimer', 'aria-label': 'Supprimer ' + x.titre, onclick: function () {
+              if (!confirm('Supprimer « ' + x.titre + ' » ? Elle disparaîtra du site.')) return;
+              save(state.data.filter(function (y) { return y.id !== x.id; }), 'Supprimé.');
+            } }) : null));
+        });
+      }
+      function save(next, okText, done) {
+        return call('PUT', '/contenu/' + name, { version: state.version, data: next }).then(function (r) {
+          state.data = next; state.version = r.version;
+          if (done) done();
+          draw(msg('ok', okText + ' Le site sera à jour d’ici une à deux minutes.'));
+        });
+      }
+      function edit(x) {
+        var isNew = !x, item = x ? JSON.parse(JSON.stringify(x)) : opts.blank();
+        clear(dlgIn);
+        var out = h('div');
+        var form = opts.form(item);
+        var btn = h('button', { class: 'btn rouge', type: 'submit', text: 'Enregistrer et publier' });
+        add(dlgIn, h('form', { onsubmit: function (e) {
+          e.preventDefault(); clear(out);
+          var v;
+          try { v = form.read(); } catch (er) { add(out, msg('err', er.message)); return; }
+          if (isNew) v.id = uid(v.titre);
+          busy(btn, true, 'Enregistrer et publier');
+          var next = isNew ? [v].concat(state.data) : state.data.map(function (y) { return y.id === v.id ? v : y; });
+          save(next, isNew ? 'Ajouté.' : 'Modifié.', function () { dlg.close(); }).then(null, function (er) {
+            add(out, msg('err', er.message)); busy(btn, false, 'Enregistrer et publier');
+          });
+        } }, h('h2', { text: (isNew ? 'Ajouter : ' : 'Modifier : ') + opts.addLabel.toLowerCase() }), out, form.el,
+          h('div', { class: 'row' }, btn, h('button', { class: 'btn clair', type: 'button', text: 'Annuler', onclick: function () { dlg.close(); } }))));
+        dlg.showModal();
+      }
+      draw();
+    }, function (er) { clear(zone); add(zone, msg('err', er.message)); });
+  }
+
+  // Envoi d'une photo : redimensionnée dans le navigateur (1600 px max) puis envoyée
+  function resize(file) {
+    return new Promise(function (ok, ko) {
+      if (!/^image\//.test(file.type)) return ko(new Error('Ce fichier n’est pas une photo.'));
+      var img = new Image(), url = URL.createObjectURL(file);
+      img.onload = function () {
+        var max = 1600, w = img.naturalWidth, hh = img.naturalHeight, r = Math.min(1, max / Math.max(w, hh));
+        var c = document.createElement('canvas'); c.width = Math.round(w * r); c.height = Math.round(hh * r);
+        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+        URL.revokeObjectURL(url);
+        ok(c.toDataURL('image/jpeg', 0.82));
+      };
+      img.onerror = function () { ko(new Error('Photo illisible (format non pris en charge ?).')); };
+      img.src = url;
+    });
+  }
+  function uploadPhotos(files, onDone, onErr, status) {
+    var list = Array.prototype.slice.call(files), out = [], i = 0;
+    (function next() {
+      if (i >= list.length) return onDone(out);
+      var f = list[i++];
+      status('Envoi de la photo ' + i + ' sur ' + list.length + '…');
+      resize(f).then(function (data) {
+        return call('POST', '/photo', { nom: f.name, type: 'image/jpeg', donnees: data }).then(function (r) { out.push({ chemin: r.chemin, apercu: data }); next(); });
+      }).then(null, onErr);
+    })();
+  }
+  function photoPicker(label, initial, multiple) {
+    var photos = (initial || []).map(function (p) { return { chemin: p, apercu: photoUrl(p) }; });
+    var box = h('div', { class: 'photos' }), status = h('div', { class: 'meta' });
+    var file = h('input', { type: 'file', accept: 'image/*', multiple: multiple ? true : null, class: 'hidden' });
+    var pick = h('button', { type: 'button', class: 'btn clair petit', text: multiple ? '+ Ajouter des photos' : 'Choisir une photo', onclick: function () { file.click(); } });
+    function draw() {
+      clear(box);
+      photos.forEach(function (p, i) {
+        add(box, h('figure', {}, h('img', { src: p.apercu, alt: '' }), h('button', { type: 'button', 'aria-label': 'Retirer la photo', text: '✕', onclick: function () { photos.splice(i, 1); draw(); } })));
+      });
+    }
+    file.addEventListener('change', function () {
+      if (!file.files.length) return;
+      pick.disabled = true;
+      uploadPhotos(file.files, function (added) {
+        photos = multiple ? photos.concat(added) : added.slice(0, 1);
+        status.textContent = added.length > 1 ? added.length + ' photos ajoutées.' : 'Photo ajoutée.';
+        pick.disabled = false; file.value = ''; draw();
+      }, function (er) { status.textContent = er.message; pick.disabled = false; file.value = ''; }, function (t) { status.textContent = t; });
+    });
+    draw();
+    return { el: h('div', { class: 'f' }, h('strong', { text: label, style: 'font-size:14px' }), box, h('div', { class: 'row' }, pick, file), status),
+      value: function () { return photos.map(function (p) { return p.chemin; }); }, busy: function () { return pick.disabled; } };
+  }
+
+  // ---------------------------------------------------------------- actus
+  function actusTab(zone) {
+    listTab(zone, 'actus', {
+      title: 'Actus', addLabel: 'Une actu', help: 'Les deux actus les plus récentes apparaissent sur la page d’accueil.',
+      sort: function (a, b) { return (b.date || '').localeCompare(a.date || ''); },
+      thumb: function (x) { return x.image; },
+      meta: function (x) { return [x.dateTexte || fmtDate(x.date), x.rubrique, x.fin ? 'jusqu’au ' + fmtDate(x.fin) : ''].filter(Boolean).join(' · '); },
+      blank: function () { return { club: ME.club || 'commun', rubrique: '', date: new Date().toISOString().slice(0, 10), dateTexte: '', titre: '', image: '', lien: '', fin: '' }; },
+      form: function (x) {
+        var titre = input('text', x.titre, { required: true, maxlength: 140 });
+        var club = select(clubOptions(), x.club), rub = input('text', x.rubrique, { maxlength: 40, placeholder: 'Résultats, Événements, Inscriptions…' });
+        var date = input('date', x.date, { required: true }), fin = input('date', x.fin);
+        var lien = input('text', x.lien, { maxlength: 300, placeholder: 'https://… ou evenements.html' });
+        var photo = photoPicker('Photo (facultative)', x.image ? [x.image] : [], false);
+        return { el: h('div', {}, field('Titre', titre), h('div', { class: 'grid2' }, field('Club', club), field('Rubrique', rub), field('Date', date), field('Ne plus afficher après le', fin, 'Facultatif')),
+            photo.el, field('Lien (facultatif)', lien, 'Page du site (ex. infos.html) ou adresse complète (album, HelloAsso…).')),
+          read: function () {
+            if (photo.busy()) throw new Error('Attendez la fin de l’envoi de la photo.');
+            return Object.assign({}, x, { titre: titre.value.trim(), club: club.value, rubrique: rub.value.trim(), date: date.value, fin: fin.value, lien: lien.value.trim(), image: photo.value()[0] || '' });
+          } };
+      }
+    });
+  }
+
+  // ---------------------------------------------------------------- agenda
+  function agendaTab(zone) {
+    listTab(zone, 'evenements', {
+      title: 'Agenda', addLabel: 'Un événement', help: 'Les événements passés disparaissent seuls du site. Sans date précise, indiquez le mois prévu, ou laissez vide (« Date à venir »).',
+      sort: function (a, b) { return (a.date || a.mois || '9999').localeCompare(b.date || b.mois || '9999'); },
+      meta: function (x) { return [x.date ? fmtDate(x.date) : x.mois ? 'Mois : ' + fmtDate(x.mois) : (x.periode || 'Date à venir'), x.type, x.lieu].filter(Boolean).join(' · '); },
+      blank: function () { return { club: ME.club || 'commun', titre: '', type: 'Tournois', date: '', dateFin: '', mois: '', periode: '', heure: '', lieu: '', details: '' }; },
+      form: function (x) {
+        var titre = input('text', x.titre, { required: true, maxlength: 140 });
+        var club = select(clubOptions(), x.club), type = select(TYPES_EV.map(function (t) { return [t, t]; }), x.type);
+        var date = input('date', x.date), mois = input('month', x.mois), periode = input('text', x.periode, { maxlength: 40, placeholder: 'ex. Fin de saison 2027' });
+        var heure = input('text', x.heure, { maxlength: 30, placeholder: 'ex. 14 h – 18 h' });
+        var lieu = h('input', { type: 'text', value: x.lieu || '', maxlength: 120, list: 'salles' });
+        var salles = h('datalist', { id: 'salles' }, ['Gasco’Sports', 'Halle des sports Louise-Michel', 'Salle polyvalente Yves-Caubet', 'Complexe Lœtitia-Moussard-Loubens'].map(function (s) { return h('option', { value: s }); }));
+        var details = h('textarea', { maxlength: 300, placeholder: 'Public, tarif, inscription…' }); details.value = x.details || '';
+        return { el: h('div', {}, field('Nom de l’événement', titre), h('div', { class: 'grid2' }, field('Club', club), field('Type', type), field('Date', date, 'Si elle est connue'), field('Heure', heure, 'Facultatif'),
+            field('Sinon, mois prévu', mois), field('Sinon, période', periode)), field('Lieu', lieu, 'Choisissez une salle ou tapez un autre lieu'), salles, field('Détails', details)),
+          read: function () {
+            return Object.assign({}, x, { titre: titre.value.trim(), club: club.value, type: type.value, date: date.value, mois: date.value ? '' : mois.value, periode: date.value || mois.value ? '' : periode.value.trim(),
+              heure: heure.value.trim(), lieu: lieu.value.trim(), details: details.value.trim() });
+          } };
+      }
+    });
+  }
+
+  // ---------------------------------------------------------------- albums photos
+  function albumsTab(zone) {
+    listTab(zone, 'albums', {
+      title: 'Photos', addLabel: 'Un album', help: 'Albums de la galerie (page Événements). Les photos sont réduites automatiquement avant l’envoi.',
+      sort: function (a, b) { return (b.date || '').localeCompare(a.date || ''); },
+      thumb: function (x) { return (x.photos || [])[0]; },
+      meta: function (x) { return [fmtDate(x.date), (x.photos || []).length + ' photo(s)', x.sousTitre].filter(Boolean).join(' · '); },
+      blank: function () { return { club: ME.club || 'commun', titre: '', sousTitre: '', date: new Date().toISOString().slice(0, 10), description: '', photos: [], mineursFloutes: false }; },
+      form: function (x) {
+        var titre = input('text', x.titre, { required: true, maxlength: 140 });
+        var club = select(clubOptions(), x.club), date = input('date', x.date, { required: true });
+        var sous = input('text', x.sousTitre, { maxlength: 140, placeholder: 'ex. 14 et 15 novembre 2026 · place de l’Hôtel-de-Ville' });
+        var desc = h('textarea', { maxlength: 1500 }); desc.value = x.description || '';
+        var photos = photoPicker('Photos', x.photos || [], true);
+        var chk = h('input', { type: 'checkbox', checked: x.mineursFloutes });
+        return { el: h('div', {}, field('Titre de l’album', titre), h('div', { class: 'grid2' }, field('Club', club), field('Date', date)), field('Sous-titre', sous, 'Date et lieu en clair'),
+            field('Texte (facultatif)', desc), photos.el,
+            h('label', { class: 'check' }, chk, 'Je confirme que sur ces photos, les visages des mineurs sont floutés (ou qu’il n’y a pas de mineurs reconnaissables), et que l’autorisation de publier a été donnée.')),
+          read: function () {
+            if (photos.busy()) throw new Error('Attendez la fin de l’envoi des photos.');
+            if (!photos.value().length) throw new Error('Ajoutez au moins une photo.');
+            if (!chk.checked) throw new Error('Cochez la case de confirmation sur les photos de mineurs.');
+            return Object.assign({}, x, { titre: titre.value.trim(), club: club.value, date: date.value, sousTitre: sous.value.trim(), description: desc.value.trim(), photos: photos.value(), mineursFloutes: true });
+          } };
+      }
+    });
+  }
+
+  // ---------------------------------------------------------------- bandeau d'alerte
+  function bandeauTab(zone) {
+    add(zone, h('p', {}, 'Chargement…'));
+    call('GET', '/contenu/bandeau').then(function (res) {
+      var b = res.data, version = res.version;
+      clear(zone);
+      var out = h('div');
+      if (!canEdit(b.club || 'commun')) { add(zone, msg('info', 'Le bandeau actuel a été publié par l’autre club. Demandez-lui de le retirer, ou à un super admin.')); }
+      var actif = h('input', { type: 'checkbox', checked: b.actif });
+      var message = input('text', b.message, { maxlength: 220, placeholder: 'ex. Entraînement U13 annulé ce soir : gymnase fermé' });
+      var club = select(clubOptions(), canEdit(b.club || 'commun') ? (b.club || 'commun') : clubOptions()[0][0]);
+      var fin = input('date', b.fin), lien = input('text', b.lien, { placeholder: 'ex. equipes.html' }), tl = input('text', b.texteLien, { maxlength: 40, placeholder: 'ex. Voir le planning' });
+      var btn = h('button', { class: 'btn rouge', type: 'submit', text: 'Enregistrer et publier' });
+      add(zone, h('form', { class: 'card', onsubmit: function (e) {
+        e.preventDefault(); clear(out);
+        if (actif.checked && !message.value.trim()) { add(out, msg('err', 'Écrivez le message à afficher.')); return; }
+        busy(btn, true, 'Enregistrer et publier');
+        call('PUT', '/contenu/bandeau', { version: version, data: { actif: actif.checked, message: message.value.trim(), club: club.value, fin: fin.value, lien: lien.value.trim(), texteLien: tl.value.trim() } })
+          .then(function (r) { version = r.version; add(out, msg('ok', (actif.checked ? 'Bandeau publié.' : 'Bandeau retiré.') + ' Le site sera à jour d’ici une à deux minutes.')); busy(btn, false, 'Enregistrer et publier'); },
+            function (er) { add(out, msg('err', er.message)); busy(btn, false, 'Enregistrer et publier'); });
+      } }, h('h2', { text: 'Bandeau d’alerte' }), h('p', { class: 'meta', text: 'Un message urgent affiché en haut de toutes les pages du site (annulation, changement de salle…).' }), out,
+        h('label', { class: 'check' }, actif, 'Afficher le bandeau sur le site'), field('Message', message), h('div', { class: 'grid2' }, field('Club', club), field('Retirer automatiquement après le', fin, 'Conseillé : le bandeau disparaît seul')),
+        h('div', { class: 'grid2' }, field('Lien (facultatif)', lien), field('Texte du lien', tl)), btn));
+    }, function (er) { clear(zone); add(zone, msg('err', er.message)); });
+  }
+
+  // ---------------------------------------------------------------- demandes et suggestions
+  function demandesTab(zone) {
+    clear(zone);
+    var out = h('div');
+    var type = select(['Correction', 'Idée', 'Photo à ajouter', 'Nouvelle page', 'Autre'].map(function (t) { return [t, t]; }), 'Correction');
+    var page = select(['', 'Accueil', 'Les clubs', 'Engagements', 'Équipes et créneaux', 'Matchs', 'Événements', 'Partenaires', 'Bénévoles', 'Infos et contact', 'Tout le site'].map(function (t) { return [t, t || '— Choisir —']; }), '');
+    var texte = h('textarea', { required: true, maxlength: 3000, placeholder: 'Décrivez la modification souhaitée ou votre idée.' });
+    var btn = h('button', { class: 'btn rouge', type: 'submit', text: 'Envoyer la demande' });
+    var list = h('div');
+    add(zone, h('form', { class: 'card', onsubmit: function (e) {
+      e.preventDefault(); clear(out); busy(btn, true);
+      call('POST', '/demandes', { type: type.value, page: page.value, message: texte.value }).then(function () {
+        texte.value = ''; add(out, msg('ok', 'Merci ! Votre demande est envoyée à Eric et Sabine.')); busy(btn, false); btn.textContent = 'Envoyer la demande'; load();
+      }, function (er) { add(out, msg('err', er.message)); busy(btn, false); btn.textContent = 'Envoyer la demande'; });
+    } }, h('h2', { text: 'Une demande, une idée ?' }), h('p', { class: 'meta', text: 'Correction, photo à ajouter, nouvelle page, suggestion… tout ce que vous ne pouvez pas faire vous-même ici.' }), out,
+      h('div', { class: 'grid2' }, field('Type', type), field('Page concernée', page)), field('Message', texte), btn), h('h3', { text: ME.role === 'superadmin' ? 'Toutes les demandes' : 'Mes demandes', style: 'margin:20px 0 10px' }), list);
+    function load() {
+      clear(list); add(list, h('p', {}, 'Chargement…'));
+      call('GET', '/demandes').then(function (ds) {
+        clear(list);
+        if (!ds.length) add(list, h('p', { text: 'Aucune demande pour le moment.' }));
+        ds.forEach(function (d) {
+          var st = ME.role === 'superadmin' ? select(['Reçue', 'En cours', 'Faite', 'Refusée'].map(function (s) { return [s, s]; }), d.statut) : h('span', { class: 'statut', text: d.statut });
+          if (st.tagName === 'SELECT') st.addEventListener('change', function () { call('PATCH', '/demandes/' + d.id, { statut: st.value }).then(null, function (er) { alert(er.message); }); });
+          add(list, h('div', { class: 'item', style: 'align-items:flex-start' }, h('div', { class: 'txt' }, h('strong', { text: d.type + (d.page ? ' · ' + d.page : '') }),
+            h('div', { text: d.message, style: 'white-space:pre-wrap;margin:4px 0' }), h('span', { class: 'meta', text: d.auteur + ' · ' + new Date(d.date).toLocaleDateString('fr-FR') })),
+            h('label', { class: 'f', style: 'margin:0;min-width:130px' }, 'Statut', st)));
+        });
+      }, function (er) { clear(list); add(list, msg('err', er.message)); });
+    }
+    load();
+  }
+
+  // ---------------------------------------------------------------- comptes (super admins)
+  function comptesTab(zone) {
+    clear(zone);
+    var out = h('div'), list = h('div');
+    var nom = input('text', '', { required: true }), email = input('email', '', { required: true });
+    var role = select([['editeur-bcl', 'Éditeur BCL'], ['editeur-usbl', 'Éditeur USBL'], ['superadmin', 'Super admin']], 'editeur-bcl');
+    var btn = h('button', { class: 'btn rouge', type: 'submit', text: 'Créer et inviter' });
+    function showInvite(mail, code, who) {
+      var link = location.origin + location.pathname + '#invitation=' + encodeURIComponent(mail) + ':' + code;
+      var box = input('text', link, { readonly: true });
+      clear(out);
+      add(out, h('div', { class: 'msg ok' }, 'Invitation prête pour ' + who + '. Envoyez-lui ce lien (valable 7 jours) : il choisira lui-même son mot de passe.', box,
+        h('button', { type: 'button', class: 'btn petit', style: 'margin-top:8px', text: 'Copier le lien', onclick: function () { box.select(); try { navigator.clipboard.writeText(link); } catch (e) { document.execCommand('copy'); } } })));
+    }
+    add(zone, h('form', { class: 'card', onsubmit: function (e) {
+      e.preventDefault(); clear(out); busy(btn, true);
+      var r = role.value, body = { nom: nom.value, email: email.value, role: r === 'superadmin' ? 'superadmin' : 'editeur', club: r === 'superadmin' ? null : r.slice(8) };
+      call('POST', '/comptes', body).then(function (res) { showInvite(res.compte.email, res.invitation, res.compte.nom); nom.value = ''; email.value = ''; busy(btn, false); btn.textContent = 'Créer et inviter'; load(); },
+        function (er) { add(out, msg('err', er.message)); busy(btn, false); btn.textContent = 'Créer et inviter'; });
+    } }, h('h2', { text: 'Comptes' }), h('p', { class: 'meta', text: 'Un éditeur gère les actus, l’agenda, les photos et le bandeau de son club, ainsi que les contenus communs. Un super admin a tous les droits, y compris sur les comptes.' }),
+      out, h('div', { class: 'grid2' }, field('Prénom et nom', nom), field('E-mail', email)), field('Rôle', role), btn), list);
+    function load() {
+      clear(list);
+      call('GET', '/comptes').then(function (us) {
+        us.forEach(function (u) {
+          add(list, h('div', { class: 'item' }, h('div', { class: 'txt' }, h('strong', { text: u.nom }),
+            h('span', { class: 'meta', text: u.email + ' · ' + (u.role === 'superadmin' ? 'Super admin' : 'Éditeur ' + u.club.toUpperCase()) + (u.actif ? '' : ' · invitation en attente') })),
+            h('button', { class: 'btn petit clair', text: u.actif ? 'Nouveau mot de passe' : 'Renvoyer l’invitation', onclick: function () {
+              call('POST', '/comptes/' + encodeURIComponent(u.email) + '/invitation').then(function (r) { showInvite(u.email, r.invitation, u.nom); window.scrollTo(0, 0); }, function (er) { alert(er.message); });
+            } }),
+            u.email === ME.email ? null : h('button', { class: 'lien', text: 'Supprimer', onclick: function () {
+              if (!confirm('Supprimer le compte de ' + u.nom + ' ? Il ne pourra plus se connecter.')) return;
+              call('DELETE', '/comptes/' + encodeURIComponent(u.email)).then(load, function (er) { alert(er.message); });
+            } })));
+        });
+      }, function (er) { add(list, msg('err', er.message)); });
+    }
+    load();
+  }
+
+  // ---------------------------------------------------------------- mon compte
+  function moncompteTab(zone) {
+    clear(zone);
+    var out = h('div'), a = input('password', '', { required: true, autocomplete: 'current-password' }), n = input('password', '', { required: true, autocomplete: 'new-password', minlength: 10 });
+    var btn = h('button', { class: 'btn rouge', type: 'submit', text: 'Changer mon mot de passe' });
+    add(zone, h('form', { class: 'card', onsubmit: function (e) {
+      e.preventDefault(); clear(out); busy(btn, true);
+      call('POST', '/password', { ancien: a.value, nouveau: n.value }).then(function () { a.value = n.value = ''; add(out, msg('ok', 'Mot de passe changé.')); busy(btn, false); btn.textContent = 'Changer mon mot de passe'; },
+        function (er) { add(out, msg('err', er.message)); busy(btn, false); btn.textContent = 'Changer mon mot de passe'; });
+    } }, h('h2', { text: 'Mon compte' }), h('p', { text: ME.nom + ' · ' + ME.email }), out, field('Mot de passe actuel', a), field('Nouveau mot de passe', n, '10 caractères minimum'), btn));
+  }
+})();
+</script>
+</body>
+</html>
