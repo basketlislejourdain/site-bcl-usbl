@@ -1,0 +1,17 @@
+# Service de l'espace admin (Cloudflare Worker). Publié automatiquement par
+# .github/workflows/admin-worker.yml à chaque modification du dossier worker/.
+name = "admin-bcl-usbl"
+main = "src/index.js"
+compatibility_date = "2025-09-01"
+account_id = "658db833dcbe656272100a094a43c0d6"
+workers_dev = true
+
+[vars]
+REPO = "basketlislejourdain/site-bcl-usbl"
+BRANCH = "main"
+ALLOWED_ORIGINS = "https://basketlislejourdain.github.io,http://127.0.0.1:8000,http://localhost:8000"
+
+# L'identifiant est rempli automatiquement par worker/scripts/prepare.mjs avant la publication.
+[[kv_namespaces]]
+binding = "ADMIN_KV"
+id = "__KV_ID__"

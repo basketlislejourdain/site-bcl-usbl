@@ -143,6 +143,8 @@ def esc(s):
 def build():
     # docs/data et docs/uploads sont écrits par l'espace admin : on ne les efface jamais
     KEEP = {"data", "uploads"}
+    api = OUT / "admin" / "api.json"          # adresse du service admin, écrite par GitHub Actions
+    api_saved = api.read_text(encoding="utf-8") if api.exists() else None
     if OUT.exists():
         for p in OUT.iterdir():
             if p.name in KEEP:
@@ -153,6 +155,9 @@ def build():
         shutil.copytree(SRC / "data-initial", OUT / "data")
     shutil.copytree(SRC / "assets", OUT / "assets")
     shutil.copytree(SRC / "static", OUT, dirs_exist_ok=True)
+    if api_saved:
+        api.parent.mkdir(exist_ok=True)
+        api.write_text(api_saved, encoding="utf-8")
     comps = {n: load(n) for n in SHARED}
     base = SITE_CFG.get("url", "").rstrip("/") + "/" if SITE_CFG.get("url") else ""
     prerender = ROOT / "tools" / "prerender"

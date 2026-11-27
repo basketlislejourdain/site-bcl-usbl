@@ -1,0 +1,49 @@
+name: Admin — publier le service Cloudflare
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [worker/**, .github/workflows/admin-worker.yml]
+permissions:
+  contents: write
+concurrency: admin-worker
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: 658db833dcbe656272100a094a43c0d6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - name: Vérifier les secrets
+        run: |
+          for s in CLOUDFLARE_API_TOKEN SITE_REPO_TOKEN ADMIN_SETUP_CODE; do
+            if [ -z "${!s}" ]; then echo "::error::Secret GitHub manquant : $s"; exit 1; fi
+          done
+        env:
+          SITE_REPO_TOKEN: ${{ secrets.SITE_REPO_TOKEN }}
+          ADMIN_SETUP_CODE: ${{ secrets.ADMIN_SETUP_CODE }}
+      - name: Préparer (stockage, adresse)
+        run: node worker/scripts/prepare.mjs
+      - name: Clé de session
+        run: echo "SESSION_SECRET=$(openssl rand -hex 32)" >> "$GITHUB_ENV"
+      - name: Publier sur Cloudflare
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: 658db833dcbe656272100a094a43c0d6
+          workingDirectory: worker
+          secrets: |
+            SITE_REPO_TOKEN
+            SETUP_CODE
+            SESSION_SECRET
+        env:
+          SITE_REPO_TOKEN: ${{ secrets.SITE_REPO_TOKEN }}
+          SETUP_CODE: ${{ secrets.ADMIN_SETUP_CODE }}
+      - name: Enregistrer l'adresse du service pour la page admin
+        run: |
+          git config user.name "github-actions"; git config user.email "github-actions@users.noreply.github.com"
+          git add docs/admin/api.json
+          git diff --cached --quiet || (git commit -m "Admin : adresse du service" && git push)
