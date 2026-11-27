@@ -129,7 +129,7 @@ a{color:#0D1117}a:hover{color:#C2361B}
       </div>
       <span style="font-size: 13px; color: #B8C0CC">Montant indicatif, ajusté avec vous.</span>
       <button type="button" data-mailto="bclislois32@gmail.com,leclubusbl32@gmail.com" data-subject="Demande de partenariat" style="border: 0; cursor: pointer; background: #E0301E; color: #FFFFFF; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-style: italic; font-size: 19px; text-transform: uppercase; height: 50px; border-radius: 4px">Envoyer ma demande</button>
-      <span style="font-size: 13px; color: #B8C0CC">Vous recevez le bon de commande en PDF et un contact du pôle partenariats sous [x] jours.</span>
+      <span style="font-size: 13px; color: #B8C0CC">Vous recevez le bon de commande en PDF et un contact du pôle partenariats sous 5 jours.</span>
     </aside>
   </section>
 
@@ -138,7 +138,7 @@ a{color:#0D1117}a:hover{color:#C2361B}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4100}}'>
 class Component extends DCLogic {
-  constructor(props) { super(props); this.state = { tier: 'Titulaire', opts: {} }; }
+  constructor(props) { super(props); this.state = { tier: 'Titulaire', opts: {}, bumped: '' }; }
   renderVals() {
     const tiers = [
       { name: 'Supporter', price: 'Don, dès 20 €', min: 20, max: 0, perks: ['Don avec reçu fiscal', 'Nom sur le mur des partenaires', 'Merci public'], bg: '#FFFFFF', fg: '#0D1117' },
@@ -192,11 +192,18 @@ class Component extends DCLogic {
     const t = tiers.find((x) => x.name === tier) || tiers[2];
     const tierPick = tiers.map((x) => {
       const on = x.name === tier;
-      return { name: x.name, price: x.price, pressed: on ? 'true' : 'false', border: on ? '#E0301E' : '#E4E0D8', bg: on ? '#FDECEA' : '#FFFFFF', pick: () => this.setState({ tier: x.name }) };
+      return { name: x.name, price: x.price, pressed: on ? 'true' : 'false', border: on ? '#E0301E' : '#E4E0D8', bg: on ? '#FDECEA' : '#FFFFFF', pick: () => this.setState({ tier: x.name, bumped: '' }) };
     });
     // Le palier choisi filtre les options : on ne montre que celles dont le prix ne dépasse pas son plafond
     const visible = lines.filter((l) => l.v <= t.max);
-    const optPick = visible.map((x) => ({ t: x.t, p: eur(x.v), on: !!opts[x.id], toggle: () => this.setState({ opts: { ...opts, [x.id]: !opts[x.id] } }) }));
+    const optPick = visible.map((x) => ({ t: x.t, p: eur(x.v), on: !!opts[x.id], toggle: () => {
+      // Si la sélection dépasse le plafond du palier, on passe automatiquement au palier correspondant
+      const next = { ...opts, [x.id]: !opts[x.id] };
+      const s2 = visible.filter((l) => next[l.id]).reduce((a, l) => a + l.v, 0);
+      const up = s2 > t.max ? [...tiers].reverse().find((y) => y.max > 0 && s2 >= y.min) : null;
+      if (up && up.name !== t.name) this.setState({ opts: next, tier: up.name, bumped: up.name });
+      else this.setState({ opts: next });
+    } }));
     const sel = visible.filter((x) => opts[x.id]);
     const chosen = sel.map((x) => ({ t: x.t, p: eur(x.v) }));
     const sum = sel.reduce((s, x) => s + x.v, 0);
@@ -204,6 +211,7 @@ class Component extends DCLogic {
     let optNote = '';
     if (t.max === 0) optNote = 'Le palier Supporter est un don : il ne comprend pas d’options à la carte.';
     else if (!sum) optNote = (t.max === Infinity ? 'Toutes les options sont possibles' : visible.length + ' options possibles jusqu’à ' + eur(t.max)) + '. Cochez celles qui vous intéressent.';
+    else if (this.state.bumped === t.name && sum >= t.min) optNote = 'Votre sélection vous fait passer au palier ' + t.name + ' : de nouvelles options sont disponibles.';
     else if (sum < t.min) optNote = 'Encore ' + eur(t.min - sum) + ' pour atteindre le palier ' + t.name + '.';
     else if (sum > t.max) optNote = 'Votre sélection vous fait passer au palier ' + (reached ? reached.name : t.name) + '.';
     else optNote = 'Votre sélection correspond au palier ' + t.name + '.';
