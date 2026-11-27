@@ -18,3 +18,5 @@ html.dc-menu-open, html.dc-menu-open body { overflow: hidden; }
 .carte-pin span{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;border:3px solid #FFFFFF;box-shadow:0 2px 8px rgba(13,17,23,.35);color:#FFFFFF;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:15px;box-sizing:border-box}
 .leaflet-popup-content{font-family:'Barlow',system-ui,sans-serif;font-size:14px;line-height:1.45}
 .leaflet-popup-content a{color:#C2361B;font-weight:600}
+/* onglets BCL / USBL de l'accueil : le panneau inactif reste hors écran quoi que fasse le widget */
+[data-mpanel][aria-hidden="true"] { position: absolute !important; top: 0 !important; left: -200vw !important; width: 100% !important; }

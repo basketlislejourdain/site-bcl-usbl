@@ -50,7 +50,12 @@
     });
     group.querySelectorAll('[data-mpanel]').forEach(function (p) {
       var on = p.getAttribute('data-mpanel') === n;
-      p.style.visibility = on ? 'visible' : 'hidden';
+      // le panneau inactif est sorti de l'écran (et non masqué) : le widget Score'n'co
+      // force son cadre en visible, ce qui annulerait un simple masquage
+      p.style.position = on ? '' : 'absolute';
+      p.style.top = on ? '' : '0';
+      p.style.left = on ? '' : '-200vw';
+      p.style.width = on ? '' : '100%';
       p.setAttribute('aria-hidden', on ? 'false' : 'true');
     });
   });
