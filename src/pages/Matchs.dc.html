@@ -21,8 +21,8 @@ a{color:#0D1117}a:hover{color:#C2361B}
     <div style="max-width: 1320px; margin: 0 auto; padding: 56px 32px 0; display: flex; flex-direction: column; gap: 14px">
       <div style="font-size: 14px; color: #B8C0CC"><a href="MainV2.dc.html" style="color: #B8C0CC">Accueil</a> / Matchs &amp; résultats</div>
       <h1 style="margin: 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 88px; line-height: 0.9; text-transform: uppercase">Matchs &amp; résultats</h1>
-      <p style="margin: 0; font-size: 17px; color: #B8C0CC">Données de la FFBB, mises à jour automatiquement.</p>
-      <div style="display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; align-items: flex-end; margin-top: 18px">
+      <p style="margin: 0; font-size: 17px; color: #B8C0CC">Les matchs de la semaine de nos équipes, mis à jour automatiquement.</p><div style="height: 36px"></div>
+      <sc-if value="{{showDemo}}"><div style="display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; align-items: flex-end; margin-top: 18px">
         <div role="tablist" aria-label="Rubriques" style="display: flex; gap: 4px">
           <sc-for list="{{tabs}}" as="t" hint-placeholder-count="3">
             <button type="button" role="tab" aria-selected="{{t.sel}}" onClick="{{t.pick}}" style="border: 0; cursor: pointer; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 20px; text-transform: uppercase; padding: 14px 22px; min-height: 52px; border-radius: 6px 6px 0 0; background: {{t.bg}}; color: {{t.fg}}">{{t.label}}</button>
@@ -34,9 +34,9 @@ a{color:#0D1117}a:hover{color:#C2361B}
           </sc-for>
           <button type="button" onClick="{{toggleHome}}" aria-pressed="{{homePressed}}" style="border: 1px solid #4A5260; cursor: pointer; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 16px; text-transform: uppercase; padding: 0 14px; height: 44px; border-radius: 999px; background: {{homeBg}}; color: {{homeFg}}">À domicile uniquement</button>
         </div>
-      </div>
+      </div></sc-if>
     </div>
-  </section>
+  </section><section style="max-width: 1320px; margin: 0 auto; padding: 44px 24px 60px; display: flex; flex-direction: column; gap: 14px"><h2 style="margin: 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; text-transform: uppercase; font-size: 48px; line-height: 1.02; color: #0D1117">Les matchs de la semaine</h2><p style="margin: 0; font-size: 15px; color: #4A5260">Calendrier et résultats mis à jour automatiquement par Score’n’co, partenaire de la FFBB.</p><div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; margin-top: 8px"><article style="background: #FFFFFF; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column"><div style="background: #E0301E; color: #FFFFFF; padding: 12px 18px; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 18px; text-transform: uppercase; letter-spacing: 0.04em">Filles · BCL</div><div class="scorenco-widget" data-dc-keep="bcl-desk" data-widget-type="week-events" data-widget-id="196218" style="background: #FFFFFF; min-height: 500px; display: flex; align-items: center; justify-content: center; flex-direction: column; text-transform: uppercase; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; gap: 9px; color: #0D1117"><div class="ldsdr"></div>Chargement des matchs du BCL…</div></article><article style="background: #FFFFFF; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column"><div style="background: #F2C14E; color: #0D1117; padding: 12px 18px; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 18px; text-transform: uppercase; letter-spacing: 0.04em">Garçons · USBL</div><div style="padding: 28px 22px; display: flex; flex-direction: column; gap: 12px; align-items: flex-start"><p style="margin: 0; font-size: 16px; line-height: 1.5">Les matchs de l’USBL arrivent bientôt ici. En attendant, retrouvez le calendrier et les résultats des garçons sur le site de la FFBB.</p><a href="https://competitions.ffbb.com/ligues/occ/comites/0032/clubs/occ0032061" target="_blank" rel="noopener" style="background: #F2C14E; color: #0D1117; text-decoration: none; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-style: italic; font-size: 17px; text-transform: uppercase; padding: 0 18px; height: 46px; border-radius: 4px; display: inline-flex; align-items: center">Matchs de l’USBL sur la FFBB ↗</a></div></article></div></section><sc-if value="{{showDemo}}">
 
   <!-- Bandeau supporters -->
   <section style="max-width: 1320px; margin: 0 auto; padding: 40px 32px 0">
@@ -138,7 +138,7 @@ a{color:#0D1117}a:hover{color:#C2361B}
     </sc-if>
   </section>
 
-  <dc-import name="Footer" hint-size="100%,330px"></dc-import>
+  </sc-if><dc-import name="Footer" hint-size="100%,330px"></dc-import>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2300}}'>

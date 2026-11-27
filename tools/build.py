@@ -126,6 +126,7 @@ HEAD = """<!doctype html>
 </style>
 <script src="assets/js/dc.js"></script>
 <script src="assets/js/forms.js" defer></script>
+<script src="assets/js/ui.js" defer></script>
 </head>
 <body>
 <div id="app">{fallback}</div>

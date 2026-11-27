@@ -137,6 +137,7 @@
       var nextO = o.nextSibling;
       if (o.nodeType === n.nodeType && (o.nodeType === 3 || (o.nodeType === 1 && o.namespaceURI === n.namespaceURI && o.tagName === n.tagName))) {
         if (o.nodeType === 3) { if (o.data !== n.data) o.data = n.data; }
+        else if (o.hasAttribute('data-dc-keep') && o.getAttribute('data-dc-keep') === n.getAttribute('data-dc-keep')) { /* contenu géré par un service externe (widget) */ }
         else { syncEl(o, n); morph(o, n); }
       } else {
         oldP.replaceChild(n, o);
@@ -189,8 +190,21 @@
       renderComponent(cfg.menu, {}, 'menu', mf);
       morph(menuEl(), mf);
     }
+    loadWidgets();
     var m = mounted; mounted = [];
     m.forEach(function (inst) { if (inst.componentDidMount) { try { inst.componentDidMount(); } catch (e) { console.error(e); } } });
+  }
+  // widgets Score'n'co : leur script est (re)chargé quand un nouveau widget apparaît
+  function loadWidgets() {
+    var fresh = document.querySelectorAll('.scorenco-widget:not([data-sc-loaded])');
+    if (!fresh.length) return;
+    for (var i = 0; i < fresh.length; i++) fresh[i].setAttribute('data-sc-loaded', '');
+    var old = document.getElementById('scorenco-js');
+    if (old) old.parentNode.removeChild(old);
+    var s = document.createElement('script');
+    s.id = 'scorenco-js'; s.async = true;
+    s.src = 'https://widgets.scorenco.com/host/widgets.js';
+    document.body.appendChild(s);
   }
   function schedule() { if (!pending) { pending = true; (window.requestAnimationFrame || setTimeout)(render); } }
 

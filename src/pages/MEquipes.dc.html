@@ -64,7 +64,7 @@ body{margin:0;background:#F4F2EE}
 // Version mobile : reprend toutes les données et la logique de la page Équipes (ordinateur)
 const Base = DC.get('Equipes');
 class Component extends Base {
-  constructor(props) { super(props); this.state = Object.assign({}, this.state, { openDay: 'Mardi' }); }
+  constructor(props) { super(props); this.state = Object.assign({}, this.state, { openDay: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'][new Date().getDay()] }); }
   renderVals() {
     const v = super.renderVals();
     const RED = '#E0301E', GOLD = '#F2C14E';

@@ -152,7 +152,7 @@ a{color:#0D1117}a:hover{color:#C2361B}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":3800}}'>
 class Component extends DCLogic {
-  constructor(props) { super(props); this.state = { sexe: 'tous', open: 'U5–U7', photo: '', photoList: [], idx: 0, tick: 0 }; }
+  constructor(props) { super(props); this.state = { sexe: 'tous', open: '', photo: '', photoList: [], idx: 0, tick: 0 }; }
   componentDidMount() { this.timer = setInterval(() => { if (!this.state.photo) this.setState({ tick: (this.state.tick || 0) + 1 }); }, 4000); }
   componentWillUnmount() { clearInterval(this.timer); }
   renderVals() {

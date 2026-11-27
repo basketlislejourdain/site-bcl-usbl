@@ -23,6 +23,7 @@ body{margin:0;background:#F4F2EE}
 </style>
 <script src="assets/js/dc.js"></script>
 <script src="assets/js/forms.js" defer></script>
+<script src="assets/js/ui.js" defer></script>
 </head>
 <body>
 <div id="app"><noscript>
@@ -544,12 +545,12 @@ body{margin:0;background:#F4F2EE}
     <div style="display: flex; flex-direction: column; gap: 10px">
       
         <div style="background: #FFFFFF; border-radius: 10px; overflow: hidden">
-          <button type="button" aria-expanded="true" style="width: 100%; border: 0; cursor: pointer; background: #0D1117; color: #FFFFFF; padding: 18px 24px; display: flex; align-items: center; gap: 20px; text-align: left; font-family: inherit">
+          <button type="button" aria-expanded="false" style="width: 100%; border: 0; cursor: pointer; background: #FFFFFF; color: #0D1117; padding: 18px 24px; display: flex; align-items: center; gap: 20px; text-align: left; font-family: inherit">
             <span style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 44px; line-height: 1; min-width: 150px">U5–U7</span>
-            <span style="flex: 1; font-size: 16px; color: #B8C0CC">Micro-basket · 2 équipes</span>
-            <span aria-hidden="true" style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 34px; color: #E0301E; width: 30px; text-align: center">–</span>
+            <span style="flex: 1; font-size: 16px; color: #4A5260">Micro-basket · 2 équipes</span>
+            <span aria-hidden="true" style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 34px; color: #E0301E; width: 30px; text-align: center">+</span>
           </button>
-          <div style="display: flex; flex-direction: column">
+          <div style="display: none; flex-direction: column">
             
               <div role="button" tabindex="0" aria-label="Agrandir la photo de l'équipe Filles · BCL" style="cursor: zoom-in; border-top: 1px solid #E4E0D8; padding: 16px 24px; display: flex; gap: 22px; align-items: flex-start">
                 <div style="display: block; position: relative; flex: none; width: 200px; height: 133px"><img src="assets/img/8b9e4226ce3484a8793d28c6cec80456.jpg" alt="Photo de l'équipe Filles · BCL" style="width: 200px; height: 133px; border-radius: 8px; object-fit: cover; box-shadow: 0 2px 8px rgba(13,17,23,0.18)"><span style="display: flex; position: absolute; right: 6px; bottom: 6px; background: rgba(13,17,23,0.8); color: #FFFFFF; font-size: 12px; font-weight: 600; padding: 2px 7px; border-radius: 999px">2 photos</span></div>
@@ -1387,7 +1388,7 @@ return Component;
 </template>
 <script>DC.define("Equipes", (function () {
 class Component extends DCLogic {
-  constructor(props) { super(props); this.state = { sexe: 'tous', open: 'U5–U7', photo: '', photoList: [], idx: 0, tick: 0 }; }
+  constructor(props) { super(props); this.state = { sexe: 'tous', open: '', photo: '', photoList: [], idx: 0, tick: 0 }; }
   componentDidMount() { this.timer = setInterval(() => { if (!this.state.photo) this.setState({ tick: (this.state.tick || 0) + 1 }); }, 4000); }
   componentWillUnmount() { clearInterval(this.timer); }
   renderVals() {
@@ -1530,7 +1531,7 @@ return Component;
 // Version mobile : reprend toutes les données et la logique de la page Équipes (ordinateur)
 const Base = DC.get('Equipes');
 class Component extends Base {
-  constructor(props) { super(props); this.state = Object.assign({}, this.state, { openDay: 'Mardi' }); }
+  constructor(props) { super(props); this.state = Object.assign({}, this.state, { openDay: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'][new Date().getDay()] }); }
   renderVals() {
     const v = super.renderVals();
     const RED = '#E0301E', GOLD = '#F2C14E';
