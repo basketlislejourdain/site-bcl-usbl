@@ -14,6 +14,7 @@ body{margin:0;background:#0D1117}
 a{color:#0D1117}a:hover{color:#C2361B}
 .fwrap{position:relative}.fmenu{display:none;position:absolute;top:100%;right:0;z-index:30;padding-top:8px}
 .fwrap:hover .fmenu[data-has="1"],.fwrap:focus-within .fmenu[data-has="1"]{display:block}
+.fbar:hover .fwrap:not(:hover) .fmenu{display:none !important}
 .fteam:hover{background:#0D1117 !important;color:#FFFFFF !important}
 </style>
 </helmet>
@@ -27,7 +28,7 @@ a{color:#0D1117}a:hover{color:#C2361B}
         <h1 style="margin: 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 88px; line-height: 0.9; text-transform: uppercase">Équipes &amp; créneaux</h1>
         <p style="margin: 0; font-size: 19px; max-width: 640px; color: #E9ECF1; line-height: 1.5">Filles et garçons à chaque niveau, du micro-basket aux loisirs. Les filles jouent au BCL, les garçons à l'USBL.</p>
       </div>
-      <div role="group" aria-label="Afficher" style="display: flex; gap: 4px; background: #1B222D; padding: 4px; border-radius: 6px">
+      <div class="fbar" role="group" aria-label="Afficher" style="display: flex; gap: 4px; background: #1B222D; padding: 4px; border-radius: 6px">
         <sc-for list="{{filters}}" as="f" hint-placeholder-count="3">
           <div class="fwrap">
             <button type="button" onClick="{{f.pick}}" aria-pressed="{{f.pressed}}" aria-haspopup="{{f.popup}}" style="border: 0; cursor: pointer; padding: 8px 20px; min-height: 56px; border-radius: 4px; background: {{f.bg}}; color: {{f.fg}}; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px">

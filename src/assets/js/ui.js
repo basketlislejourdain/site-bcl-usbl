@@ -76,3 +76,14 @@
     if (!open) btn.closest('article, section, div').scrollIntoView({ block: 'nearest' });
   });
 })();
+
+/* Menus des filtres (page Équipes) : après un clic à la souris, on retire le focus
+   pour que le menu se referme quand le pointeur s'en va (au clavier, il reste ouvert). */
+(function () {
+  'use strict';
+  document.addEventListener('click', function (e) {
+    if (!e.detail) return; // clic au clavier
+    var b = e.target.closest && e.target.closest('.fwrap button');
+    if (b) b.blur();
+  });
+})();
