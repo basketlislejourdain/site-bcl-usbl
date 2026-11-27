@@ -113,7 +113,7 @@ HEAD = """<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title>
-<meta name="description" content="{desc}">
+<meta name="description" content="{desc}">{robots}
 <meta property="og:type" content="website">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
@@ -150,7 +150,8 @@ def build():
         full_title = title if slug == "index" else f"{title} — Basketball à L'Isle-Jourdain"
         fb = prerender / f"{slug}.html"
         fallback = fb.read_text(encoding="utf-8") if fb.exists() else ""
-        html = HEAD.format(title=esc(full_title), desc=esc(desc), base=base, styles=styles, fallback=fallback)
+        robots = '\n<meta name="robots" content="noindex, nofollow">' if SITE_CFG.get("preview") else ""
+        html = HEAD.format(title=esc(full_title), desc=esc(desc), base=base, styles=styles, fallback=fallback, robots=robots)
         for n in SHARED:
             html += component_block(n, comps[n])
         html += component_block(desk, d) + component_block(mob, m)
@@ -164,6 +165,14 @@ def build():
         (OUT / "sitemap.xml").write_text(
             f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>\n', encoding="utf-8")
         (OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {base}sitemap.xml\n", encoding="utf-8")
+    # page 404 : chemins absolus selon l'adresse du site
+    bp = SITE_CFG.get("basePath") or "/"
+    p404 = OUT / "404.html"
+    p404.write_text(p404.read_text(encoding="utf-8").replace('href="/', f'href="{bp}'), encoding="utf-8")
+    if SITE_CFG.get("preview"):
+        # préversion : interdit l'indexation par les moteurs de recherche
+        (OUT / "robots.txt").write_text("User-agent: *\nDisallow: /\n", encoding="utf-8")
+        p404.write_text(p404.read_text(encoding="utf-8").replace("<meta charset=\"utf-8\">", "<meta charset=\"utf-8\">\n<meta name=\"robots\" content=\"noindex, nofollow\">"), encoding="utf-8")
     print(f"Site construit dans {OUT} ({len(PAGES)} pages)")
 
 

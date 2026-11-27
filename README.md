@@ -34,6 +34,15 @@ vers le bon club (`src/assets/js/forms.js`) : pas de serveur, pas de données st
    ```
 3. Envoyer sur GitHub (`git commit` puis `git push`) : le site est mis à jour en une à deux minutes.
 
+## Préversion (avant la publication officielle)
+
+Tant que `src/site.json` contient `"preview": true`, chaque page porte la consigne `noindex` : le site est en ligne
+à l'adresse GitHub (`https://basketlislejourdain.github.io/site-bcl-usbl/`) mais les moteurs de recherche ne le
+référencent pas. On partage le lien uniquement avec les gens du club.
+
+**Le jour du lancement** : dans `src/site.json`, mettre `"preview": false`, renseigner `"domain"` (ex. `basket-lislois.fr`),
+`"url"` (`https://basket-lislois.fr`) et `"basePath": "/"`, reconstruire, puis suivre les étapes ci-dessous.
+
 ## Mise en ligne (à faire une fois)
 
 ### GitHub Pages
