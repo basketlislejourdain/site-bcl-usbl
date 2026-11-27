@@ -1,0 +1,68 @@
+[
+ {
+  "id": "coupe-du-gers-2026",
+  "titre": "Coupe du Gers",
+  "type": "Tournois",
+  "club": "commun",
+  "date": "2026-12-19",
+  "mois": "",
+  "periode": "",
+  "lieu": "Gasco’Sports",
+  "details": "ouvert à tous · restauration sur place"
+ },
+ {
+  "id": "galette-2027",
+  "titre": "Galette des rois",
+  "type": "Soirées",
+  "club": "commun",
+  "date": "",
+  "mois": "2027-01",
+  "periode": "",
+  "lieu": "Halle des sports Louise-Michel",
+  "details": "BCL et USBL (interne) · galettes et cidre offerts"
+ },
+ {
+  "id": "tournoi-fluo-3x3",
+  "titre": "Tournoi Fluo 3x3",
+  "type": "Tournois",
+  "club": "commun",
+  "date": "",
+  "mois": "",
+  "periode": "",
+  "lieu": "Gasco’Sports",
+  "details": "des U15 aux seniors, dans la limite des places · 20 € par équipe"
+ },
+ {
+  "id": "basket-pour-tous-2027",
+  "titre": "Journée Basket pour tous",
+  "type": "Tournois",
+  "club": "commun",
+  "date": "",
+  "mois": "2027-05",
+  "periode": "",
+  "lieu": "Gasco’Sports",
+  "details": "ouvert à tous"
+ },
+ {
+  "id": "tournoi-loisirs-2027",
+  "titre": "Tournoi Loisirs",
+  "type": "Tournois",
+  "club": "commun",
+  "date": "",
+  "mois": "2027-05",
+  "periode": "",
+  "lieu": "Gasco’Sports",
+  "details": "ouvert à tous"
+ },
+ {
+  "id": "30-ans-usbl",
+  "titre": "Les 30 ans de l’USBL",
+  "type": "Soirées",
+  "club": "usbl",
+  "date": "",
+  "mois": "",
+  "periode": "Fin de saison 2027",
+  "lieu": "",
+  "details": "Exposition rétrospective · lieu à venir"
+ }
+]

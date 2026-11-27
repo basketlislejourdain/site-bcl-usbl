@@ -75,7 +75,7 @@ a{color:#0D1117}a:hover{color:#C2361B}
     </sc-for>
   </section>
 
-  <section style="max-width: 1320px; margin: 0 auto; padding: 72px 32px 80px; display: flex; flex-direction: column; gap: 20px">
+  <section id="galerie" style="max-width: 1320px; margin: 0 auto; padding: 72px 32px 80px; display: flex; flex-direction: column; gap: 20px">
     <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: flex-end">
       <h2 style="margin: 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 56px; line-height: 1; text-transform: uppercase">Galerie photos</h2>
       <span style="font-size: 14px; color: #4A5260">Visages des mineurs floutés. Cliquez sur un album pour voir les photos.</span>
@@ -105,7 +105,7 @@ a{color:#0D1117}a:hover{color:#C2361B}
         <button type="button" onClick="{{lb.close}}" style="border: 1px solid #4A5260; background: transparent; color: #FFFFFF; border-radius: 4px; height: 44px; padding: 0 16px; cursor: pointer; font-weight: 600">Fermer ✕</button>
       </div>
       <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center">
-        <sc-for list="{{lb.photos}}" as="ph" hint-placeholder-count="2"><img src="{{ph.u}}" alt="" style="max-height: 70vh; max-width: 100%; border-radius: 8px; object-fit: contain"></sc-for>
+        <sc-for list="{{lb.photos}}" as="ph" hint-placeholder-count="2"><img src="{{ph.u}}" alt="{{lb.title}}" loading="lazy" style="max-height: 70vh; max-width: 100%; border-radius: 8px; object-fit: contain"></sc-for>
       </div>
     </div>
   </div>
@@ -123,25 +123,12 @@ class Component extends DCLogic {
     });
     const club = (c) => c === 'usbl' ? { club: 'USBL · garçons', color: '#F2C14E', ink: '#0D1117' } : c === 'bcl' ? { club: 'BCL · filles', color: '#E0301E', ink: '#FFFFFF' } : { club: 'Commun', color: '#D9D5CC', ink: '#0D1117' };
     const ev = (day, dow, t, title, sub, c) => ({ day, dow, type: t, title, sub, ...club(c), href: t === 'Engagement' ? 'Engagements.dc.html' : '#', more: t === 'Engagement' ? 'Notre démarche →' : '', moreDisp: t === 'Engagement' ? 'inline-flex' : 'none', typeBg: t === 'Engagement' ? '#E0301E' : '#0D1117' });
-    const raw = [
-      { name: 'Décembre 2026', items: [ev('19', 'Sam.', 'Tournois', 'Coupe du Gers', 'Gasco’Sports · ouvert à tous · restauration sur place', 'commun')] },
-      { name: 'Janvier 2027', items: [ev('–', 'Date à venir', 'Soirées', 'Galette des rois', 'Halle des sports Louise-Michel · BCL et USBL (interne) · galettes et cidre offerts', 'commun')] },
-      { name: 'Date à venir', items: [ev('–', 'Date à venir', 'Tournois', 'Tournoi Fluo 3x3', 'Gasco’Sports · des U15 aux seniors, dans la limite des places · 20 € par équipe', 'commun')] },
-      { name: 'Mai 2027', items: [ev('–', 'Date à venir', 'Tournois', 'Journée Basket pour tous', 'Gasco’Sports · ouvert à tous', 'commun'), ev('–', 'Date à venir', 'Tournois', 'Tournoi Loisirs', 'Gasco’Sports · ouvert à tous', 'commun')] },
-      { name: 'Fin de saison 2027', items: [ev('–', 'Date à venir', 'Soirées', 'Les 30 ans de l’USBL', 'Exposition rétrospective · lieu à venir', 'usbl')] }
-    ];
+    // agenda : fichier data/evenements.json (espace admin)
+    const raw = Contenu.parMois(Contenu.evenements().map((e) => ({ ...ev(e.jour, e.jourSemaine, e.type, e.titre, e.sousTitre, e.club), groupe: e.groupe })));
     const months = raw.map((m) => ({ ...m, items: m.items.filter((e) => type === 'Tous' || e.type === type) })).filter((m) => m.items.length);
-    const P = { bouchons: '/_blob/4d7b1905753338dba1e80eb13448e379', secours1: '/_blob/4143032503efe6256d6e959d626953f3', secours2: '/_blob/ab531f6a4f685eee1e7f0dc3d1c53aa3',
-      tmb1: '/_blob/56d88218927b7ea84cb22fbcff9424be', tmb2: '/_blob/173399496c7bbffec7f14eaf78a7ef2e', tmb3: '/_blob/598a2d0035e145cbb689faefe0383cbe', cleanup: '/_blob/cf5a3f95bfa415058a0fb5e2e455f159', muco: '/_blob/2d768d1dee115d4da7e0010afef6adef' };
-    const TAG = { commun: ['BCL + USBL', '#0D1117', '#FFFFFF'], bcl: ['BCL', '#E0301E', '#FFFFFF'] };
-    const RAW = [
-      ['Foire de la Saint-Martin', '14 et 15 novembre 2026 · place de l’Hôtel-de-Ville', 'commun', ['/_blob/765155a4eba273788cbb3e6e05ab6bd3', '/_blob/c1a258760c7ca81ab008530d0d81e60c', '/_blob/5657b48c7b5833da77a9a212c3a8942a', '/_blob/8325177888f3c676d880522371aa6824', '/_blob/680105b9ad4c5666ba8b17f42aac6596', '/_blob/717987493f60af56ff667c74d358a955', '/_blob/e2566c28d6baa1827c57e99cb8616c74', '/_blob/eea678d251f53a8ca11c0b19a6e58cc1', '/_blob/538ee2f337fcba766dd6aa0767db40fa'], 'Pour la 49e Foire de la Saint-Martin, fête de l’artisanat et de la vie locale organisée par le comité des fêtes, le BCL et l’USBL tenaient un stand commun place de l’Hôtel-de-Ville. Au programme : crêpes, pâtisseries préparées par nos bénévoles, concours de shoot et tombola du Basket Lislois, qui a connu un grand succès. Merci à tous les bénévoles et aux commerçants lislois pour les lots !'],
-      ['World Cleanup Day', '22 mars 2026 · ramassage des déchets autour de Gasco’Sports', 'bcl', [P.cleanup]],
-      ['Gestes qui sauvent avec les pompiers', '24 janvier 2026 · caserne de L’Isle-Jourdain', 'bcl', [P.secours1, P.secours2]],
-      ['Soirée au match TMB–Bourges', 'Saison 2025-2026 · avec la Maison des Femmes de Toulouse', 'bcl', [P.tmb2, P.tmb1, P.tmb3]],
-      ['Après-midi mucoviscidose', 'Saison 2025-2026 · avec l’USBL et ABC Muco', 'commun', [P.muco]],
-      ['Collecte des Bouchons d’Amour', 'Saison 2025-2026 · avec les U15 et les U18', 'bcl', [P.bouchons]]
-    ];
+    // albums : fichier data/albums.json (espace admin)
+    const RAW = Contenu.albums().map((a) => [a.titre, a.sousTitre, a.club, a.photos || [], a.description]);
+    const TAG = { commun: ['BCL + USBL', '#0D1117', '#FFFFFF'], bcl: ['BCL', '#E0301E', '#FFFFFF'], usbl: ['USBL', '#F2C14E', '#0D1117'] };
     const bg = (u, f) => u ? `${f} url(${u}) center / cover no-repeat` : f;
     const album = this.state.album;
     const albums = RAW.map(([t, n, c, ph, d], i) => ({ t, n, d: d || '', dd: d ? 'block' : 'none', cnt: ph.length > 1 ? ph.length + ' photos' : '', dc: ph.length > 1 ? 'inline' : 'none', tag: TAG[c][0], tagBg: TAG[c][1], tagFg: TAG[c][2],

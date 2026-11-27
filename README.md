@@ -12,7 +12,8 @@ Site statique hébergé gratuitement sur **GitHub Pages**, nom de domaine chez *
 | `src/static/` | Fichiers copiés tels quels (page 404…). |
 | `src/site.json` | Nom de domaine du site. |
 | `tools/` | Scripts de construction et de vérification. |
-| `docs/` | **Le site publié** (généré : ne pas modifier à la main). |
+| `docs/` | **Le site publié** (généré : ne pas modifier à la main), sauf `docs/data/` et `docs/uploads/`. |
+| `docs/data/` | Contenus gérés par l'espace admin : `actus.json`, `evenements.json`, `albums.json`, `bandeau.json`. Lus par les pages à chaque visite ; jamais effacés par la construction (valeurs de départ dans `src/data-initial/`). |
 
 Les pages s'affichent grâce à `src/assets/js/dc.js`, un petit moteur qui reprend la syntaxe des maquettes
 (`{{valeur}}`, boucles `sc-for`, conditions `sc-if`, éléments communs `dc-import`). Sous 900 px de large,

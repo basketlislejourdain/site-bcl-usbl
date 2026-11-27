@@ -237,17 +237,13 @@ class Component extends DCLogic {
       m('bcl', 'U13 F', 'avenir', 'Dim. [hh:mm]', false)
     ].filter(keep).map(deco);
 
-    const news = [
-      { club: 'commun', date: '15/11', rubrique: 'Événements', title: 'Retour sur la Foire de la Saint-Martin : crêpes, pâtisseries et tombola', img: '/_blob/765155a4eba273788cbb3e6e05ab6bd3', href: 'Evenements.dc.html' },
-      { club: 'commun', date: 'Saison 2026-2027', rubrique: 'Inscriptions', title: 'Saison 2026-2027 : comment s’inscrire, tarifs et pièces à fournir', href: 'Infos.dc.html' },
-      { club: 'commun', date: 'Saison 2026-2027', rubrique: 'Partenaires', title: 'Entreprises locales : rejoignez l’aventure du basket lislois', href: 'Partenaires.dc.html' }
-    ].filter(keep).slice(0, 2).map(deco).map((n) => ({ ...n, bg: n.img ? `#D9D5CC url(${n.img}) center / cover no-repeat` : '#D9D5CC', phTxt: n.img ? '' : '[Photo]', href: n.href || '#' }));
+    // actus : fichier data/actus.json (espace admin)
+    const news = Contenu.actus().map((n) => ({ club: n.club, date: n.dateAff, rubrique: n.rubrique, title: n.titre, img: n.image, href: n.lien }))
+      .filter(keep).slice(0, 2).map(deco).map((n) => ({ ...n, bg: n.img ? `#D9D5CC url(${n.img}) center / cover no-repeat` : '#D9D5CC', phTxt: n.img ? '' : '[Photo]', href: n.href || '#' }));
 
-    const events = [
-      { club: 'commun', d: '19', m: 'déc.', type: 'Tournoi', title: 'Coupe du Gers à Gasco’Sports' },
-      { club: 'commun', d: '–', m: 'janv.', type: 'Soirée', title: 'Galette des rois' },
-      { club: 'commun', d: '–', m: 'à venir', type: 'Tournoi', title: 'Tournoi Fluo 3x3' }
-    ].filter(keep).slice(0, 2).map((e) => ({ ...e, color: e.club === 'commun' ? '#0D1117' : colorOf(e.club) }));
+    // agenda : fichier data/evenements.json (espace admin)
+    const events = Contenu.evenements().map((e) => ({ club: e.club, d: e.jour, m: e.moisCourt, type: e.type.replace(/s$/, ''), title: e.titre }))
+      .filter(keep).slice(0, 2).map((e) => ({ ...e, color: e.club === 'commun' ? '#0D1117' : colorOf(e.club) }));
 
     const filterCaption = club === 'tous' ? 'Les deux clubs' : (club === 'bcl' ? 'BCL · filles' : 'USBL · garçons') + ' + communes';
 

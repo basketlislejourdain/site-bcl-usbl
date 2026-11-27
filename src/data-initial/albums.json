@@ -1,0 +1,85 @@
+[
+ {
+  "id": "foire-saint-martin-2026",
+  "titre": "Foire de la Saint-Martin",
+  "sousTitre": "14 et 15 novembre 2026 · place de l’Hôtel-de-Ville",
+  "club": "commun",
+  "date": "2026-11-15",
+  "description": "Pour la 49e Foire de la Saint-Martin, fête de l’artisanat et de la vie locale organisée par le comité des fêtes, le BCL et l’USBL tenaient un stand commun place de l’Hôtel-de-Ville. Au programme : crêpes, pâtisseries préparées par nos bénévoles, concours de shoot et tombola du Basket Lislois, qui a connu un grand succès. Merci à tous les bénévoles et aux commerçants lislois pour les lots !",
+  "photos": [
+   "assets/img/765155a4eba273788cbb3e6e05ab6bd3.jpg",
+   "assets/img/c1a258760c7ca81ab008530d0d81e60c.jpg",
+   "assets/img/5657b48c7b5833da77a9a212c3a8942a.jpg",
+   "assets/img/8325177888f3c676d880522371aa6824.jpg",
+   "assets/img/680105b9ad4c5666ba8b17f42aac6596.jpg",
+   "assets/img/717987493f60af56ff667c74d358a955.jpg",
+   "assets/img/e2566c28d6baa1827c57e99cb8616c74.jpg",
+   "assets/img/eea678d251f53a8ca11c0b19a6e58cc1.jpg",
+   "assets/img/538ee2f337fcba766dd6aa0767db40fa.jpg"
+  ],
+  "mineursFloutes": true
+ },
+ {
+  "id": "world-cleanup-day-2026",
+  "titre": "World Cleanup Day",
+  "sousTitre": "22 mars 2026 · ramassage des déchets autour de Gasco’Sports",
+  "club": "bcl",
+  "date": "2026-03-22",
+  "description": "",
+  "photos": [
+   "assets/img/cf5a3f95bfa415058a0fb5e2e455f159.jpg"
+  ],
+  "mineursFloutes": true
+ },
+ {
+  "id": "gestes-qui-sauvent-2026",
+  "titre": "Gestes qui sauvent avec les pompiers",
+  "sousTitre": "24 janvier 2026 · caserne de L’Isle-Jourdain",
+  "club": "bcl",
+  "date": "2026-01-24",
+  "description": "",
+  "photos": [
+   "assets/img/4143032503efe6256d6e959d626953f3.jpg",
+   "assets/img/ab531f6a4f685eee1e7f0dc3d1c53aa3.jpg"
+  ],
+  "mineursFloutes": true
+ },
+ {
+  "id": "tmb-bourges",
+  "titre": "Soirée au match TMB–Bourges",
+  "sousTitre": "Saison 2025-2026 · avec la Maison des Femmes de Toulouse",
+  "club": "bcl",
+  "date": "2026-01-01",
+  "description": "",
+  "photos": [
+   "assets/img/173399496c7bbffec7f14eaf78a7ef2e.jpg",
+   "assets/img/56d88218927b7ea84cb22fbcff9424be.jpg",
+   "assets/img/598a2d0035e145cbb689faefe0383cbe.jpg"
+  ],
+  "mineursFloutes": true
+ },
+ {
+  "id": "mucoviscidose",
+  "titre": "Après-midi mucoviscidose",
+  "sousTitre": "Saison 2025-2026 · avec l’USBL et ABC Muco",
+  "club": "commun",
+  "date": "2025-12-01",
+  "description": "",
+  "photos": [
+   "assets/img/2d768d1dee115d4da7e0010afef6adef.jpg"
+  ],
+  "mineursFloutes": true
+ },
+ {
+  "id": "bouchons-damour",
+  "titre": "Collecte des Bouchons d’Amour",
+  "sousTitre": "Saison 2025-2026 · avec les U15 et les U18",
+  "club": "bcl",
+  "date": "2025-11-01",
+  "description": "",
+  "photos": [
+   "assets/img/4d7b1905753338dba1e80eb13448e379.jpg"
+  ],
+  "mineursFloutes": true
+ }
+]

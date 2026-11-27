@@ -231,7 +231,26 @@
     instances = {};
   }
 
+  // contenus modifiables (actus, événements, albums, bandeau) : data/*.json, lus avant le premier affichage
+  function loadData(names) {
+    window.SITE_DATA = window.SITE_DATA || {};
+    if (!names || !names.length || !window.fetch) return Promise.resolve();
+    return Promise.all(names.map(function (n) {
+      return fetch('data/' + n + '.json', { cache: 'no-cache' })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (d) { if (d) window.SITE_DATA[n] = d; })
+        .catch(function () { /* contenu indisponible : la page s'affiche sans */ });
+    }));
+  }
+
   function boot(config) {
+    loadData(config.data || ['actus', 'evenements', 'albums', 'bandeau']).then(function () {
+      if (window.Contenu) window.Contenu.bandeau();
+      start(config);
+    });
+  }
+
+  function start(config) {
     cfg = config;
     mq = window.matchMedia('(max-width: ' + (config.breakpoint || 899) + 'px)');
     root = { el: document.getElementById('app'), name: currentName(), fresh: true };

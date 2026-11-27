@@ -20,3 +20,6 @@ html.dc-menu-open, html.dc-menu-open body { overflow: hidden; }
 .leaflet-popup-content a{color:#C2361B;font-weight:600}
 /* onglets BCL / USBL de l'accueil : le panneau inactif reste hors écran quoi que fasse le widget */
 [data-mpanel][aria-hidden="true"] { position: absolute !important; top: 0 !important; left: -200vw !important; width: 100% !important; }
+/* bandeau d'alerte (géré depuis l'espace admin) */
+#bandeau-alerte{position:relative;z-index:50;background:#F2C14E;color:#0D1117;font-family:'Barlow',system-ui,sans-serif;font-weight:600;font-size:15px;line-height:1.4;padding:10px 16px;display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;align-items:center;text-align:center}
+#bandeau-alerte a{color:#0D1117;font-weight:800;text-decoration:underline}

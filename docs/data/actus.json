@@ -1,0 +1,35 @@
+[
+ {
+  "id": "foire-saint-martin-2026",
+  "club": "commun",
+  "rubrique": "Événements",
+  "date": "2026-11-15",
+  "dateTexte": "",
+  "titre": "Retour sur la Foire de la Saint-Martin : crêpes, pâtisseries et tombola",
+  "image": "assets/img/765155a4eba273788cbb3e6e05ab6bd3.jpg",
+  "lien": "evenements.html#galerie",
+  "fin": ""
+ },
+ {
+  "id": "inscriptions-2026-2027",
+  "club": "commun",
+  "rubrique": "Inscriptions",
+  "date": "2026-09-01",
+  "dateTexte": "Saison 2026-2027",
+  "titre": "Saison 2026-2027 : comment s’inscrire, tarifs et pièces à fournir",
+  "image": "",
+  "lien": "infos.html",
+  "fin": ""
+ },
+ {
+  "id": "appel-partenaires-2026",
+  "club": "commun",
+  "rubrique": "Partenaires",
+  "date": "2026-09-01",
+  "dateTexte": "Saison 2026-2027",
+  "titre": "Entreprises locales : rejoignez l’aventure du basket lislois",
+  "image": "",
+  "lien": "partenaires.html",
+  "fin": ""
+ }
+]

@@ -126,6 +126,7 @@ HEAD = """<!doctype html>
 {styles}
 </style>
 <script src="assets/js/dc.js"></script>
+<script src="assets/js/contenu.js"></script>
 <script src="assets/js/forms.js" defer></script>
 <script src="assets/js/ui.js" defer></script>
 <script src="assets/js/carte.js" defer></script>
@@ -140,8 +141,16 @@ def esc(s):
 
 
 def build():
+    # docs/data et docs/uploads sont écrits par l'espace admin : on ne les efface jamais
+    KEEP = {"data", "uploads"}
     if OUT.exists():
-        shutil.rmtree(OUT)
+        for p in OUT.iterdir():
+            if p.name in KEEP:
+                continue
+            shutil.rmtree(p) if p.is_dir() else p.unlink()
+    OUT.mkdir(exist_ok=True)
+    if not (OUT / "data").exists():
+        shutil.copytree(SRC / "data-initial", OUT / "data")
     shutil.copytree(SRC / "assets", OUT / "assets")
     shutil.copytree(SRC / "static", OUT, dirs_exist_ok=True)
     comps = {n: load(n) for n in SHARED}
