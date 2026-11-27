@@ -5,6 +5,7 @@ Usage : python3 tools/build.py
 Le dossier docs/ est ce que GitHub Pages publie. Ne pas le modifier à la main :
 modifier src/ puis relancer ce script.
 """
+import hashlib
 import json
 import re
 import shutil
@@ -159,6 +160,12 @@ def build():
         html += component_block(desk, d) + component_block(mob, m)
         html += f'<script>DC.boot({{desktop: {json.dumps(desk)}, mobile: {json.dumps(mob)}, menu: "MMenu", breakpoint: 899}});</script>\n'
         html += "</body>\n</html>\n"
+        # numéro de version sur les fichiers CSS/JS : le navigateur recharge chaque nouvelle version
+        def versioned(m):
+            f = OUT / m.group(2)
+            v = hashlib.sha1(f.read_bytes()).hexdigest()[:8] if f.exists() else "0"
+            return f'{m.group(1)}="{m.group(2)}?v={v}"'
+        html = re.sub(r'(src|href)="(assets/(?:js|css|fonts)/[^"?]+)"', versioned, html)
         (OUT / f"{slug}.html").write_text(html, encoding="utf-8")
     # nom de domaine
     if SITE_CFG.get("domain"):
