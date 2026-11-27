@@ -78,3 +78,16 @@ attention aux **adresses e-mail** liées au domaine avant de le résilier.
 - Photos Halle Louise-Michel et salle polyvalente ; documents à télécharger (statuts, règlement, PV d'AG, projet de club).
 - Dates des événements ; nombre de licenciés ; assurance pendant l'essai ; téléphone éventuel ; boutique.
 - Espace administrateur (actus).
+
+## Espace admin
+
+Adresse : `https://basketlislejourdain.github.io/site-bcl-usbl/admin/` (non référencée).
+
+- **Page** : `src/static/admin/index.html` (copiée dans `docs/admin/`). Elle lit l'adresse du service dans `docs/admin/api.json`, écrite automatiquement à chaque publication du service.
+- **Service** : `worker/` (Cloudflare Worker), publié par `.github/workflows/admin-worker.yml` à chaque modification du dossier `worker/`. Comptes et demandes dans Workers KV ; contenus et photos enregistrés dans ce dépôt (un commit par modification, signé du nom de la personne).
+- **Rôles** : super admin (tous les droits, gestion des comptes ; il en faut toujours au moins deux) ; éditeur BCL / éditeur USBL (actus, agenda, photos, bandeau de son club et contenus communs).
+- **Secrets GitHub nécessaires** (Settings → Secrets and variables → Actions) :
+  - `CLOUDFLARE_API_TOKEN` : clé Cloudflare (modèle « Edit Cloudflare Workers ») ;
+  - `SITE_REPO_TOKEN` : clé GitHub « fine-grained », dépôt `site-bcl-usbl` seulement, permission *Contents : Read and write*. **Expire au bout d'un an : la renouveler** puis relancer la publication du service (onglet Actions → « Admin — publier le service Cloudflare » → Run workflow) ;
+  - `ADMIN_SETUP_CODE` : phrase secrète pour créer les comptes super admin via `…/admin/#installation`.
+- Chaque publication du service déconnecte les personnes connectées (nouvelle clé de session) : il suffit de se reconnecter.
