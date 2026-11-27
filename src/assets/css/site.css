@@ -1,0 +1,12 @@
+/* Réglages communs à toutes les pages (le reste du style est dans les maquettes) */
+html, body { margin: 0; }
+body { background: #F4F2EE; overflow-x: hidden; -webkit-text-size-adjust: 100%; }
+#app { min-height: 100vh; }
+img { max-width: 100%; }
+button { font: inherit; }
+a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid #F2C14E; outline-offset: 2px; }
+#dc-menu { position: fixed; inset: 0; z-index: 1000; overflow-y: auto; background: #0D1117; }
+#dc-menu[hidden] { display: none; }
+html.dc-menu-open, html.dc-menu-open body { overflow: hidden; }
+.dc-noscript { font-family: 'Barlow', system-ui, sans-serif; max-width: 760px; margin: 0 auto; padding: 24px 16px; color: #0D1117; }
+@media (max-width: 899px) { #app table { display: block; overflow-x: auto; } }

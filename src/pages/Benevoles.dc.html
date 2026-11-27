@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Espace bénévoles</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&amp;family=Barlow:wght@400;500;600;700&amp;family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800&amp;display=swap">
+<style>
+body{margin:0;background:#0D1117}
+a{color:#0D1117}a:hover{color:#C2361B}
+</style>
+</helmet>
+<div style="font-family: 'Barlow', system-ui, sans-serif; color: #0D1117; background: #F4F2EE; min-width: 0">
+  <dc-import name="Header" active="benevoles" hint-size="100%,124px"></dc-import>
+
+  <section style="background: #E0301E; color: #FFFFFF">
+    <div style="max-width: 1320px; margin: 0 auto; padding: 64px 32px; display: flex; flex-direction: column; gap: 16px">
+      <div style="font-size: 14px"><a href="MainV2.dc.html" style="color: #FFFFFF">Accueil</a> / Bénévoles</div>
+      <h1 style="margin: 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 112px; line-height: 1; text-transform: uppercase">Le club,<br>c'est vous.</h1>
+      <p style="margin: 0; font-size: 20px; max-width: 680px; line-height: 1.5">Chaque match, chaque tournoi, chaque soirée existe grâce à des parents, des joueurs et des amis du club qui donnent un peu de leur temps. Une heure par mois ou tous les week-ends, pour un match ou pour toute la saison : chaque coup de main compte, et on vous accompagne pour démarrer.</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px">
+        <a href="#missions" style="background: #0D1117; color: #FFFFFF; text-decoration: none; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-style: italic; font-size: 19px; text-transform: uppercase; padding: 0 24px; height: 50px; border-radius: 4px; display: inline-flex; align-items: center">Je deviens bénévole</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pourquoi -->
+  <section style="max-width: 1320px; margin: 0 auto; padding: 72px 32px 0; display: flex; flex-direction: column; gap: 24px">
+    <div>
+      <div style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase; color: #4A5260">Pourquoi s'engager</div>
+      <h2 style="margin: 4px 0 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 56px; line-height: 1; text-transform: uppercase">Pourquoi être bénévole ?</h2>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 16px">
+      <sc-for list="{{why}}" as="w" hint-placeholder-count="4">
+        <div style="background: #FFFFFF; border-radius: 10px; padding: 28px; display: flex; flex-direction: column; gap: 10px">
+          <span style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 56px; line-height: 0.8; color: #E0301E">{{w.n}}</span>
+          <h3 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 26px; text-transform: uppercase; line-height: 1">{{w.t}}</h3>
+          <p style="margin: 0; font-size: 16px; color: #2B3340; line-height: 1.5">{{w.d}}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- Missions -->
+  <section id="missions" style="max-width: 1320px; margin: 0 auto; padding: 72px 32px 0; display: flex; flex-direction: column; gap: 24px">
+    <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: flex-end">
+      <div>
+        <div style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase; color: #4A5260">Une heure par mois ou tous les week-ends</div>
+        <h2 style="margin: 4px 0 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 56px; line-height: 1; text-transform: uppercase">Les missions</h2>
+      </div>
+      <span style="font-size: 15px; color: #4A5260">Pas besoin d'être expert : on vous forme.</span>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 12px">
+      <sc-for list="{{missions}}" as="m" hint-placeholder-count="8">
+        <div style="background: #FFFFFF; border-radius: 8px; padding: 20px; display: flex; gap: 16px; align-items: flex-start">
+          <span style="width: 48px; height: 48px; flex: none; border-radius: 8px; background: #F4F2EE; display: flex; align-items: center; justify-content: center">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E0301E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{m.icon}}"></path></svg>
+          </span>
+          <div style="display: flex; flex-direction: column; gap: 4px">
+            <h3 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 22px; text-transform: uppercase; line-height: 1">{{m.t}}</h3>
+            <span style="font-size: 15px; color: #2B3340">{{m.d}}</span>
+            
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section style="max-width: 1320px; margin: 0 auto; padding: 72px 32px 80px">
+    <div style="background: #0D1117; color: #FFFFFF; border-radius: 10px; padding: 28px 32px; display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: center; justify-content: space-between">
+      <div>
+        <h2 style="margin: 0 0 6px; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 36px; text-transform: uppercase; line-height: 1">Une question ?</h2>
+        <p style="margin: 0; font-size: 17px; color: #E9ECF1">Eric, référent bénévoles, répond à toutes vos questions.</p>
+      </div>
+      <a href="mailto:bclislois32@gmail.com?subject=B%C3%A9n%C3%A9volat" style="background: #E0301E; color: #FFFFFF; text-decoration: none; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-style: italic; font-size: 18px; text-transform: uppercase; padding: 0 22px; height: 48px; border-radius: 4px; display: inline-flex; align-items: center">Écrire à Eric</a>
+    </div>
+  </section>
+
+  <dc-import name="Footer" hint-size="100%,330px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2300}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const why = [
+      { n: '01', t: 'Sans vous, pas de match', d: 'Table de marque, arbitrage, accueil : un match officiel ne peut pas se jouer sans bénévoles.' },
+      { n: '02', t: 'Vivre le club de l’intérieur', d: 'Voir les coulisses, rencontrer les autres familles, partager les victoires.' },
+      { n: '03', t: 'Apprendre et transmettre', d: 'Formations à la table de marque ou à l’arbitrage, compétences utiles ailleurs.' },
+      { n: '04', t: 'À votre rythme', d: 'Une heure par mois ou chaque week-end : chacun donne ce qu’il peut. Choisissez une mission, dites-nous vos disponibilités, on vous accueille le jour J.' }
+    ];
+    const missions = [
+      { t: 'Table de marque', d: 'Feuille de match, chrono, score (OTM).', icon: 'M12 8v4l3 2M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z' },
+      { t: 'Arbitrage', d: 'Arbitrer les matchs de jeunes.', icon: 'M8 21h8M12 17v4M7 4h10l-1 7a4 4 0 0 1-8 0Z' },
+      { t: 'Buvette', d: 'Tenir le stand pendant les matchs.', icon: 'M6 8h12l-1.5 12h-9ZM9 4h6' },
+      { t: 'Accueil et sécurité', d: 'Accueillir les équipes et le public.', icon: 'M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7Z' },
+      { t: 'Transport', d: 'Conduire les joueurs aux matchs à l’extérieur.', icon: 'M3 13h18v5H3zM5 13l2-6h10l2 6M7 18v2M17 18v2' },
+      { t: 'Événements', d: 'Préparer tournois, lotos, soirées.', icon: 'M3 5h18v16H3zM3 10h18M8 3v4M16 3v4' },
+      { t: 'Photo et communication', d: 'Photos, posts Instagram, affiches.', icon: 'M4 7h4l2-3h4l2 3h4v13H4zM12 17a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z' },
+      { t: 'Aide aux coachs', d: 'Épauler l’encadrement des plus jeunes.', icon: 'M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2M10 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM21 21v-2a4 4 0 0 0-3-3.9' }
+    ];
+    return { why, missions };
+  }
+}
+</script>
+</body>
+</html>

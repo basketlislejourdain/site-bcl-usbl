@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Événements</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&amp;family=Barlow:wght@400;500;600;700&amp;family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800&amp;display=swap">
+<style>
+body{margin:0;background:#0D1117}
+a{color:#0D1117}a:hover{color:#C2361B}
+</style>
+</helmet>
+<div style="font-family: 'Barlow', system-ui, sans-serif; color: #0D1117; background: #F4F2EE; min-width: 0">
+  <dc-import name="Header" active="evenements" hint-size="100%,124px"></dc-import>
+
+  <section style="background: #0D1117; color: #FFFFFF; border-bottom: 6px solid #E0301E">
+    <div style="max-width: 1320px; margin: 0 auto; padding: 56px 32px 56px; display: flex; flex-wrap: wrap; gap: 32px; align-items: stretch">
+      <div style="flex: 1 1 460px; display: flex; flex-direction: column; gap: 14px; justify-content: center">
+        <div style="font-size: 14px; color: #B8C0CC"><a href="MainV2.dc.html" style="color: #B8C0CC">Accueil</a> / Événements</div>
+        <h1 style="margin: 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 88px; line-height: 0.9; text-transform: uppercase">La vie du club</h1>
+        <p style="margin: 0; font-size: 19px; color: #E9ECF1; line-height: 1.5; max-width: 520px">Stages, tournois, soirées, assemblées : tous les rendez-vous des deux clubs.</p>
+      </div>
+      <article style="flex: 1 1 520px; background: #E0301E; border-radius: 10px; overflow: hidden; display: flex; min-height: 280px">
+        <div style="width: 150px; flex: none; background: #0D1117; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; border-right: 4px solid #E0301E">
+          <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase; color: #B8C0CC">Prochain</span>
+          <span style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 72px; line-height: 0.9">19</span>
+          <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 22px; text-transform: uppercase">déc. 2026</span>
+        </div>
+        <div style="padding: 28px; display: flex; flex-direction: column; gap: 10px; justify-content: center">
+          <span style="align-self: flex-start; background: #0D1117; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px; text-transform: uppercase; padding: 3px 10px; border-radius: 3px">Tournoi · commun</span>
+          <h2 style="margin: 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 48px; line-height: 0.95; text-transform: uppercase">Coupe du Gers</h2>
+          <span style="font-size: 17px">Samedi 19 décembre · Gasco’Sports · ouvert à tous · restauration sur place</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px">
+            <a href="Benevoles.dc.html" style="color: #FFFFFF; font-weight: 600; display: inline-flex; align-items: center; min-height: 44px">Besoin de bénévoles →</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section style="max-width: 1320px; margin: 0 auto; padding: 56px 32px 0; display: flex; flex-direction: column; gap: 20px">
+    <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: flex-end">
+      <h2 style="margin: 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 56px; line-height: 1; text-transform: uppercase">Agenda</h2>
+      <div role="group" aria-label="Type d'événement" style="display: flex; flex-wrap: wrap; gap: 8px">
+        <sc-for list="{{types}}" as="t" hint-placeholder-count="6">
+          <button type="button" onClick="{{t.pick}}" aria-pressed="{{t.pressed}}" style="border: 1px solid #0D1117; cursor: pointer; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 16px; text-transform: uppercase; padding: 0 16px; height: 44px; border-radius: 999px; background: {{t.bg}}; color: {{t.fg}}">{{t.label}}</button>
+        </sc-for>
+      </div>
+    </div>
+    <sc-for list="{{months}}" as="mo" hint-placeholder-count="2">
+      <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px">
+        <h3 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 22px; text-transform: uppercase; border-bottom: 2px solid #0D1117; padding-bottom: 6px">{{mo.name}}</h3>
+        <sc-for list="{{mo.items}}" as="e" hint-placeholder-count="3">
+          <div style="background: #FFFFFF; border-radius: 8px; padding: 16px 20px; display: flex; flex-wrap: wrap; gap: 16px 24px; align-items: center">
+            <div style="width: 64px; text-align: center">
+              <div style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 34px; line-height: 1">{{e.day}}</div>
+              <div style="font-size: 13px; color: #4A5260">{{e.dow}}</div>
+            </div>
+            <div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 4px">
+              <div style="display: flex; gap: 8px; align-items: center">
+                <span style="background: {{e.typeBg}}; color: #FFFFFF; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; text-transform: uppercase; padding: 2px 8px; border-radius: 3px">{{e.type}}</span>
+                <span style="background: {{e.color}}; color: {{e.ink}}; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; text-transform: uppercase; padding: 2px 8px; border-radius: 3px">{{e.club}}</span>
+              </div>
+              <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 22px">{{e.title}}</span>
+              <span style="font-size: 15px; color: #4A5260">{{e.sub}}</span>
+            </div>
+            <a href="{{e.href}}" style="font-weight: 600; font-size: 15px; min-height: 44px; display: {{e.moreDisp}}; align-items: center">{{e.more}}</a>
+          </div>
+        </sc-for>
+      </div>
+    </sc-for>
+  </section>
+
+  <section style="max-width: 1320px; margin: 0 auto; padding: 72px 32px 80px; display: flex; flex-direction: column; gap: 20px">
+    <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: flex-end">
+      <h2 style="margin: 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 56px; line-height: 1; text-transform: uppercase">Galerie photos</h2>
+      <span style="font-size: 14px; color: #4A5260">Visages des mineurs floutés. Cliquez sur un album pour voir les photos.</span>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px">
+      <sc-for list="{{albums}}" as="a" hint-placeholder-count="4">
+        <button type="button" onClick="{{a.open}}" style="border: 0; padding: 0; cursor: {{a.cursor}}; text-align: left; font: inherit; color: inherit; background: #FFFFFF; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column">
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3px; height: 200px; width: 100%">
+            <div style="background: {{a.c1}}; grid-row: span 2; grid-column: {{a.span}}"></div><div style="display: {{a.d2}}; background: {{a.c2}}"></div><div style="display: {{a.d3}}; background: {{a.c3}}"></div>
+          </div>
+          <div style="padding: 14px 16px; display: flex; flex-direction: column; gap: 4px">
+            <span style="align-self: flex-start; background: {{a.tagBg}}; color: {{a.tagFg}}; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 12px; text-transform: uppercase; padding: 2px 7px; border-radius: 3px">{{a.tag}}</span>
+            <div style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 20px; line-height: 1.15">{{a.t}}</div>
+            <div style="font-size: 14px; color: #4A5260">{{a.n}}</div>
+            <div style="display: {{a.dd}}; font-size: 14px; line-height: 1.45; color: #2B3340; margin-top: 4px">{{a.d}}</div>
+            <div style="display: {{a.dc}}; font-size: 13px; font-weight: 600; color: #C2361B; margin-top: 2px">{{a.cnt}} →</div>
+          </div>
+        </button>
+      </sc-for>
+    </div>
+  </section>
+
+  <div onClick="{{lb.close}}" style="display: {{lb.display}}; position: fixed; inset: 0; z-index: 50; background: rgba(13,17,23,0.92); align-items: center; justify-content: center; padding: 32px; cursor: zoom-out">
+    <div style="width: min(1200px, 100%); max-height: 100%; overflow: auto; display: flex; flex-direction: column; gap: 14px; color: #FFFFFF">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 12px">
+        <div><div style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 36px; text-transform: uppercase; line-height: 1">{{lb.title}}</div><div style="font-size: 15px; color: #B8C0CC">{{lb.sub}}</div><div style="display: {{lb.dd}}; font-size: 16px; line-height: 1.5; color: #E9ECF1; max-width: 820px; margin-top: 8px">{{lb.desc}}</div></div>
+        <button type="button" onClick="{{lb.close}}" style="border: 1px solid #4A5260; background: transparent; color: #FFFFFF; border-radius: 4px; height: 44px; padding: 0 16px; cursor: pointer; font-weight: 600">Fermer ✕</button>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center">
+        <sc-for list="{{lb.photos}}" as="ph" hint-placeholder-count="2"><img src="{{ph.u}}" alt="" style="max-height: 70vh; max-width: 100%; border-radius: 8px; object-fit: contain"></sc-for>
+      </div>
+    </div>
+  </div>
+  <dc-import name="Footer" hint-size="100%,330px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2900}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { album: null,  type: 'Tous' }; }
+  renderVals() {
+    const type = this.state.type;
+    const types = ['Tous', 'Stages', 'Tournois', 'Soirées', 'Engagement', 'Assemblées'].map((label) => {
+      const on = type === label;
+      return { label, pressed: on ? 'true' : 'false', bg: on ? '#0D1117' : 'transparent', fg: on ? '#FFFFFF' : '#0D1117', pick: () => this.setState({ type: label }) };
+    });
+    const club = (c) => c === 'usbl' ? { club: 'USBL · garçons', color: '#F2C14E', ink: '#0D1117' } : c === 'bcl' ? { club: 'BCL · filles', color: '#E0301E', ink: '#FFFFFF' } : { club: 'Commun', color: '#D9D5CC', ink: '#0D1117' };
+    const ev = (day, dow, t, title, sub, c) => ({ day, dow, type: t, title, sub, ...club(c), href: t === 'Engagement' ? 'Engagements.dc.html' : '#', more: t === 'Engagement' ? 'Notre démarche →' : '', moreDisp: t === 'Engagement' ? 'inline-flex' : 'none', typeBg: t === 'Engagement' ? '#E0301E' : '#0D1117' });
+    const raw = [
+      { name: 'Décembre 2026', items: [ev('19', 'Sam.', 'Tournois', 'Coupe du Gers', 'Gasco’Sports · ouvert à tous · restauration sur place', 'commun')] },
+      { name: 'Janvier 2027', items: [ev('–', 'Date à venir', 'Soirées', 'Galette des rois', 'Halle des sports Louise-Michel · BCL et USBL (interne) · galettes et cidre offerts', 'commun')] },
+      { name: 'Date à venir', items: [ev('–', 'Date à venir', 'Tournois', 'Tournoi Fluo 3x3', 'Gasco’Sports · des U15 aux seniors, dans la limite des places · 20 € par équipe', 'commun')] },
+      { name: 'Mai 2027', items: [ev('–', 'Date à venir', 'Tournois', 'Journée Basket pour tous', 'Gasco’Sports · ouvert à tous', 'commun'), ev('–', 'Date à venir', 'Tournois', 'Tournoi Loisirs', 'Gasco’Sports · ouvert à tous', 'commun')] },
+      { name: 'Fin de saison 2027', items: [ev('–', 'Date à venir', 'Soirées', 'Les 30 ans de l’USBL', 'Exposition rétrospective · lieu à venir', 'usbl')] }
+    ];
+    const months = raw.map((m) => ({ ...m, items: m.items.filter((e) => type === 'Tous' || e.type === type) })).filter((m) => m.items.length);
+    const P = { bouchons: '/_blob/4d7b1905753338dba1e80eb13448e379', secours1: '/_blob/4143032503efe6256d6e959d626953f3', secours2: '/_blob/ab531f6a4f685eee1e7f0dc3d1c53aa3',
+      tmb1: '/_blob/56d88218927b7ea84cb22fbcff9424be', tmb2: '/_blob/173399496c7bbffec7f14eaf78a7ef2e', tmb3: '/_blob/598a2d0035e145cbb689faefe0383cbe', cleanup: '/_blob/cf5a3f95bfa415058a0fb5e2e455f159', muco: '/_blob/2d768d1dee115d4da7e0010afef6adef' };
+    const TAG = { commun: ['BCL + USBL', '#0D1117', '#FFFFFF'], bcl: ['BCL', '#E0301E', '#FFFFFF'] };
+    const RAW = [
+      ['Foire de la Saint-Martin', '14 et 15 novembre 2026 · place de l’Hôtel-de-Ville', 'commun', ['/_blob/765155a4eba273788cbb3e6e05ab6bd3', '/_blob/c1a258760c7ca81ab008530d0d81e60c', '/_blob/5657b48c7b5833da77a9a212c3a8942a', '/_blob/8325177888f3c676d880522371aa6824', '/_blob/680105b9ad4c5666ba8b17f42aac6596', '/_blob/717987493f60af56ff667c74d358a955', '/_blob/e2566c28d6baa1827c57e99cb8616c74', '/_blob/eea678d251f53a8ca11c0b19a6e58cc1', '/_blob/538ee2f337fcba766dd6aa0767db40fa'], 'Pour la 49e Foire de la Saint-Martin, fête de l’artisanat et de la vie locale organisée par le comité des fêtes, le BCL et l’USBL tenaient un stand commun place de l’Hôtel-de-Ville. Au programme : crêpes, pâtisseries préparées par nos bénévoles, concours de shoot et tombola du Basket Lislois, qui a connu un grand succès. Merci à tous les bénévoles et aux commerçants lislois pour les lots !'],
+      ['World Cleanup Day', '22 mars 2026 · ramassage des déchets autour de Gasco’Sports', 'bcl', [P.cleanup]],
+      ['Gestes qui sauvent avec les pompiers', '24 janvier 2026 · caserne de L’Isle-Jourdain', 'bcl', [P.secours1, P.secours2]],
+      ['Soirée au match TMB–Bourges', 'Saison 2025-2026 · avec la Maison des Femmes de Toulouse', 'bcl', [P.tmb2, P.tmb1, P.tmb3]],
+      ['Après-midi mucoviscidose', 'Saison 2025-2026 · avec l’USBL et ABC Muco', 'commun', [P.muco]],
+      ['Collecte des Bouchons d’Amour', 'Saison 2025-2026 · avec les U15 et les U18', 'bcl', [P.bouchons]]
+    ];
+    const bg = (u, f) => u ? `${f} url(${u}) center / cover no-repeat` : f;
+    const album = this.state.album;
+    const albums = RAW.map(([t, n, c, ph, d], i) => ({ t, n, d: d || '', dd: d ? 'block' : 'none', cnt: ph.length > 1 ? ph.length + ' photos' : '', dc: ph.length > 1 ? 'inline' : 'none', tag: TAG[c][0], tagBg: TAG[c][1], tagFg: TAG[c][2],
+      c1: bg(ph[0], '#D9D5CC'), c2: bg(ph[1], '#CFCAC0'), c3: bg(ph[2], '#E4E0D8'),
+      span: ph.length === 1 ? 'span 2' : 'auto', d2: ph.length === 1 ? 'none' : 'block', d3: ph.length === 1 ? 'none' : 'block',
+      cursor: ph.length ? 'zoom-in' : 'default', open: () => ph.length && this.setState({ album: i }) }));
+    const cur = album == null ? null : RAW[album];
+    const lb = { display: cur ? 'flex' : 'none', title: cur ? cur[0] : '', sub: cur ? cur[1] : '', desc: cur ? (cur[4] || '') : '', dd: cur && cur[4] ? 'block' : 'none', photos: cur ? cur[3].map((u) => ({ u })) : [], close: () => this.setState({ album: null }) };
+    return { types, months, albums, lb };
+  }
+}
+</script>
+</body>
+</html>

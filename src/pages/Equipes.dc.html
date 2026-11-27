@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Équipes et créneaux d'entraînement</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&amp;family=Barlow:wght@400;500;600;700&amp;family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800&amp;display=swap">
+<style>
+body{margin:0;background:#0D1117}
+a{color:#0D1117}a:hover{color:#C2361B}
+.fwrap{position:relative}.fmenu{display:none;position:absolute;top:100%;right:0;z-index:30;padding-top:8px}
+.fwrap:hover .fmenu[data-has="1"],.fwrap:focus-within .fmenu[data-has="1"]{display:block}
+.fteam:hover{background:#0D1117 !important;color:#FFFFFF !important}
+</style>
+</helmet>
+<div style="font-family: 'Barlow', system-ui, sans-serif; color: #0D1117; background: #F4F2EE; min-width: 0">
+  <dc-import name="Header" active="equipes" hint-size="100%,124px"></dc-import>
+
+  <section style="background: #0D1117; color: #FFFFFF; border-bottom: 6px solid #E0301E">
+    <div style="max-width: 1320px; margin: 0 auto; padding: 56px 32px 48px; display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-end; justify-content: space-between">
+      <div style="flex: 1 1 560px; display: flex; flex-direction: column; gap: 14px">
+        <div style="font-size: 14px; color: #B8C0CC"><a href="MainV2.dc.html" style="color: #B8C0CC">Accueil</a> / Équipes</div>
+        <h1 style="margin: 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 88px; line-height: 0.9; text-transform: uppercase">Équipes &amp; créneaux</h1>
+        <p style="margin: 0; font-size: 19px; max-width: 640px; color: #E9ECF1; line-height: 1.5">Filles et garçons à chaque niveau, du micro-basket aux loisirs. Les filles jouent au BCL, les garçons à l'USBL.</p>
+      </div>
+      <div role="group" aria-label="Afficher" style="display: flex; gap: 4px; background: #1B222D; padding: 4px; border-radius: 6px">
+        <sc-for list="{{filters}}" as="f" hint-placeholder-count="3">
+          <div class="fwrap">
+            <button type="button" onClick="{{f.pick}}" aria-pressed="{{f.pressed}}" aria-haspopup="{{f.popup}}" style="border: 0; cursor: pointer; padding: 8px 20px; min-height: 56px; border-radius: 4px; background: {{f.bg}}; color: {{f.fg}}; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px">
+              <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 20px; text-transform: uppercase; line-height: 1">{{f.label}}</span>
+              <span style="font-size: 13px; font-weight: 600; line-height: 1">{{f.sub}}</span>
+            </button>
+            <div class="fmenu" data-has="{{f.has}}">
+              <div style="background: #FFFFFF; color: #0D1117; border-radius: 8px; box-shadow: 0 12px 32px rgba(13,17,23,0.35); padding: 12px; width: 300px; display: flex; flex-direction: column; gap: 8px; border-top: 5px solid {{f.accent}}">
+                <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: #4A5260">Voir les créneaux d’une équipe</span>
+                <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px">
+                  <sc-for list="{{f.teams}}" as="tm" hint-placeholder-count="6">
+                    <button type="button" class="fteam" onClick="{{tm.pick}}" style="border: 0; cursor: pointer; border-radius: 4px; min-height: 40px; padding: 6px 10px; background: {{tm.bg}}; color: {{tm.fg}}; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 17px; text-transform: uppercase; text-align: left">{{tm.label}}</button>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- Planning -->
+  <section style="max-width: 1320px; margin: 0 auto; padding: 56px 32px 0; display: flex; flex-direction: column; gap: 20px">
+    <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: flex-end">
+      <div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center"><span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase; color: #4A5260">{{planCaption}}</span><button type="button" onClick="{{clearTeam}}" style="display: {{clearDisp}}; border: 1px solid #0D1117; background: #FFFFFF; cursor: pointer; border-radius: 999px; padding: 4px 12px; font-weight: 600; font-size: 14px">Tout le planning ✕</button></div>
+        <h2 style="margin: 4px 0 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 56px; line-height: 1; text-transform: uppercase">Trouver un créneau</h2>
+      </div>
+      <a href="/_blob/7218d6e113d9da81361116e972ec407b" target="_blank" rel="noopener" style="font-weight: 600; font-size: 16px">Télécharger le planning (PDF) →</a>
+    </div>
+    <div style="overflow-x: auto">
+      <div style="display: grid; grid-template-columns: repeat(6, minmax(170px, 1fr)); gap: 10px; min-width: 1060px">
+        <sc-for list="{{days}}" as="d" hint-placeholder-count="6">
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <div style="background: #0D1117; color: #FFFFFF; border-radius: 6px; padding: 10px 12px; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 18px; text-transform: uppercase">{{d.name}}</div>
+            <sc-for list="{{d.slots}}" as="s" hint-placeholder-count="5">
+              <div style="background: #FFFFFF; border-radius: 6px; overflow: hidden; display: flex">
+                <span aria-hidden="true" style="flex: none; width: 5px; background: {{s.strip}}"></span>
+                <div style="padding: 10px 12px; display: flex; flex-direction: column; gap: 4px; min-width: 0">
+                  <span style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: 20px; line-height: 1.05">{{s.cat}}</span>
+                  <span style="font-size: 12px; font-weight: 700; color: #4A5260; text-transform: uppercase; letter-spacing: 0.04em">{{s.who}}</span>
+                  <span style="font-size: 14px; font-weight: 600">{{s.time}}</span>
+                  <span style="align-self: flex-start; background: {{s.rbg}}; color: {{s.rc}}; font-size: 13px; font-weight: 700; border-radius: 4px; padding: 2px 8px; line-height: 1.35">{{s.code}} · {{s.place}}</span>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; font-size: 14px; color: #4A5260">
+      <span>Salles :</span>
+      <sc-for list="{{legend}}" as="l" hint-placeholder-count="4"><span style="background: {{l.bg}}; color: {{l.c}}; font-weight: 700; border-radius: 4px; padding: 3px 9px">{{l.code}} · {{l.n}}</span></sc-for>
+      <span>· Bande rouge = filles (BCL), or = garçons (USBL), rouge et or = créneau commun.</span>
+    </div>
+  </section>
+
+  <!-- Catégories -->
+  <section style="max-width: 1320px; margin: 0 auto; padding: 72px 32px 80px; display: flex; flex-direction: column; gap: 20px">
+    <h2 style="margin: 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 56px; line-height: 1; text-transform: uppercase">Les catégories</h2>
+    <p style="margin: -6px 0 6px; font-size: 16px; color: #4A5260">Cliquez sur une catégorie pour voir ses équipes, puis sur une équipe pour agrandir sa photo.</p>
+    <div style="display: flex; flex-direction: column; gap: 10px">
+      <sc-for list="{{cats}}" as="c" hint-placeholder-count="8">
+        <div style="background: #FFFFFF; border-radius: 10px; overflow: hidden">
+          <button type="button" onClick="{{c.toggle}}" aria-expanded="{{c.expanded}}" style="width: 100%; border: 0; cursor: pointer; background: {{c.headBg}}; color: {{c.headFg}}; padding: 18px 24px; display: flex; align-items: center; gap: 20px; text-align: left; font-family: inherit">
+            <span style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 44px; line-height: 1; min-width: 150px">{{c.code}}</span>
+            <span style="flex: 1; font-size: 16px; color: {{c.subFg}}">{{c.label}} · {{c.count}}</span>
+            <span aria-hidden="true" style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 34px; color: #E0301E; width: 30px; text-align: center">{{c.sign}}</span>
+          </button>
+          <div style="display: {{c.bodyDisplay}}; flex-direction: column">
+            <sc-for list="{{c.rows}}" as="r" hint-placeholder-count="2">
+              <div onClick="{{r.open}}" role="button" tabindex="0" aria-label="Agrandir la photo de l'équipe {{r.who}}" style="cursor: zoom-in; border-top: 1px solid #E4E0D8; padding: 16px 24px; display: flex; gap: 22px; align-items: flex-start">
+                <div style="display: {{r.thumbImg}}; position: relative; flex: none; width: 200px; height: 133px"><img src="{{r.photo}}" alt="Photo de l'équipe {{r.who}}" style="width: 200px; height: 133px; border-radius: 8px; object-fit: cover; box-shadow: 0 2px 8px rgba(13,17,23,0.18)"><span style="display: {{r.multi}}; position: absolute; right: 6px; bottom: 6px; background: rgba(13,17,23,0.8); color: #FFFFFF; font-size: 12px; font-weight: 600; padding: 2px 7px; border-radius: 999px">{{r.multiTxt}}</span></div>
+                <div style="display: {{r.thumbPh}}; flex: none; width: 200px; height: 130px; border-radius: 8px; background: repeating-linear-gradient(45deg, #EEEBE5 0 10px, #E4E0D8 10px 20px); flex-direction: column; align-items: center; justify-content: center; gap: 4px; color: #4A5260; font-size: 13px; font-weight: 600; text-align: center">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="15" rx="2"></rect><circle cx="12" cy="12.5" r="3.5"></circle><path d="M8 5l1.5-2h5L16 5"></path></svg>
+                  Photo d'équipe<br>à venir
+                </div>
+                <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px">
+                  <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px">
+                    <span style="background: {{r.color}}; color: {{r.ink}}; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 16px; text-transform: uppercase; padding: 3px 10px; border-radius: 3px">{{r.who}}</span>
+                    <span style="font-size: 14px; color: #4A5260">Niveau : {{r.level}}</span>
+                  </div>
+                  <div style="font-size: 15px; color: {{r.coachInk}}"><strong style="color: #0D1117">Coach :</strong> {{r.coach}}</div>
+                  <div style="display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: 14px">
+                    <sc-for list="{{r.slots}}" as="k" hint-placeholder-count="2"><span style="display: inline-flex; gap: 8px; align-items: center"><span style="flex: none; background: {{k.rbg}}; color: {{k.rc}}; font-weight: 700; font-size: 12px; border-radius: 3px; padding: 1px 6px">{{k.code}}</span>{{k.txt}}</span></sc-for>
+                  </div>
+                  <div style="display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 15px; font-weight: 600">
+                    <a href="Matchs.dc.html">Calendrier</a><a href="Matchs.dc.html">Classement</a><a href="Matchs.dc.html#suivre" style="color: #C2361B">Ajouter les matchs à mon agenda</a><a href="{{r.ffbb}}" target="_blank" rel="noopener" style="display: {{r.ffbbDisplay}}; color: #4A5260; font-weight: 500">{{r.ffbbLabel}}</a><a href="{{r.ffbb2}}" target="_blank" rel="noopener" style="display: {{r.ffbb2Display}}; color: #4A5260; font-weight: 500">Page FFBB U15 2 ↗</a>
+                  </div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <div onClick="{{closePhoto}}" style="display: {{lbDisplay}}; position: fixed; inset: 0; z-index: 50; background: rgba(13,17,23,0.88); align-items: center; justify-content: center; padding: 40px; cursor: zoom-out">
+      <div style="width: min(1100px, 100%); display: flex; flex-direction: column; gap: 12px">
+        <div style="position: relative; display: {{lbImg}}">
+          <img src="{{lbUrl}}" alt="Photo de l'équipe {{lbTitle}}" style="display: block; width: 100%; max-height: calc(100vh - 160px); object-fit: contain; border-radius: 10px; background: #0D1117">
+          <div style="display: {{lbNav}}; position: absolute; inset: 0; justify-content: space-between; align-items: center; padding: 0 12px; pointer-events: none">
+            <button type="button" aria-label="Photo précédente" onClick="{{lbPrev}}" style="pointer-events: auto; width: 52px; height: 52px; border-radius: 50%; border: 0; background: rgba(13,17,23,0.75); color: #FFFFFF; font-size: 26px; cursor: pointer">‹</button>
+            <button type="button" aria-label="Photo suivante" onClick="{{lbNext}}" style="pointer-events: auto; width: 52px; height: 52px; border-radius: 50%; border: 0; background: rgba(13,17,23,0.75); color: #FFFFFF; font-size: 26px; cursor: pointer">›</button>
+          </div>
+        </div>
+        <div style="display: {{lbPh}}; aspect-ratio: 3 / 2; border-radius: 10px; background: repeating-linear-gradient(45deg, #2B3340 0 14px, #1B222D 14px 28px); align-items: center; justify-content: center; color: #B8C0CC; font-size: 20px; font-weight: 600">Photo de l'équipe {{lbTitle}} · à venir</div>
+        <div style="display: flex; justify-content: space-between; align-items: center; color: #FFFFFF">
+          <span style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 32px; text-transform: uppercase">{{lbTitle}} <span style="font-family: 'Barlow', sans-serif; font-weight: 500; font-size: 16px; color: #B8C0CC; text-transform: none">{{lbCount}}</span></span>
+          <button type="button" onClick="{{closePhoto}}" style="border: 1px solid #4A5260; background: transparent; color: #FFFFFF; border-radius: 4px; height: 44px; padding: 0 16px; cursor: pointer; font-weight: 600">Fermer ✕</button>
+        </div>
+      </div>
+    </div>
+    <div style="background: #E0301E; color: #FFFFFF; border-radius: 10px; padding: 24px 28px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between">
+      <div style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 32px; text-transform: uppercase; line-height: 1">Envie d'essayer ? Demandez une séance d'essai</div>
+      <a href="Infos.dc.html" style="background: #0D1117; color: #FFFFFF; text-decoration: none; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-style: italic; font-size: 18px; text-transform: uppercase; padding: 0 20px; height: 46px; border-radius: 4px; display: inline-flex; align-items: center">S'inscrire →</a>
+    </div>
+  </section>
+
+  <dc-import name="Footer" hint-size="100%,330px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":3800}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { sexe: 'tous', open: 'U5–U7', photo: '', photoList: [], idx: 0, tick: 0 }; }
+  componentDidMount() { this.timer = setInterval(() => { if (!this.state.photo) this.setState({ tick: (this.state.tick || 0) + 1 }); }, 4000); }
+  componentWillUnmount() { clearInterval(this.timer); }
+  renderVals() {
+    const GOLD = '#F2C14E', RED = '#E0301E';
+    const sexe = this.state.sexe;
+    const keep = (x) => sexe === 'tous' || x.s === sexe;
+    const team = this.state.team || null; // { s, cat, eq, label }
+    const TEAM_LIST = {
+      f: [['U5–U7', 0], ['U9', 0], ['U11', 0], ['U13', 0], ['U15', 0], ['U18', 0], ['Seniors', 1], ['Seniors', 2], ['Loisirs', 0]],
+      m: [['U5–U7', 0], ['U9', 0], ['U11', 0], ['U13', 0], ['U15', 0], ['U18', 1], ['U18', 2], ['Seniors', 1], ['Seniors', 2], ['Loisirs', 0]]
+    };
+    const filters = [['tous', 'Tous', 'Filles + garçons'], ['f', 'Filles', 'BCL'], ['m', 'Garçons', 'USBL']].map(([id, label, sub]) => {
+      const on = sexe === id;
+      const bg = on ? (id === 'tous' ? '#FFFFFF' : id === 'f' ? RED : GOLD) : '#3D4654';
+      const fg = on ? (id === 'f' ? '#FFFFFF' : '#0D1117') : '#FFFFFF';
+      const teams = (TEAM_LIST[id] || []).map(([cat, eq]) => {
+        const lab = cat === 'Loisirs' ? 'Loisirs (mixte)' : cat + (eq ? ' ' + eq : '');
+        const sel = team && team.s === id && team.cat === cat && team.eq === eq;
+        return { label: lab, bg: sel ? (id === 'f' ? RED : GOLD) : '#F4F2EE', fg: sel && id === 'f' ? '#FFFFFF' : '#0D1117',
+          pick: () => this.setState({ sexe: id, team: { s: id, cat, eq, label: lab + (cat === 'Loisirs' ? '' : id === 'f' ? ' filles (BCL)' : ' garçons (USBL)') }, open: cat }) };
+      });
+      return { label, sub, bg, fg, teams, has: teams.length ? '1' : '0', popup: teams.length ? 'true' : 'false', accent: id === 'f' ? RED : GOLD, pressed: on ? 'true' : 'false', pick: () => this.setState({ sexe: id, team: null }) };
+    });
+    const SLOTS = [{"d": "Lundi", "t1": "17h30", "t2": "19h00", "t": "U9–U11", "s": "f", "r": "GS", "cats": ["U9", "U11"], "pr": "", "eq": null}, {"d": "Lundi", "t1": "19h00", "t2": "20h30", "t": "U15", "s": "f", "r": "GS", "cats": ["U15"], "pr": "", "eq": null}, {"d": "Lundi", "t1": "19h30", "t2": "21h00", "t": "Renforcement U18 et Seniors", "s": "f", "r": "LM", "cats": ["U18", "Seniors"], "pr": "salle Belvédère", "eq": null}, {"d": "Mardi", "t1": "17h30", "t2": "19h00", "t": "U13", "s": "f", "r": "GY", "cats": ["U13"], "pr": "", "eq": null}, {"d": "Mardi", "t1": "17h30", "t2": "19h00", "t": "U11–U13", "s": "m", "r": "GS", "cats": ["U11", "U13"], "pr": "", "eq": null}, {"d": "Mardi", "t1": "17h30", "t2": "19h00", "t": "Centre de performance U9", "s": "m", "r": "SP", "cats": ["U9"], "pr": "", "eq": null}, {"d": "Mardi", "t1": "19h00", "t2": "20h30", "t": "Centre de performance U18 – 1 et 2", "s": "m", "r": "GS", "cats": ["U18"], "pr": "", "eq": null}, {"d": "Mardi", "t1": "19h00", "t2": "20h30", "t": "Centre de performance U15 – 1 et 2", "s": "m", "r": "GY", "cats": ["U15"], "pr": "", "eq": null}, {"d": "Mardi", "t1": "20h30", "t2": "22h00", "t": "Loisirs", "s": "mix", "r": "GY", "cats": ["Loisirs"], "pr": "", "eq": null}, {"d": "Mardi", "t1": "20h30", "t2": "22h00", "t": "Seniors 1 et 2", "s": "m", "r": "GS", "cats": ["Seniors"], "pr": "", "eq": null}, {"d": "Mercredi", "t1": "16h00", "t2": "17h30", "t": "U9", "s": "f", "r": "GS", "cats": ["U9"], "pr": "", "eq": null}, {"d": "Mercredi", "t1": "16h00", "t2": "17h30", "t": "U9", "s": "m", "r": "GS", "cats": ["U9"], "pr": "", "eq": null}, {"d": "Mercredi", "t1": "17h30", "t2": "19h00", "t": "U11", "s": "f", "r": "GS", "cats": ["U11"], "pr": "", "eq": null}, {"d": "Mercredi", "t1": "17h30", "t2": "19h00", "t": "U11", "s": "m", "r": "GY", "cats": ["U11"], "pr": "", "eq": null}, {"d": "Mercredi", "t1": "19h00", "t2": "20h30", "t": "U18", "s": "f", "r": "GS", "cats": ["U18"], "pr": "", "eq": null}, {"d": "Mercredi", "t1": "20h30", "t2": "22h00", "t": "Seniors", "s": "f", "r": "GS", "cats": ["Seniors"], "pr": "", "eq": null}, {"d": "Mercredi", "t1": "20h45", "t2": "22h00", "t": "3x3", "s": "mix", "r": "LM", "cats": ["Loisirs"], "pr": "", "eq": null}, {"d": "Jeudi", "t1": "17h30", "t2": "19h00", "t": "U7–U9", "s": "f", "r": "SP", "cats": ["U5–U7", "U9"], "pr": "", "eq": null}, {"d": "Jeudi", "t1": "17h30", "t2": "19h00", "t": "Centre de performance U13", "s": "m", "r": "GS", "cats": ["U13"], "pr": "", "eq": null}, {"d": "Jeudi", "t1": "19h00", "t2": "20h30", "t": "U15", "s": "f", "r": "GY", "cats": ["U15"], "pr": "", "eq": null}, {"d": "Jeudi", "t1": "19h00", "t2": "20h30", "t": "U15 – 1 et 2", "s": "m", "r": "GS", "cats": ["U15"], "pr": "", "eq": null}, {"d": "Jeudi", "t1": "20h30", "t2": "22h00", "t": "Seniors 1", "s": "m", "r": "GS", "cats": ["Seniors"], "pr": "", "eq": 1}, {"d": "Jeudi", "t1": "20h45", "t2": "22h00", "t": "Seniors 2", "s": "f", "r": "LM", "cats": ["Seniors"], "pr": "", "eq": 2}, {"d": "Vendredi", "t1": "17h30", "t2": "19h00", "t": "U13", "s": "f", "r": "GS", "cats": ["U13"], "pr": "", "eq": null}, {"d": "Vendredi", "t1": "18h00", "t2": "19h15", "t": "U18 – 2", "s": "m", "r": "GY", "cats": ["U18"], "pr": "", "eq": 2}, {"d": "Vendredi", "t1": "19h00", "t2": "20h30", "t": "U18", "s": "f", "r": "GS", "cats": ["U18"], "pr": "", "eq": null}, {"d": "Vendredi", "t1": "19h15", "t2": "20h30", "t": "U18 – 1", "s": "m", "r": "GY", "cats": ["U18"], "pr": "", "eq": 1}, {"d": "Vendredi", "t1": "20h30", "t2": "22h00", "t": "Seniors", "s": "f", "r": "GS", "cats": ["Seniors"], "pr": "", "eq": null}, {"d": "Vendredi", "t1": "20h45", "t2": "22h00", "t": "Seniors 2", "s": "m", "r": "LM", "cats": ["Seniors"], "pr": "", "eq": 2}, {"d": "Dimanche", "t1": "10h00", "t2": "10h45", "t": "U5", "s": "mix", "r": "GS", "cats": ["U5–U7"], "pr": "", "eq": null}, {"d": "Dimanche", "t1": "11h00", "t2": "12h00", "t": "U7", "s": "mix", "r": "GS", "cats": ["U5–U7"], "pr": "", "eq": null}, {"d": "Dimanche", "t1": "18h00", "t2": "19h30", "t": "Centre de tirs U13 à Seniors", "s": "m", "r": "GS", "cats": ["U13", "U15", "U18", "Seniors"], "pr": "", "eq": null}];
+    const ROOMS = {"GS": {"n": "Gasco'Sports", "c": "#1D5FD1", "bg": "#E6EEFC"}, "LM": {"n": "Complexe Moussard-Loubens", "c": "#6B3FB5", "bg": "#EFE8FB"}, "GY": {"n": "Halle Louise-Michel", "c": "#B35400", "bg": "#FDEBD8"}, "SP": {"n": "Salle polyvalente", "c": "#1E7F45", "bg": "#E3F4EA"}};
+    const MIX = 'linear-gradient(' + RED + ' 50%, ' + GOLD + ' 50%)';
+    const tag = (x) => (x.s === 'f' ? ' F' : x.s === 'm' ? ' M' : '');
+    const card = (x) => {
+      const r = ROOMS[x.r];
+      return { cat: x.t + tag(x), who: x.s === 'mix' ? 'Filles et garçons' : x.s === 'f' ? 'BCL' : 'USBL', strip: x.s === 'f' ? RED : x.s === 'm' ? GOLD : MIX,
+        time: x.t1 + ' – ' + x.t2, place: r.n + (x.pr ? ' · ' + x.pr : ''), code: x.r, rc: r.c, rbg: r.bg };
+    };
+    const keepS = (x) => team
+      ? x.cats.includes(team.cat) && (team.cat === 'Loisirs' || x.s === team.s || x.s === 'mix') && (!x.eq || !team.eq || x.eq === team.eq)
+      : sexe === 'tous' || x.s === sexe || x.s === 'mix';
+    const days = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Dimanche'].map((name) => ({ name, slots: SLOTS.filter((x) => x.d === name && keepS(x)).map(card) }))
+      .filter((d) => !team || d.slots.length);
+    const legend = Object.entries(ROOMS).map(([code, r]) => ({ code, n: r.n, c: r.c, bg: r.bg }));
+    const planCaption = team ? 'Créneaux · ' + team.label : sexe === 'tous' ? 'Planning de la semaine · filles et garçons' : sexe === 'f' ? 'Planning de la semaine · filles (BCL)' : 'Planning de la semaine · garçons (USBL)';
+    // Équipes par catégorie : coachs différents, mêmes horaires sauf créneaux propres à une équipe (eq)
+    // [équipe, coach(s) (prénoms seulement), niveau, page FFBB de secours]
+    const FF = 'https://competitions.ffbb.com/ligues/occ/comites/0032/clubs/occ0032061/equipes/';
+    const CLUB_BCL = 'https://competitions.ffbb.com/ligues/occ/comites/0032/clubs/occ0032016';
+    const TEAMS = {
+      f: { 'U5–U7': [[0, 'Tao', 'Plateaux']], 'U9': [[0, 'Tao, Mehdi', 'Plateaux', '', 'U9 1 et U9 2']], 'U11': [[0, 'Cathie, Mika', 'Plateaux']],
+           'U13': [[0, 'Cathie, Alexandre', 'U13 1 : Régionale D2 (Pyrénées A) et brassages régionaux · U13 2 : Départementale D2 (Haute-Garonne, poule B)', CLUB_BCL, 'U13 1 et U13 2']],
+           'U15': [[0, 'Stéphane, Romane', 'Inter-départementale (poule AB)', CLUB_BCL]],
+           'U18': [[0, 'Fred, Béa, Iliana', 'Régionale D2 (Pyrénées A) et Inter-départementale (Gers)', CLUB_BCL]],
+           'Seniors': [[1, 'Idries, Manu', 'Pré-régionale inter-départementale (PRF AB)', CLUB_BCL], [2, 'Manu', 'Inter-départementale D2 (Gers)', CLUB_BCL]], 'Loisirs': [[0, '']] },
+      m: { 'U5–U7': [[0, 'Taïlis (assistants : Lenny, Hugo)', 'Plateaux']], 'U9': [[0, 'Aurore (assistant : Lenny)', 'Plateaux', '', 'U9 1, U9 2 et U9 3']], 'U11': [[0, 'Guillaume (assistant : Lenny)', 'Plateaux']],
+           'U13': [[0, 'Taïlis', 'Départemental D2, poule A', FF + '200000005403758']],
+           'U15': [[0, 'David (U15 1), Taïlis (U15 2)', 'U15 1 : Départemental D1, poule B · U15 2 : Départemental D3, poule D', FF + '200000005403118', 'U15 1 et U15 2', FF + '200000005413569']],
+           'U18': [[1, 'Michaël', 'Régional D2', FF + '200000005400349'], [2, 'Walid et Luka', 'Départemental D3, poule C', FF + '200000005357921']],
+           'Seniors': [[1, 'Rémy', 'Régional RM3 · Trophée Georges Estève', FF + '200000005337226'], [2, 'Flavien et Alexandre', 'Interdépartemental D2, poule A', FF + '200000005376102']], 'Loisirs': [[0, '']] }
+    };
+    const PH = { S1: '/_blob/5e879bf925e9ae4ee8de87f42ebc774c', S2: '/_blob/12761efda34771c843d93b535a3af675', U11: '/_blob/edb79f0a60259ef7227a38775b3f526c',
+      U13: '/_blob/9a71c305507f023041d8af0b87289173', U15: '/_blob/3ac0d1036fc31bfca37831d7ccd3a1be', U18: '/_blob/4d9fec14e9f2dd9fd2f4031ed2b62913', MICRO: '/_blob/8b9e4226ce3484a8793d28c6cec80456', U7: '/_blob/ce4f3c124b42ff01eb7849027605cbcc', U9F: '/_blob/27ea827fb8dd2b91fdc2234ddb8d1b3d', U9M: '/_blob/0093c3a79c842d4b368722760009230c', U15F: '/_blob/7b3441071dc6e87e88ead307655f5e3e', U11F: '/_blob/6f93cb080de890ad4f164a51e1585f8b', U18F: '/_blob/972ccf33c4816dc7767feab491d3fb05', SF: '/_blob/ea88a56307562f0d7c9f82428c3e13e7', U13F: '/_blob/971fa0fc9ab032eaed952da6dad7d644' };
+    // Photos par équipe : clé sexe|catégorie|équipe (0 = équipe unique)
+    const PHOTOS = { 'f|U5–U7|0': [PH.MICRO, PH.U7], 'm|U5–U7|0': [PH.MICRO, PH.U7], 'f|U9|0': PH.U9F, 'f|U15|0': PH.U15F, 'f|U11|0': PH.U11F, 'f|U18|0': PH.U18F, 'f|U13|0': PH.U13F, 'f|Seniors|1': PH.SF, 'f|Seniors|2': PH.SF, 'm|U9|0': PH.U9M, 'm|U11|0': PH.U11, 'm|U13|0': PH.U13, 'm|U15|0': PH.U15, 'm|U18|1': PH.U18, 'm|U18|2': PH.U18, 'm|Seniors|1': PH.S1, 'm|Seniors|2': PH.S2 };
+    const LOISIRS_COACH = 'personne. La 3e mi-temps, elle, est très bien encadrée.';
+    const rowsFor = (code) => code === 'Loisirs' ? [{ s: 'mix', who: 'Filles et garçons · BCL + USBL', color: '#0D1117', ink: '#FFFFFF', level: 'Loisirs', ffbb: '', ffbbDisplay: 'none', ffbb2: '', ffbb2Display: 'none', ffbbLabel: '', coach: LOISIRS_COACH, coachInk: '#0D1117', photos: ['/_blob/1af1832e9bcc6a13ed666870efa46efd'],
+        slots: SLOTS.filter((x) => x.cats.includes(code)).map((x) => { const rm = ROOMS[x.r]; return { txt: x.d + ' ' + x.t1 + '–' + x.t2 + ' · ' + x.t, code: x.r, rc: rm.c, rbg: rm.bg }; }) }]
+      : [{ s: 'f', club: 'Filles · BCL', color: RED, ink: '#FFFFFF' }, { s: 'm', club: 'Garçons · USBL', color: GOLD, ink: '#0D1117' }].filter(keep)
+      .flatMap((r) => TEAMS[r.s][code].map(([eq, coach, level, ffbb, label, ffbb2]) => ({ ...r, ffbb2: ffbb2 || '', ffbb2Display: ffbb2 ? 'inline' : 'none', ffbbLabel: ffbb2 ? 'Page FFBB U15 1 ↗' : ffbb === CLUB_BCL ? 'Page FFBB du club ↗' : 'Page FFBB ↗', level: level || '[championnat]', ffbb: ffbb || '', ffbbDisplay: ffbb ? 'inline' : 'none', photos: [].concat(PHOTOS[r.s + '|' + code + '|' + eq] || []),
+        who: r.club + (label ? ' · ' + label : eq ? ' · ' + code + ' ' + eq : ''),
+        coach: coach || 'Recherché : vous voulez encadrer ce groupe ? Contactez-nous',
+        coachInk: coach ? '#0D1117' : '#C2361B',
+        slots: SLOTS.filter((x) => x.cats.includes(code) && (x.s === r.s || x.s === 'mix') && (!x.eq || !eq || x.eq === eq))
+          .map((x) => { const rm = ROOMS[x.r]; return { txt: x.d + ' ' + x.t1 + '–' + x.t2 + ' · ' + x.t, code: x.r, rc: rm.c, rbg: rm.bg }; }) })));
+    const cats = [
+      ['U5–U7', 'Micro-basket'], ['U9', 'École de basket'], ['U11', 'École de basket'], ['U13', 'Formation jeunes'],
+      ['U15', 'Formation jeunes'], ['U18', 'Formation jeunes'], ['Seniors', 'Équipes premières'], ['Loisirs', 'Adultes']
+    ].map(([code, label]) => {
+      const on = this.state.open === code;
+      const rows = rowsFor(code).map((r) => { const ph = r.photos || []; const cur = ph.length ? ph[(this.state.tick || 0) % ph.length] : '';
+        return { ...r, thumbImg: cur ? 'block' : 'none', thumbPh: cur ? 'none' : 'flex', photo: cur, multi: ph.length > 1 ? 'flex' : 'none', multiTxt: ph.length + ' photos',
+          open: () => this.setState({ photo: r.who.includes(code) ? r.who : code + ' · ' + r.who, photoList: ph, idx: 0 }) }; });
+      return { code, label, rows, count: rows.length + (rows.length > 1 ? ' équipes' : ' équipe'), expanded: on ? 'true' : 'false',
+        sign: on ? '–' : '+', bodyDisplay: on ? 'flex' : 'none', headBg: on ? '#0D1117' : '#FFFFFF', headFg: on ? '#FFFFFF' : '#0D1117', subFg: on ? '#B8C0CC' : '#4A5260',
+        toggle: () => this.setState({ open: on ? '' : code }) };
+    });
+    return { filters, days, planCaption, cats, legend, clearDisp: team ? 'inline-flex' : 'none', clearTeam: () => this.setState({ team: null }), lbDisplay: this.state.photo ? 'flex' : 'none', lbTitle: this.state.photo, ...(() => { const L = this.state.photoList || []; const k = L.length ? ((this.state.idx || 0) % L.length + L.length) % L.length : 0;
+      return { lbImg: L.length ? 'block' : 'none', lbPh: L.length ? 'none' : 'flex', lbUrl: L[k] || '', lbNav: L.length > 1 ? 'flex' : 'none', lbCount: L.length > 1 ? (k + 1) + ' / ' + L.length : '',
+        lbPrev: (e) => { if (e && e.stopPropagation) e.stopPropagation(); this.setState({ idx: k - 1 }); }, lbNext: (e) => { if (e && e.stopPropagation) e.stopPropagation(); this.setState({ idx: k + 1 }); } }; })(), closePhoto: () => this.setState({ photo: '', photoList: [], idx: 0 }) };
+  }
+}
+</script>
+</body>
+</html>

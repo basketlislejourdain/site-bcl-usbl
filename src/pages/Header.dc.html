@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>En-tête du site</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&amp;family=Barlow:wght@400;500;600;700&amp;family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="font-family: 'Barlow', system-ui, sans-serif; color: #FFFFFF">
+  <div style="background: #06080C; color: #B8C0CC; font-size: 14px">
+    <div style="max-width: 1400px; margin: 0 auto; padding: 6px 24px; display: flex; flex-wrap: wrap; gap: 6px 24px; justify-content: flex-end; align-items: center">
+      <a href="https://www.instagram.com/usbl_bcl32/" style="color: #FFFFFF; text-decoration: none; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 10px; min-height: 36px">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1"></circle></svg>
+        Suivez-nous sur Instagram · @usbl_bcl32
+      </a>
+    </div>
+  </div>
+  <header style="background: #0D1117">
+    <div style="max-width: 1400px; margin: 0 auto; padding: 12px 24px; display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; justify-content: space-between">
+      <a href="MainV2.dc.html" style="display: {{brandDisplay}}; align-items: center; gap: 8px; text-decoration: none" aria-label="Accueil Basketball L'Isle-Jourdain">
+        <span style="width: 48px; height: 48px; flex: none; border-radius: 50%; background: #FFFFFF; display: flex; align-items: center; justify-content: center"><img src="/_blob/c5c3fe201d7f7c8fa6e0dab2d91c204f" alt="Logo Basket Club Lislois" style="width: 43px; height: 43px; object-fit: contain"></span>
+        <span style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 18px; color: #E0301E">×</span>
+        <span style="width: 48px; height: 48px; flex: none; border-radius: 50%; background: #FFFFFF; display: flex; align-items: center; justify-content: center"><img src="/_blob/bbd5c9e526a35a3f5e0473ee5c4e7bd9" alt="Logo USBL" style="width: 41px; height: 41px; object-fit: contain"></span>
+        <span style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: 18px; line-height: 1; color: #FFFFFF; text-transform: uppercase; letter-spacing: 0.02em; margin-left: 2px; white-space: nowrap">Basketball<br>L'Isle-Jourdain</span>
+      </a>
+      <nav aria-label="Menu principal" style="display: flex; flex-wrap: wrap; flex: {{navFlex}}; justify-content: {{navJustify}}; margin-right: {{navMargin}}; gap: 4px {{navGap}}; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: {{navSize}}; white-space: nowrap; text-transform: uppercase; letter-spacing: 0.04em">
+        <sc-for list="{{items}}" as="it" hint-placeholder-count="7">
+          <a href="{{it.href}}" aria-current="{{it.current}}" style="color: {{it.fg}}; text-decoration: none; padding: 10px 0 6px; border-bottom: 3px solid {{it.bar}}">{{it.label}}</a>
+        </sc-for>
+      </nav>
+      <div style="display: flex; gap: 10px; align-items: center">
+                <a href="Infos.dc.html" style="background: #E0301E; color: #FFFFFF; text-decoration: none; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-style: italic; font-size: 18px; text-transform: uppercase; padding: 0 18px; height: 46px; box-sizing: border-box; border-radius: 4px; display: inline-flex; align-items: center; white-space: nowrap">S'inscrire</a>
+      </div>
+    </div>
+  </header>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"active":{"editor":"enum","options":["accueil","clubs","equipes","matchs","evenements","benevoles","partenaires","infos","boutique"],"default":"accueil"},"$preview":{"width":1440,"height":118}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const active = this.props.active ?? 'accueil';
+    const nav = [
+      ['clubs', 'Les clubs', 'Clubs.dc.html'],
+      ['equipes', 'Équipes', 'Equipes.dc.html'],
+      ['matchs', 'Matchs & résultats', 'Matchs.dc.html'],
+      ['evenements', 'Événements', 'Evenements.dc.html'],
+      ['partenaires', 'Partenaires', 'Partenaires.dc.html'],
+      ['benevoles', 'Bénévoles', 'Benevoles.dc.html'],
+      ['infos', 'Infos & contact', 'Infos.dc.html']
+    ];
+    const items = nav.map(([id, label, href]) => {
+      const on = id === active;
+      return { label, href, current: on ? 'page' : 'false', fg: on ? '#FFFFFF' : '#C9D0DA', bar: on ? '#E0301E' : 'transparent' };
+    });
+    const home = active === 'accueil';
+    return { items, shopBorder: active === 'boutique' ? '#E0301E' : '#4A5260',
+      brandDisplay: home ? 'none' : 'flex', navFlex: home ? '1 1 auto' : '0 1 auto', navJustify: home ? 'space-between' : 'flex-start',
+      navMargin: home ? '40px' : '0', navGap: home ? '28px' : '18px', navSize: home ? '22px' : '17px' };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Infos, inscription et contact</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&amp;family=Barlow:wght@400;500;600;700&amp;family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800&amp;display=swap">
+<style>
+body{margin:0;background:#0D1117}
+a{color:#0D1117}a:hover{color:#C2361B}
+</style>
+</helmet>
+<div style="font-family: 'Barlow', system-ui, sans-serif; color: #0D1117; background: #F4F2EE; min-width: 0">
+  <dc-import name="Header" active="infos" hint-size="100%,124px"></dc-import>
+
+  <section style="background: #0D1117; color: #FFFFFF; border-bottom: 6px solid #E0301E">
+    <div style="max-width: 1320px; margin: 0 auto; padding: 56px 32px 56px; display: flex; flex-direction: column; gap: 14px">
+      <div style="font-size: 14px; color: #B8C0CC"><a href="MainV2.dc.html" style="color: #B8C0CC">Accueil</a> / Infos &amp; contact</div>
+      <h1 style="margin: 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 88px; line-height: 0.9; text-transform: uppercase">Infos &amp; contact</h1>
+      <p style="margin: 0; font-size: 19px; max-width: 680px; color: #E9ECF1; line-height: 1.5">S'inscrire, connaître les tarifs, trouver une réponse ou nous écrire : tout est ici.</p>
+      <nav aria-label="Dans cette page" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px">
+        <a href="#inscription" style="background: #E0301E; color: #FFFFFF; text-decoration: none; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-style: italic; font-size: 18px; text-transform: uppercase; padding: 0 20px; height: 48px; border-radius: 4px; display: inline-flex; align-items: center">S'inscrire</a>
+        <a href="#tarifs" style="border: 1px solid #4A5260; color: #FFFFFF; text-decoration: none; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 17px; text-transform: uppercase; padding: 0 16px; height: 48px; box-sizing: border-box; border-radius: 4px; display: inline-flex; align-items: center">Tarifs</a>
+        <a href="#faq" style="border: 1px solid #4A5260; color: #FFFFFF; text-decoration: none; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 17px; text-transform: uppercase; padding: 0 16px; height: 48px; box-sizing: border-box; border-radius: 4px; display: inline-flex; align-items: center">FAQ</a>
+        <a href="#contacts" style="border: 1px solid #4A5260; color: #FFFFFF; text-decoration: none; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 17px; text-transform: uppercase; padding: 0 16px; height: 48px; box-sizing: border-box; border-radius: 4px; display: inline-flex; align-items: center">Contacts</a>
+        <a href="#acces" style="border: 1px solid #4A5260; color: #FFFFFF; text-decoration: none; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 17px; text-transform: uppercase; padding: 0 16px; height: 48px; box-sizing: border-box; border-radius: 4px; display: inline-flex; align-items: center">Accès</a>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Inscription -->
+  <section id="inscription" style="max-width: 1320px; margin: 0 auto; padding: 64px 32px 0; display: flex; flex-direction: column; gap: 24px">
+    <div style="display: flex; flex-wrap: wrap; gap: 12px 40px; align-items: flex-end; justify-content: space-between">
+      <div>
+        <div style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase; color: #4A5260">Saison 2026-2027</div>
+        <h2 style="margin: 4px 0 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 56px; line-height: 1; text-transform: uppercase">S'inscrire en 5 étapes</h2>
+      </div>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap">
+        <span style="background: #E0301E; color: #FFFFFF; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 16px; text-transform: uppercase; padding: 8px 12px; border-radius: 4px">Filles → BCL</span>
+        <span style="background: #F2C14E; color: #0D1117; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 16px; text-transform: uppercase; padding: 8px 12px; border-radius: 4px">Garçons → USBL</span>
+      </div>
+    </div>
+    <ol style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px">
+      <sc-for list="{{steps}}" as="s" hint-placeholder-count="5">
+        <li style="background: #FFFFFF; border-radius: 10px; padding: 22px; display: flex; flex-direction: column; gap: 10px; border-top: 5px solid #E0301E">
+          <span style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 48px; line-height: 0.8; color: #E0301E">{{s.n}}</span>
+          <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 22px; text-transform: uppercase; line-height: 1">{{s.t}}</span>
+          <span style="font-size: 15px; color: #2B3340; line-height: 1.5">{{s.d}}</span>
+        </li>
+      </sc-for>
+    </ol>
+    <div style="display: flex; flex-wrap: wrap; gap: 16px">
+      <div style="flex: 1 1 380px; background: #0D1117; color: #FFFFFF; border-radius: 10px; padding: 24px 28px; display: flex; flex-direction: column; gap: 10px">
+        <h3 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 22px; text-transform: uppercase">Pièces à prévoir</h3>
+        <ul style="margin: 0; padding-left: 20px; font-size: 16px; line-height: 1.6; color: #E9ECF1">
+          <li>Moins de 18 ans : questionnaire de santé, sans certificat médical</li>
+          <li>18 ans et plus : certificat médical de moins de 6 mois, avec la mention « en compétition » pour les joueurs ; il vaut 3 saisons, avec le questionnaire de santé entre-temps</li>
+          <li>Photo d'identité</li>
+          <li>Autorisation parentale et droit à l'image (mineurs)</li>
+          <li>Justificatif d’aide le cas échéant (Pass’Sport, coupons sport…)</li>
+        </ul>
+      </div>
+      <div style="flex: 1 1 380px; background: #FFFFFF; border-radius: 10px; padding: 24px 28px; display: flex; flex-direction: column; gap: 12px; justify-content: space-between">
+        <div>
+          <h3 style="margin: 0 0 6px; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 22px; text-transform: uppercase">Prêt à vous lancer ?</h3>
+          <p style="margin: 0; font-size: 16px; color: #2B3340">Écrivez au club : il vous envoie le lien de licence en ligne.</p>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px">
+          <a href="mailto:bclislois32@gmail.com?subject=Demande%20d%E2%80%99inscription%20(fille)" style="background: #E0301E; color: #FFFFFF; text-decoration: none; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-style: italic; font-size: 18px; text-transform: uppercase; padding: 0 20px; height: 48px; border-radius: 4px; display: inline-flex; align-items: center">Demande d'inscription fille</a>
+          <a href="mailto:leclubusbl32@gmail.com?subject=Demande%20d%E2%80%99inscription%20(gar%C3%A7on)" style="background: #F2C14E; color: #0D1117; text-decoration: none; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-style: italic; font-size: 18px; text-transform: uppercase; padding: 0 20px; height: 48px; border-radius: 4px; display: inline-flex; align-items: center">Demande d'inscription garçon</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tarifs -->
+  <section id="tarifs" style="max-width: 1320px; margin: 0 auto; padding: 72px 32px 0; display: flex; flex-direction: column; gap: 20px">
+    <h2 style="margin: 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 56px; line-height: 1; text-transform: uppercase">Tarifs</h2>
+    <div style="background: #FFFFFF; border-radius: 10px; overflow-x: auto">
+      <table style="width: 100%; border-collapse: collapse; font-size: 16px; min-width: 600px">
+        <thead>
+          <tr style="background: #0D1117; color: #FFFFFF; font-family: 'Barlow Condensed', sans-serif; text-transform: uppercase; font-size: 15px; text-align: left">
+            <th scope="col" style="padding: 12px 18px">Catégorie</th><th scope="col" style="padding: 12px 18px">Filles · BCL</th><th scope="col" style="padding: 12px 18px">Garçons · USBL</th><th scope="col" style="padding: 12px 18px">Ce qui est compris</th>
+          </tr>
+        </thead>
+        <tbody>
+          <sc-for list="{{prices}}" as="p" hint-placeholder-count="8">
+            <tr style="border-bottom: 1px solid #E4E0D8">
+              <th scope="row" style="padding: 12px 18px; text-align: left; font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: 20px">{{p}}</th>
+              <td style="padding: 12px 18px">[xxx €]</td><td style="padding: 12px 18px">[xxx €]</td><td style="padding: 12px 18px; color: #4A5260">[licence, assurance, maillot…]</td>
+            </tr>
+          </sc-for>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin: 0; font-size: 15px; color: #4A5260">Réductions pour les familles, Pass’Sport accepté et paiement en plusieurs fois possible : montants précisés prochainement.</p>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" style="max-width: 1320px; margin: 0 auto; padding: 72px 32px 0; display: flex; flex-direction: column; gap: 20px">
+    <h2 style="margin: 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 56px; line-height: 1; text-transform: uppercase">Questions fréquentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <sc-for list="{{faq}}" as="q" hint-placeholder-count="6">
+        <div style="background: #FFFFFF; border-radius: 8px; overflow: hidden">
+          <button type="button" onClick="{{q.toggle}}" aria-expanded="{{q.expanded}}" style="width: 100%; border: 0; background: transparent; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px 22px; min-height: 56px; text-align: left; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 21px; color: #0D1117">
+            <span>{{q.q}}</span>
+            <span aria-hidden="true" style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 28px; color: #E0301E">{{q.sign}}</span>
+          </button>
+          <sc-if value="{{q.open}}" hint-placeholder-val="{{ false }}">
+            <div style="padding: 0 22px 20px; font-size: 16px; line-height: 1.55; color: #2B3340">{{q.a}}</div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- Contacts -->
+  <section id="contacts" style="max-width: 1320px; margin: 0 auto; padding: 72px 32px 0; display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+    <div style="flex: 1 1 360px; display: flex; flex-direction: column; gap: 16px">
+      <h2 style="margin: 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 56px; line-height: 1; text-transform: uppercase">Contacts</h2>
+      <div style="background: #FFFFFF; border-radius: 10px; padding: 22px; border-top: 5px solid #E0301E; display: flex; gap: 16px; align-items: center">
+        <img src="/_blob/c5c3fe201d7f7c8fa6e0dab2d91c204f" alt="Logo Basket Club Lislois" style="width: 64px; height: 64px; object-fit: contain">
+        <div style="display: flex; flex-direction: column; gap: 2px; font-size: 15px">
+          <strong style="font-family: 'Barlow Condensed', sans-serif; font-size: 20px; text-transform: uppercase">BCL · section féminine</strong>
+          <span>bclislois32@gmail.com</span>
+        </div>
+      </div>
+      <div style="background: #FFFFFF; border-radius: 10px; padding: 22px; border-top: 5px solid #F2C14E; display: flex; gap: 16px; align-items: center">
+        <img src="/_blob/bbd5c9e526a35a3f5e0473ee5c4e7bd9" alt="Logo USBL" style="width: 64px; height: 64px; object-fit: contain">
+        <div style="display: flex; flex-direction: column; gap: 2px; font-size: 15px">
+          <strong style="font-family: 'Barlow Condensed', sans-serif; font-size: 20px; text-transform: uppercase">USBL · section masculine</strong>
+          <span>leclubusbl32@gmail.com</span>
+        </div>
+      </div>
+    </div>
+    <form style="flex: 2 1 520px; min-width: 0; background: #FFFFFF; border-radius: 10px; padding: 28px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px">
+      <h3 style="grid-column: span 2; margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 24px; text-transform: uppercase">Nous écrire</h3>
+      <label style="display: flex; flex-direction: column; gap: 4px; font-size: 14px; font-weight: 600">Nom<input type="text" style="height: 44px; border: 1px solid #B8C0CC; border-radius: 6px; padding: 0 12px; font-size: 16px"></label>
+      <label style="display: flex; flex-direction: column; gap: 4px; font-size: 14px; font-weight: 600">E-mail<input type="email" style="height: 44px; border: 1px solid #B8C0CC; border-radius: 6px; padding: 0 12px; font-size: 16px"></label>
+      <label style="grid-column: span 2; display: flex; flex-direction: column; gap: 4px; font-size: 14px; font-weight: 600">Destinataire
+        <select style="height: 44px; border: 1px solid #B8C0CC; border-radius: 6px; padding: 0 12px; font-size: 16px; background: #FFFFFF"><option>BCL · filles</option><option>USBL · garçons</option><option>Les deux clubs</option><option>Bénévolat</option><option>Partenariats</option><option>Boutique</option></select>
+      </label>
+      <label style="grid-column: span 2; display: flex; flex-direction: column; gap: 4px; font-size: 14px; font-weight: 600">Message<textarea rows="4" style="border: 1px solid #B8C0CC; border-radius: 6px; padding: 10px 12px; font-size: 16px; font-family: inherit"></textarea></label>
+      <button type="button" data-mailto="bclislois32@gmail.com" data-subject="Message depuis le site" style="grid-column: span 2; justify-self: start; border: 0; cursor: pointer; background: #E0301E; color: #FFFFFF; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-style: italic; font-size: 18px; text-transform: uppercase; height: 48px; padding: 0 24px; border-radius: 4px">Envoyer</button>
+    </form>
+  </section>
+
+  <!-- Accès -->
+  <section id="acces" style="max-width: 1320px; margin: 0 auto; padding: 72px 32px 80px; display: flex; flex-wrap: wrap; gap: 16px">
+    <div style="flex: 1 1 320px; display: flex; flex-direction: column; gap: 12px">
+      <h2 style="margin: 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 56px; line-height: 1; text-transform: uppercase">Accès</h2>
+      <div style="font-size: 17px; line-height: 1.55"><strong>Gasco’Sports</strong> · 33 rue de Rozès<br><strong>Halle Louise-Michel</strong> · 17 avenue du Courdé<br><strong>Salle polyvalente Yves-Caubet</strong> · rue des Réfractaires-et-des-Maquisards<br><strong>Complexe Lœtitia-Moussard-Loubens</strong> · 15 rue François-Darolles<br>32600 L’Isle-Jourdain</div>
+      <a href="#" style="font-weight: 600; font-size: 16px">Itinéraire →</a>
+    </div>
+    <div style="flex: 2 1 520px; min-height: 320px; background: #D9D5CC; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #4A5260">[Carte]</div>
+  </section>
+
+  <!-- Mentions légales -->
+  <section id="mentions" style="max-width: 1320px; margin: 0 auto; padding: 0 32px 80px; display: flex; flex-direction: column; gap: 16px">
+    <h2 style="margin: 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 40px; line-height: 1; text-transform: uppercase">Mentions légales</h2>
+    <p style="margin: 0; font-size: 16px; color: #4A5260">Ce site est édité conjointement par les deux associations.</p>
+    <div style="display: flex; flex-wrap: wrap; gap: 16px">
+      <div style="flex: 1 1 380px; background: #FFFFFF; border-radius: 10px; padding: 22px 24px; display: flex; flex-direction: column; gap: 6px; font-size: 15px; line-height: 1.5">
+        <strong style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 19px; text-transform: uppercase">Basket Club Lislois (BCL)</strong>
+        <span>Basket Club Lislois, association loi 1901</span><span>BCL Gymnase, avenue du Courdé, 32600 L’Isle-Jourdain</span><span>SIRET 419 391 537 00026 · RNA W321001132</span><span>Directeur de la publication : Eric Voisin</span><span>Contact : bclislois32@gmail.com</span>
+      </div>
+      <div style="flex: 1 1 380px; background: #FFFFFF; border-radius: 10px; padding: 22px 24px; display: flex; flex-direction: column; gap: 6px; font-size: 15px; line-height: 1.5">
+        <strong style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 19px; text-transform: uppercase">Union Sportive Basket L’Isle-Jourdain (USBL)</strong>
+        <span>Union Sportive Basket L’Isle-Jourdain, association loi 1901</span><span>33 rue de Rozès, 32600 L’Isle-Jourdain</span><span>SIRET 442 036 646 00010 · RNA W321001744</span><span>Directrice de la publication : Sabine Lancelin</span><span>Contact : leclubusbl32@gmail.com</span>
+      </div>
+    </div>
+    <p style="margin: 0; font-size: 14px; line-height: 1.55; color: #4A5260">Hébergement : GitHub Pages, GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis. Nom de domaine enregistré chez OVH SAS, 2 rue Kellermann, 59100 Roubaix. Les deux associations sont habilitées à délivrer des reçus fiscaux pour les dons. Les photos de licenciés, notamment mineurs, sont publiées avec l’autorisation recueillie à l’inscription. Pour toute demande sur vos données personnelles ou pour retirer une photo, écrivez à l’un des deux clubs.</p>
+  </section>
+
+  <!-- Confidentialité -->
+  <section id="confidentialite" style="max-width: 1320px; margin: 0 auto; padding: 0 32px 80px; display: flex; flex-direction: column; gap: 16px">
+    <h2 style="margin: 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 40px; line-height: 1; text-transform: uppercase">Confidentialité et données personnelles</h2>
+    <div style="display: flex; flex-wrap: wrap; gap: 16px"><div style="flex: 1 1 380px; background: #FFFFFF; border-radius: 10px; padding: 20px 24px; display: flex; flex-direction: column; gap: 6px"><strong style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 19px; text-transform: uppercase">Données collectées</strong><span style="font-size: 15px; line-height: 1.5; color: #2B3340">À l’inscription : identité, date de naissance, coordonnées et informations de licence, transmises à la FFBB pour délivrer la licence. Par les formulaires de contact : nom, e-mail et message.</span></div><div style="flex: 1 1 380px; background: #FFFFFF; border-radius: 10px; padding: 20px 24px; display: flex; flex-direction: column; gap: 6px"><strong style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 19px; text-transform: uppercase">Utilisation</strong><span style="font-size: 15px; line-height: 1.5; color: #2B3340">Gestion des licences, des équipes et de la vie du club, informations aux familles, relations avec nos partenaires. Vos données ne sont jamais vendues ni cédées.</span></div><div style="flex: 1 1 380px; background: #FFFFFF; border-radius: 10px; padding: 20px 24px; display: flex; flex-direction: column; gap: 6px"><strong style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 19px; text-transform: uppercase">Responsables</strong><span style="font-size: 15px; line-height: 1.5; color: #2B3340">Chaque association pour ses licenciés : le BCL pour la section féminine, l’USBL pour la section masculine.</span></div><div style="flex: 1 1 380px; background: #FFFFFF; border-radius: 10px; padding: 20px 24px; display: flex; flex-direction: column; gap: 6px"><strong style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 19px; text-transform: uppercase">Conservation</strong><span style="font-size: 15px; line-height: 1.5; color: #2B3340">Le temps de l’adhésion, puis selon les obligations légales (comptabilité, assurance).</span></div><div style="flex: 1 1 380px; background: #FFFFFF; border-radius: 10px; padding: 20px 24px; display: flex; flex-direction: column; gap: 6px"><strong style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 19px; text-transform: uppercase">Photos</strong><span style="font-size: 15px; line-height: 1.5; color: #2B3340">Publiées avec l’autorisation recueillie à l’inscription. Sur les photos d’événements, les visages des mineurs sont floutés. Retrait sur simple demande.</span></div><div style="flex: 1 1 380px; background: #FFFFFF; border-radius: 10px; padding: 20px 24px; display: flex; flex-direction: column; gap: 6px"><strong style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 19px; text-transform: uppercase">Vos droits</strong><span style="font-size: 15px; line-height: 1.5; color: #2B3340">Accès, rectification, effacement et opposition : écrivez au club concerné (adresses dans la rubrique Contact). Vous pouvez aussi saisir la CNIL (cnil.fr).</span></div></div>
+  </section>
+
+  <dc-import name="Footer" hint-size="100%,330px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4100}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { open: 0 }; }
+  renderVals() {
+    const steps = [
+      { n: '1', t: 'Choisir sa catégorie', d: 'Selon l’année de naissance. Filles au BCL, garçons à l’USBL. Deux séances d’essai possibles.' },
+      { n: '2', t: 'Faire la demande', d: 'Écrivez au club (boutons ci-dessous) : il vous envoie le lien de licence FFBB à remplir.' },
+      { n: '3', t: 'Fournir les pièces', d: 'Santé, photo, autorisations : tout se dépose en ligne.' },
+      { n: '4', t: 'Régler la cotisation', d: 'En ligne sur HelloAsso, en une ou plusieurs fois, ou avec les aides acceptées.' },
+      { n: '5', t: 'C’est parti !', d: 'Licence validée : rendez-vous au prochain entraînement.' }
+    ];
+    const prices = ['U5–U7', 'U9', 'U11', 'U13', 'U15', 'U18', 'Seniors', 'Loisirs'];
+    const faqRaw = [
+      ['À partir de quel âge peut-on jouer ?', 'Dès 4 ans, en micro-basket. Catégories 2026-2027 selon l’année de naissance : U5 (2022-2023), U7 (2020-2021), U9 (2018-2019), U11 (2016-2017), U13 (2014-2015), U15 (2012-2013), U18 (2009 à 2011), seniors (2008 et avant).'],
+      ['Mon enfant peut-il faire un essai ?', 'Oui : deux séances d’essai gratuites avant de prendre sa licence. Écrivez au club (filles : BCL, garçons : USBL) pour convenir d’une date.'],
+      ['Pourquoi deux clubs ?', 'L’USBL accueille les garçons, le BCL les filles. Les deux clubs travaillent ensemble : même gymnase, même site, mêmes événements.'],
+      ['Combien coûte la licence et que comprend-elle ?', 'Voir le tableau des tarifs ci-dessus. [Détail : licence FFBB, assurance, équipement.]'],
+      ['Quelles aides sont acceptées ?', 'Le Pass’Sport est accepté, des réductions existent pour les familles et le paiement peut se faire en plusieurs fois. Les montants seront précisés prochainement.'],
+      ['Les parents doivent-ils s’impliquer ?', 'Le club vit grâce aux bénévoles : table de marque, transport, buvette. Chacun aide à sa mesure. Voir l’espace bénévoles.'],
+      ['Où et quand ont lieu les entraînements ?', 'Consultez le planning sur la page Équipes, filtrable filles / garçons.']
+    ];
+    const open = this.state.open;
+    const faq = faqRaw.map(([q, a], i) => ({ q, a, open: open === i, expanded: open === i ? 'true' : 'false', sign: open === i ? '–' : '+', toggle: () => this.setState({ open: open === i ? -1 : i }) }));
+    return { steps, prices, faq };
+  }
+}
+</script>
+</body>
+</html>

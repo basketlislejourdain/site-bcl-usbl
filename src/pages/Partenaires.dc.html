@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Partenaires — offres et bon de commande</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&amp;family=Barlow:wght@400;500;600;700&amp;family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800&amp;display=swap">
+<style>
+body{margin:0;background:#0D1117}
+a{color:#0D1117}a:hover{color:#C2361B}
+</style>
+</helmet>
+<div style="font-family: 'Barlow', system-ui, sans-serif; color: #0D1117; background: #F4F2EE; min-width: 0">
+  <dc-import name="Header" active="partenaires" hint-size="100%,124px"></dc-import>
+
+  <section style="background: #0D1117; color: #FFFFFF; border-bottom: 6px solid #E0301E">
+    <div style="max-width: 1320px; margin: 0 auto; padding: 56px 32px 64px; display: flex; flex-wrap: wrap; gap: 24px 48px; align-items: flex-end; justify-content: space-between">
+      <div style="flex: 1 1 560px; display: flex; flex-direction: column; gap: 14px">
+        <div style="font-size: 14px; color: #B8C0CC"><a href="MainV2.dc.html" style="color: #B8C0CC">Accueil</a> / Partenaires</div>
+        <h1 style="margin: 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 88px; line-height: 0.9; text-transform: uppercase">Entrez dans l'équipe</h1>
+        <p style="margin: 0; font-size: 19px; max-width: 640px; color: #E9ECF1; line-height: 1.5">Entreprises et commerçants du territoire : soutenez le basket lislois, filles et garçons, et gagnez en visibilité auprès de [xxx] licenciés et de leurs familles.</p>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px">
+        <a href="#offres" style="background: #FFFFFF; color: #0D1117; text-decoration: none; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-style: italic; font-size: 18px; text-transform: uppercase; padding: 0 20px; height: 48px; border-radius: 4px; display: inline-flex; align-items: center">Voir les offres</a>
+        <a href="#commande" style="background: #E0301E; color: #FFFFFF; text-decoration: none; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-style: italic; font-size: 18px; text-transform: uppercase; padding: 0 20px; height: 48px; border-radius: 4px; display: inline-flex; align-items: center">Bon de commande</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mur -->
+  <section style="max-width: 1320px; margin: 0 auto; padding: 64px 32px 0; display: flex; flex-direction: column; gap: 20px">
+    <h2 style="margin: 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 56px; line-height: 1; text-transform: uppercase">Le mur des partenaires</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px">
+      <sc-for list="{{wall}}" as="w" hint-placeholder-count="8">
+        <a href="{{w.href}}" style="background: {{w.bg}}; border: 2px {{w.border}}; border-radius: 8px; height: 130px; box-sizing: border-box; text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; text-align: center; padding: 12px">
+          <img src="{{w.logo}}" alt="{{w.name}}" title="{{w.name}}" style="display: {{w.img}}; max-width: 88%; max-height: 96px; object-fit: contain">
+          <span style="display: {{w.txt}}; flex-direction: column; align-items: center; gap: 4px"><span style="font-size: 22px; color: #4A5260">+</span><span style="font-weight: 600; font-size: 16px">{{w.name}}</span></span>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- Offres -->
+  <section id="offres" style="max-width: 1320px; margin: 0 auto; padding: 80px 32px 0; display: flex; flex-direction: column; gap: 24px">
+    <div>
+      <div style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase; color: #4A5260">Saison 2026-2027</div>
+      <h2 style="margin: 4px 0 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 56px; line-height: 1; text-transform: uppercase">Nos offres</h2>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px">
+      <sc-for list="{{tiers}}" as="t" hint-placeholder-count="5">
+        <div style="background: {{t.bg}}; color: {{t.fg}}; border-radius: 10px; padding: 24px 20px; display: flex; flex-direction: column; gap: 10px">
+          <span style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 40px; line-height: 0.95; text-transform: uppercase">{{t.name}}</span>
+          <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 22px">{{t.price}}</span>
+          <ul style="margin: 0; padding-left: 18px; font-size: 15px; line-height: 1.5">
+            <sc-for list="{{t.perks}}" as="p" hint-placeholder-count="3"><li>{{p}}</li></sc-for>
+          </ul>
+        </div>
+      </sc-for>
+    </div>
+    <h3 style="margin: 16px 0 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 26px; text-transform: uppercase">À la carte</h3>
+    <div style="background: #FFFFFF; border-radius: 10px; overflow-x: auto">
+      <table style="width: 100%; border-collapse: collapse; font-size: 16px; min-width: 640px">
+        <thead>
+          <tr style="background: #0D1117; color: #FFFFFF; font-family: 'Barlow Condensed', sans-serif; text-transform: uppercase; font-size: 15px; text-align: left">
+            <th scope="col" style="padding: 12px 18px">Contrepartie</th><th scope="col" style="padding: 12px 18px">1re saison</th><th scope="col" style="padding: 12px 18px">Saisons suivantes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <sc-for list="{{extras}}" as="x" hint-placeholder-count="13">
+            <tr style="border-bottom: 1px solid #E4E0D8">
+              <td style="padding: 14px 18px"><strong>{{x.t}}</strong><br><span style="font-size: 14px; color: #4A5260">{{x.d}}</span></td>
+              <td style="padding: 14px 18px; font-weight: 600">{{x.p1}}</td>
+              <td style="padding: 14px 18px">{{x.p2}}</td>
+            </tr>
+          </sc-for>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Bon de commande -->
+  <section id="commande" style="max-width: 1320px; margin: 0 auto; padding: 80px 32px 80px; display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+    <form style="flex: 999 1 560px; min-width: 0; background: #FFFFFF; border-radius: 10px; padding: 32px; display: flex; flex-direction: column; gap: 24px">
+      <h2 style="margin: 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 48px; line-height: 1; text-transform: uppercase">Bon de commande</h2>
+      <fieldset style="border: 0; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px">
+        <legend style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 20px; text-transform: uppercase; margin-bottom: 10px">1. Votre palier</legend>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px">
+          <sc-for list="{{tierPick}}" as="t" hint-placeholder-count="5">
+            <button type="button" onClick="{{t.pick}}" aria-pressed="{{t.pressed}}" style="cursor: pointer; text-align: left; border: 2px solid {{t.border}}; background: {{t.bg}}; border-radius: 8px; padding: 12px 14px; min-height: 64px; display: flex; flex-direction: column; gap: 2px">
+              <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 19px; text-transform: uppercase; color: #0D1117">{{t.name}}</span>
+              <span style="font-size: 14px; color: #2B3340">{{t.price}}</span>
+            </button>
+          </sc-for>
+        </div>
+      </fieldset>
+      <fieldset style="border: 0; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px">
+        <legend style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 20px; text-transform: uppercase; margin-bottom: 10px">2. Options à la carte</legend>
+        <span style="font-size: 15px; color: #2B3340; background: #F4F2EE; border-radius: 6px; padding: 10px 12px">{{optNote}}</span>
+        <sc-for list="{{optPick}}" as="o" hint-placeholder-count="4">
+          <label style="display: flex; gap: 12px; align-items: center; min-height: 44px; font-size: 16px; cursor: pointer">
+            <input type="checkbox" checked="{{o.on}}" onChange="{{o.toggle}}" style="width: 22px; height: 22px; accent-color: #E0301E">
+            <span style="flex: 1">{{o.t}}</span>
+            <span style="font-weight: 600">{{o.p}}</span>
+          </label>
+        </sc-for>
+      </fieldset>
+      <fieldset style="border: 0; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+        <legend style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 20px; text-transform: uppercase; margin-bottom: 10px">3. Vos coordonnées</legend>
+        <label style="display: flex; flex-direction: column; gap: 4px; font-size: 14px; font-weight: 600">Entreprise<input type="text" style="height: 44px; border: 1px solid #B8C0CC; border-radius: 6px; padding: 0 12px; font-size: 16px"></label>
+        <label style="display: flex; flex-direction: column; gap: 4px; font-size: 14px; font-weight: 600">Nom du contact<input type="text" style="height: 44px; border: 1px solid #B8C0CC; border-radius: 6px; padding: 0 12px; font-size: 16px"></label>
+        <label style="display: flex; flex-direction: column; gap: 4px; font-size: 14px; font-weight: 600">E-mail<input type="email" style="height: 44px; border: 1px solid #B8C0CC; border-radius: 6px; padding: 0 12px; font-size: 16px"></label>
+        <label style="display: flex; flex-direction: column; gap: 4px; font-size: 14px; font-weight: 600">Téléphone<input type="tel" style="height: 44px; border: 1px solid #B8C0CC; border-radius: 6px; padding: 0 12px; font-size: 16px"></label>
+        <label style="grid-column: span 2; display: flex; flex-direction: column; gap: 4px; font-size: 14px; font-weight: 600">Message<textarea rows="3" style="border: 1px solid #B8C0CC; border-radius: 6px; padding: 10px 12px; font-size: 16px; font-family: inherit"></textarea></label>
+      </fieldset>
+    </form>
+    <aside style="flex: 1 1 300px; background: #0D1117; color: #FFFFFF; border-radius: 10px; padding: 28px; display: flex; flex-direction: column; gap: 14px">
+      <h3 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 22px; text-transform: uppercase">Récapitulatif</h3>
+      <div style="display: flex; justify-content: space-between; font-size: 16px"><span>Palier {{tierName}}</span><span>{{tierFrom}}</span></div>
+      <sc-for list="{{chosen}}" as="c" hint-placeholder-count="1">
+        <div style="display: flex; justify-content: space-between; font-size: 15px; color: #E9ECF1"><span>{{c.t}}</span><span>{{c.p}}</span></div>
+      </sc-for>
+      <div style="border-top: 1px solid #2B3340; padding-top: 12px; display: flex; justify-content: space-between; align-items: baseline">
+        <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 18px; text-transform: uppercase">{{totalLabel}}</span>
+        <span style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 44px">{{total}} €</span>
+      </div>
+      <span style="font-size: 13px; color: #B8C0CC">Montant indicatif, ajusté avec vous.</span>
+      <button type="button" data-mailto="bclislois32@gmail.com,leclubusbl32@gmail.com" data-subject="Demande de partenariat" style="border: 0; cursor: pointer; background: #E0301E; color: #FFFFFF; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-style: italic; font-size: 19px; text-transform: uppercase; height: 50px; border-radius: 4px">Envoyer ma demande</button>
+      <span style="font-size: 13px; color: #B8C0CC">Vous recevez le bon de commande en PDF et un contact du pôle partenariats sous [x] jours.</span>
+    </aside>
+  </section>
+
+  <dc-import name="Footer" hint-size="100%,330px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4100}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { tier: 'Titulaire', opts: {} }; }
+  renderVals() {
+    const tiers = [
+      { name: 'Supporter', price: 'Don, dès 20 €', min: 20, max: 0, perks: ['Don avec reçu fiscal', 'Nom sur le mur des partenaires', 'Merci public'], bg: '#FFFFFF', fg: '#0D1117' },
+      { name: '6ème Homme', price: '100 à 299 €', min: 100, max: 299, perks: ['1 support au choix', 'Carte avantages licenciés', 'Logo digital + invitation match'], bg: '#FFFFFF', fg: '#0D1117' },
+      { name: 'Titulaire', price: '300 à 699 €', min: 300, max: 699, perks: ['2 supports combinés', 'Story dédiée', 'Invitation VIP'], bg: '#FFFFFF', fg: '#0D1117' },
+      { name: 'Capitaine', price: '700 à 1 499 €', min: 700, max: 1499, perks: ['Maillots, panneau, affiche ou écocups', 'Partenaire de match', 'Tout Titulaire'], bg: '#0D1117', fg: '#FFFFFF' },
+      { name: 'MVP', price: '1 500 € et +', min: 1500, max: Infinity, perks: ['Combo complet', 'Naming d’un événement', 'Exclusivité dans votre secteur'], bg: '#E0301E', fg: '#FFFFFF' }
+    ];
+    const eur = (v) => v.toLocaleString('fr-FR') + ' €';
+    // Une seule liste : sert au tableau « À la carte » et au bon de commande (mêmes réf. que le PDF)
+    const lines = [
+      { id: 'l1', g: 'pan', t: 'Panneau alu dibond (100 × 250 cm)', v: 999 },
+      { id: 'l2', g: 'pop', t: 'Pop-out recto-verso (1re année)', v: 499 },
+      { id: 'l3', g: 'pop', t: 'Pop-out (2e année)', v: 299, renew: true },
+      { id: 'l4', g: 'roll', t: 'Roll-up (1re année)', v: 399 },
+      { id: 'l5', g: 'roll', t: 'Roll-up (2e année)', v: 299, renew: true },
+      { id: 'l6', g: 'char', t: 'Encart sur chariot à ballons', v: 399 },
+      { id: 'l7', g: 'mj', t: 'Jeu de maillots (2 saisons)', v: 749 },
+      { id: 'l8', g: 'mj1', t: 'Jeu de maillots équipe 1 (2 saisons)', v: 899 },
+      { id: 'l9', g: 'sm', t: 'Surmaillots (12 joueuses)', v: 299 },
+      { id: 'l10', g: 'dig', t: 'Pack digital', v: 149 },
+      { id: 'l11', g: 'mini', t: 'Parrainage d’un événement mini-basket', v: 199 },
+      { id: 'l12', g: 'eco1', t: 'Écocups floqués, exclusif (1re saison)', v: 799 },
+      { id: 'l13', g: 'eco1', t: 'Écocups floqués, exclusif (saisons suivantes)', v: 299, renew: true },
+      { id: 'l14', g: 'eco2', t: 'Écocups partagés (1re saison)', v: 299 },
+      { id: 'l15', g: 'eco2', t: 'Écocups partagés (saisons suivantes)', v: 99, renew: true },
+      { id: 'l16', g: 'aff', t: 'Affiche « Matchs du week-end » exclusive', v: 499 },
+      { id: 'l17', g: 'carte', t: 'Carte avantages licenciés', v: 99 }
+    ];
+    const groups = [
+      { g: 'pan', t: 'Panneau publicitaire alu dibond', d: '100 × 250 cm, dans la salle principale' },
+      { g: 'pop', t: 'Panneau Pop-out recto-verso', d: 'Au bord du terrain, les jours de match' },
+      { g: 'roll', t: 'Roll-up', d: 'À l’entrée de la salle et lors des événements' },
+      { g: 'char', t: 'Encart sur chariot à ballons', d: 'Visible à chaque échauffement' },
+      { g: 'mj1', t: 'Jeu de maillots équipe 1', d: 'Votre logo sur les maillots d’une équipe première, la vitrine du club (couvre 2 saisons)' },
+      { g: 'mj', t: 'Jeu de maillots', d: 'Votre logo sur les maillots d’une équipe (couvre 2 saisons)' },
+      { g: 'sm', t: 'Surmaillots', d: 'Votre logo sur les surmaillots personnalisés d’une équipe (12 joueuses)' },
+      { g: 'dig', t: 'Pack digital', d: 'Logo sur le site + 1 post et 2 stories Instagram dédiés', nw: true },
+      { g: 'mini', t: 'Parrainage d’un événement mini-basket', d: 'Goûter, tournoi : votre nom associé à l’événement', nw: true },
+      { g: 'eco1', t: 'Écocups floqués, exclusif', d: 'Votre logo seul sur les gobelets de la buvette', nw: true },
+      { g: 'eco2', t: 'Écocups partagés', d: 'Jusqu’à 3 partenaires', nw: true },
+      { g: 'aff', t: 'Affiche « Matchs du week-end » exclusive', d: 'Votre logo sur l’affiche hebdomadaire (env. 30 affiches)', nw: true },
+      { g: 'carte', t: 'Carte avantages licenciés', d: 'Votre offre réservée aux familles du club', nw: true }
+    ];
+    const extras = groups.map((x) => {
+      const ls = lines.filter((l) => l.g === x.g);
+      const first = ls.find((l) => !l.renew); const next = ls.find((l) => l.renew);
+      return { t: x.nw ? x.t + ' · Nouveau' : x.t, d: x.d, p1: eur(first.v), p2: next ? eur(next.v) : '—' };
+    });
+    const { tier, opts } = this.state;
+    const t = tiers.find((x) => x.name === tier) || tiers[2];
+    const tierPick = tiers.map((x) => {
+      const on = x.name === tier;
+      return { name: x.name, price: x.price, pressed: on ? 'true' : 'false', border: on ? '#E0301E' : '#E4E0D8', bg: on ? '#FDECEA' : '#FFFFFF', pick: () => this.setState({ tier: x.name }) };
+    });
+    // Le palier choisi filtre les options : on ne montre que celles dont le prix ne dépasse pas son plafond
+    const visible = lines.filter((l) => l.v <= t.max);
+    const optPick = visible.map((x) => ({ t: x.t, p: eur(x.v), on: !!opts[x.id], toggle: () => this.setState({ opts: { ...opts, [x.id]: !opts[x.id] } }) }));
+    const sel = visible.filter((x) => opts[x.id]);
+    const chosen = sel.map((x) => ({ t: x.t, p: eur(x.v) }));
+    const sum = sel.reduce((s, x) => s + x.v, 0);
+    const reached = [...tiers].reverse().find((x) => x.max > 0 && sum >= x.min);
+    let optNote = '';
+    if (t.max === 0) optNote = 'Le palier Supporter est un don : il ne comprend pas d’options à la carte.';
+    else if (!sum) optNote = (t.max === Infinity ? 'Toutes les options sont possibles' : visible.length + ' options possibles jusqu’à ' + eur(t.max)) + '. Cochez celles qui vous intéressent.';
+    else if (sum < t.min) optNote = 'Encore ' + eur(t.min - sum) + ' pour atteindre le palier ' + t.name + '.';
+    else if (sum > t.max) optNote = 'Votre sélection vous fait passer au palier ' + (reached ? reached.name : t.name) + '.';
+    else optNote = 'Votre sélection correspond au palier ' + t.name + '.';
+    const total = sum || t.min;
+    const wall = [
+      ...[{ name: 'Mairie de L’Isle-Jourdain', logo: '/_blob/50c124b1f31af8b537ceac024f047c68' }, { name: 'Communauté de communes de la Gascogne Toulousaine', logo: '/_blob/725ff66fcc989790bc148fcd49fc598d' }, { name: 'Office intercommunal du sport de la Gascogne Toulousaine', logo: '/_blob/c3e56283244fbe70e1cabf52a033f5b6' }, { name: 'Auto-école Captain Conduite', logo: '/_blob/50857cdd6d1a1db9b9926602a135934d' }].map((x) => ({ ...x, img: 'block', txt: 'none', href: '#', bg: '#FFFFFF', border: 'solid #FFFFFF' })),
+      ...[1, 2, 3, 4].map(() => ({ name: 'Votre logo ici', logo: '', img: 'none', txt: 'flex', href: '#commande', bg: 'transparent', border: 'dashed #B8C0CC' }))
+    ];
+    return { tiers, extras, tierPick, optPick, optNote, chosen, tierName: t.name, tierFrom: t.price, totalLabel: sum ? 'Votre sélection' : 'À partir de', total: total.toLocaleString('fr-FR'), wall };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Matchs et résultats</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&amp;family=Barlow:wght@400;500;600;700&amp;family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800&amp;display=swap">
+<style>
+body{margin:0;background:#0D1117}
+a{color:#0D1117}a:hover{color:#C2361B}
+</style>
+</helmet>
+<div style="font-family: 'Barlow', system-ui, sans-serif; color: #0D1117; background: #F4F2EE; min-width: 0">
+  <dc-import name="Header" active="matchs" hint-size="100%,124px"></dc-import>
+
+  <section style="background: #0D1117; color: #FFFFFF">
+    <div style="max-width: 1320px; margin: 0 auto; padding: 56px 32px 0; display: flex; flex-direction: column; gap: 14px">
+      <div style="font-size: 14px; color: #B8C0CC"><a href="MainV2.dc.html" style="color: #B8C0CC">Accueil</a> / Matchs &amp; résultats</div>
+      <h1 style="margin: 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 88px; line-height: 0.9; text-transform: uppercase">Matchs &amp; résultats</h1>
+      <p style="margin: 0; font-size: 17px; color: #B8C0CC">Données de la FFBB, mises à jour automatiquement.</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; align-items: flex-end; margin-top: 18px">
+        <div role="tablist" aria-label="Rubriques" style="display: flex; gap: 4px">
+          <sc-for list="{{tabs}}" as="t" hint-placeholder-count="3">
+            <button type="button" role="tab" aria-selected="{{t.sel}}" onClick="{{t.pick}}" style="border: 0; cursor: pointer; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 20px; text-transform: uppercase; padding: 14px 22px; min-height: 52px; border-radius: 6px 6px 0 0; background: {{t.bg}}; color: {{t.fg}}">{{t.label}}</button>
+          </sc-for>
+        </div>
+        <div style="display: flex; gap: 8px; align-items: center; padding-bottom: 8px; flex-wrap: wrap">
+          <sc-for list="{{filters}}" as="f" hint-placeholder-count="3">
+            <button type="button" onClick="{{f.pick}}" aria-pressed="{{f.pressed}}" style="border: 1px solid #4A5260; cursor: pointer; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 16px; text-transform: uppercase; padding: 0 14px; height: 44px; border-radius: 999px; background: {{f.bg}}; color: {{f.fg}}">{{f.label}}</button>
+          </sc-for>
+          <button type="button" onClick="{{toggleHome}}" aria-pressed="{{homePressed}}" style="border: 1px solid #4A5260; cursor: pointer; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 16px; text-transform: uppercase; padding: 0 14px; height: 44px; border-radius: 999px; background: {{homeBg}}; color: {{homeFg}}">À domicile uniquement</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bandeau supporters -->
+  <section style="max-width: 1320px; margin: 0 auto; padding: 40px 32px 0">
+    <div style="background: #E0301E; color: #FFFFFF; border-radius: 10px; padding: 28px 32px; display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: space-between">
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase">Ce week-end au gymnase municipal</span>
+        <span style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 44px; line-height: 0.95; text-transform: uppercase">Venez supporter nos équipes !</span>
+        <span style="font-size: 16px">{{homeCount}} matchs à domicile · entrée libre · buvette sur place</span>
+      </div>
+      <button type="button" onClick="{{showHome}}" style="border: 0; cursor: pointer; background: #0D1117; color: #FFFFFF; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-style: italic; font-size: 18px; text-transform: uppercase; padding: 0 22px; height: 48px; border-radius: 4px">Voir les matchs à domicile</button>
+    </div>
+  </section>
+
+  <!-- Suivre une équipe -->
+  <section id="suivre" style="max-width: 1320px; margin: 0 auto; padding: 24px 32px 0">
+    <div style="background: #FFFFFF; border-radius: 10px; padding: 24px 28px; display: flex; flex-wrap: wrap; gap: 18px 32px; align-items: center; border-left: 6px solid #E0301E">
+      <div style="flex: 1 1 300px; display: flex; flex-direction: column; gap: 4px">
+        <h2 style="margin: 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 34px; line-height: 1; text-transform: uppercase">Suivre une équipe</h2>
+        <span style="font-size: 15px; color: #4A5260">Tous ses matchs dans votre agenda, mis à jour automatiquement.</span>
+      </div>
+      <label style="flex: 0 1 260px; display: flex; flex-direction: column; gap: 4px; font-size: 14px; font-weight: 600">Équipe
+        <select onChange="{{pickTeam}}" style="height: 48px; border: 1px solid #B8C0CC; border-radius: 6px; padding: 0 12px; font-size: 16px; background: #FFFFFF; font-family: inherit">
+          <sc-for list="{{teams}}" as="t" hint-placeholder-count="8"><option value="{{t.v}}" selected="{{t.sel}}">{{t.v}}</option></sc-for>
+        </select>
+      </label>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px">
+        <button type="button" onClick="{{subscribe}}" style="border: 0; cursor: pointer; background: #0D1117; color: #FFFFFF; height: 48px; padding: 0 18px; border-radius: 4px; display: inline-flex; align-items: center; gap: 10px; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 17px; text-transform: uppercase">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h18v16H3zM3 10h18M8 3v4M16 3v4"></path></svg>Google Agenda
+        </button>
+        <button type="button" onClick="{{subscribe}}" style="border: 2px solid #0D1117; cursor: pointer; background: #FFFFFF; color: #0D1117; height: 48px; padding: 0 18px; border-radius: 4px; display: inline-flex; align-items: center; gap: 10px; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 17px; text-transform: uppercase">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h18v16H3zM3 10h18M8 3v4M16 3v4"></path></svg>iPhone / Outlook
+        </button>
+      </div>
+      <sc-if value="{{done}}" hint-placeholder-val="{{ false }}">
+        <div role="status" style="flex: 1 1 100%; background: #FDECEA; border-radius: 6px; padding: 12px 16px; font-size: 15px">
+          <strong>C'est fait !</strong> Les matchs des {{team}} vont apparaître dans votre agenda. Un horaire change ? Votre agenda se met à jour tout seul. La page s'ouvrira désormais sur « Mon équipe : {{team}} ».
+        </div>
+      </sc-if>
+    </div>
+  </section>
+
+  <section style="max-width: 1320px; margin: 0 auto; padding: 40px 32px 80px; display: flex; flex-direction: column; gap: 16px">
+
+    <sc-if value="{{isCal}}" hint-placeholder-val="{{ true }}">
+      <sc-for list="{{calendar}}" as="w" hint-placeholder-count="2">
+        <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px">
+          <h2 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 24px; text-transform: uppercase; border-bottom: 2px solid #0D1117; padding-bottom: 6px">{{w.title}}</h2>
+          <sc-for list="{{w.rows}}" as="m" hint-placeholder-count="4">
+            <div style="background: #FFFFFF; border-radius: 6px; display: grid; grid-template-columns: 110px 140px 1fr 150px 130px; gap: 12px; align-items: center; padding: 14px 18px; border-left: 6px solid {{m.color}}">
+              <span style="font-weight: 600">{{m.day}}</span>
+              <span style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: 24px">{{m.cat}}</span>
+              <span style="font-size: 16px">{{m.versus}}</span>
+              <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 15px; text-transform: uppercase; color: {{m.haColor}}">{{m.ha}}</span>
+              <span style="font-size: 14px; color: #4A5260">{{m.place}}</span>
+            </div>
+          </sc-for>
+        </div>
+      </sc-for>
+    </sc-if>
+
+    <sc-if value="{{isRes}}" hint-placeholder-val="{{ false }}">
+      <h2 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 24px; text-transform: uppercase; border-bottom: 2px solid #0D1117; padding-bottom: 6px">Week-end du [jj/mm]</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px">
+        <sc-for list="{{results}}" as="r" hint-placeholder-count="4">
+          <div style="background: #0D1117; color: #FFFFFF; border-radius: 8px; padding: 18px; border-top: 5px solid {{r.color}}; display: flex; flex-direction: column; gap: 8px">
+            <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px; text-transform: uppercase; color: #B8C0CC">{{r.club}} · {{r.cat}} · {{r.ha}}</span>
+            <span style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 48px; line-height: 1">[xx – xx]</span>
+            <span style="font-size: 15px">vs {{r.opp}}</span>
+            <a href="#" style="color: #FFFFFF; font-weight: 600; font-size: 14px">Feuille de match →</a>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{isRank}}" hint-placeholder-val="{{ false }}">
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center">
+        <label for="team" style="font-weight: 600">Équipe :</label>
+        <select id="team" style="font-family: 'Barlow', sans-serif; font-size: 16px; height: 44px; padding: 0 12px; border-radius: 6px; border: 1px solid #B8C0CC; background: #FFFFFF">
+          <option>Seniors F · BCL</option><option>Seniors M · USBL</option><option>U18 F · BCL</option><option>U18 M · USBL</option><option>[…]</option>
+        </select>
+        <span style="font-size: 14px; color: #4A5260">Championnat : [nom de la poule]</span>
+      </div>
+      <div style="background: #FFFFFF; border-radius: 8px; overflow-x: auto">
+        <table style="width: 100%; border-collapse: collapse; font-size: 16px; min-width: 640px">
+          <thead>
+            <tr style="background: #0D1117; color: #FFFFFF; font-family: 'Barlow Condensed', sans-serif; text-transform: uppercase; font-size: 15px; text-align: left">
+              <th scope="col" style="padding: 12px 16px">Rang</th><th scope="col" style="padding: 12px 16px">Équipe</th><th scope="col" style="padding: 12px 16px">Joués</th><th scope="col" style="padding: 12px 16px">Gagnés</th><th scope="col" style="padding: 12px 16px">Perdus</th><th scope="col" style="padding: 12px 16px">Points</th>
+            </tr>
+          </thead>
+          <tbody>
+            <sc-for list="{{ranking}}" as="t" hint-placeholder-count="6">
+              <tr style="border-bottom: 1px solid #E4E0D8; background: {{t.bg}}; font-weight: {{t.fw}}">
+                <td style="padding: 12px 16px">{{t.rank}}</td><td style="padding: 12px 16px">{{t.name}}</td><td style="padding: 12px 16px">[–]</td><td style="padding: 12px 16px">[–]</td><td style="padding: 12px 16px">[–]</td><td style="padding: 12px 16px">[–]</td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </div>
+    </sc-if>
+  </section>
+
+  <dc-import name="Footer" hint-size="100%,330px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2300}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { tab: 'cal', sexe: 'tous', home: false, team: 'U13 F · BCL', done: false }; }
+  renderVals() {
+    const GOLD = '#F2C14E', RED = '#E0301E';
+    const { tab, sexe, home } = this.state;
+    const tabs = [['cal', 'Calendrier'], ['res', 'Résultats'], ['rank', 'Classements']].map(([id, label]) => {
+      const on = tab === id;
+      return { label, sel: on ? 'true' : 'false', bg: on ? '#F4F2EE' : '#3D4654', fg: on ? '#0D1117' : '#FFFFFF', pick: () => this.setState({ tab: id }) };
+    });
+    const filters = [['tous', 'Tous'], ['f', 'Filles · BCL'], ['m', 'Garçons · USBL']].map(([id, label]) => {
+      const on = sexe === id;
+      return { label, pressed: on ? 'true' : 'false', bg: on ? (id === 'f' ? RED : id === 'm' ? GOLD : '#FFFFFF') : 'transparent', fg: on ? (id === 'f' ? '#FFFFFF' : '#0D1117') : '#E9ECF1', pick: () => this.setState({ sexe: id }) };
+    });
+    const mk = (day, cat, s, dom) => ({ day, cat: cat + (s === 'f' ? ' F' : ' M'), s, dom, color: s === 'f' ? RED : GOLD,
+      versus: dom ? 'L’Isle-Jourdain vs [Adversaire]' : '[Adversaire] vs L’Isle-Jourdain', ha: dom ? 'Domicile' : 'Extérieur', haColor: dom ? '#C2361B' : '#4A5260', place: dom ? 'Gymnase municipal' : '[Ville]' });
+    const keep = (m) => (sexe === 'tous' || m.s === sexe) && (!home || m.dom);
+    const all = [
+      { title: 'Samedi [jj/mm] et dimanche [jj/mm]', rows: [mk('Sam. [hh:mm]', 'U11', 'f', true), mk('Sam. [hh:mm]', 'U13', 'm', false), mk('Sam. [hh:mm]', 'U18', 'f', false), mk('Sam. [hh:mm]', 'Seniors', 'm', true), mk('Dim. [hh:mm]', 'U15', 'm', true), mk('Dim. [hh:mm]', 'Seniors', 'f', true)] },
+      { title: 'Samedi [jj/mm] et dimanche [jj/mm]', rows: [mk('Sam. [hh:mm]', 'U9', 'm', true), mk('Sam. [hh:mm]', 'U15', 'f', true), mk('Sam. [hh:mm]', 'U18', 'm', false), mk('Dim. [hh:mm]', 'Seniors', 'f', false)] }
+    ];
+    const homeCount = all[0].rows.filter((m) => m.dom).length;
+    const calendar = all.map((w) => ({ ...w, rows: w.rows.filter(keep) }));
+    const results = [mk('', 'Seniors', 'm', true), mk('', 'U18', 'f', false), mk('', 'U15', 'f', true), mk('', 'U11', 'm', false)]
+      .filter(keep).map((r) => ({ ...r, club: r.s === 'f' ? 'BCL' : 'USBL', opp: '[Adversaire]' }));
+    const ranking = ['[Équipe]', '[Équipe]', 'L’Isle-Jourdain', '[Équipe]', '[Équipe]', '[Équipe]'].map((name, i) => ({ rank: String(i + 1), name, bg: name.startsWith('L’Isle') ? '#FDECEA' : '#FFFFFF', fw: name.startsWith('L’Isle') ? '700' : '400' }));
+    const teamList = [];
+    const TEAMS_F = ['U5–U7', 'U9 1', 'U9 2', 'U11', 'U13 1', 'U13 2', 'U15', 'U18', 'Seniors 1', 'Seniors 2'];
+    const TEAMS_M = ['U5–U7', 'U9 1', 'U9 2', 'U9 3', 'U11', 'U13', 'U15 1', 'U15 2', 'U18 1', 'U18 2', 'Seniors 1', 'Seniors 2'];
+    TEAMS_F.forEach((c) => teamList.push(c + ' F · BCL')); TEAMS_M.forEach((c) => teamList.push(c + ' M · USBL')); teamList.push('Loisirs · BCL + USBL');
+    const teams = teamList.map((v) => ({ v, sel: v === this.state.team }));
+    return {
+      teams, team: this.state.team, done: this.state.done,
+      pickTeam: (e) => this.setState({ team: e.target.value, done: false }),
+      subscribe: () => this.setState({ done: true }),
+      tabs, filters, calendar, results, ranking, homeCount: String(homeCount),
+      isCal: tab === 'cal', isRes: tab === 'res', isRank: tab === 'rank',
+      homePressed: home ? 'true' : 'false', homeBg: home ? '#E0301E' : 'transparent', homeFg: '#FFFFFF',
+      toggleHome: () => this.setState({ home: !home }),
+      showHome: () => this.setState({ home: true, tab: 'cal' })
+    };
+  }
+}
+</script>
+</body>
+</html>

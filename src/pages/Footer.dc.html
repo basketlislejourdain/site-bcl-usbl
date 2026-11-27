@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Pied de page du site</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&amp;family=Barlow:wght@400;500;600;700&amp;family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<footer style="font-family: 'Barlow', system-ui, sans-serif; background: #06080C; color: #B8C0CC">
+  <div style="max-width: 1320px; margin: 0 auto; padding: 56px 32px 32px; display: flex; flex-direction: column; gap: 40px">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 32px; font-size: 15px">
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <div style="display: flex; gap: 8px; align-items: center">
+          <span style="width: 48px; height: 48px; border-radius: 50%; background: #FFFFFF; display: flex; align-items: center; justify-content: center"><img src="/_blob/c5c3fe201d7f7c8fa6e0dab2d91c204f" alt="Logo Basket Club Lislois" style="width: 42px; height: 42px; object-fit: contain"></span>
+          <span style="width: 48px; height: 48px; border-radius: 50%; background: #FFFFFF; display: flex; align-items: center; justify-content: center"><img src="/_blob/bbd5c9e526a35a3f5e0473ee5c4e7bd9" alt="Logo USBL" style="width: 40px; height: 40px; object-fit: contain"></span>
+        </div>
+        <span>BCL, section féminine · USBL, section masculine. Le basket à L'Isle-Jourdain (Gers).</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <div style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 16px; color: #FFFFFF; text-transform: uppercase; letter-spacing: 0.08em">Les clubs</div>
+        <a href="Clubs.dc.html" style="color: #B8C0CC; text-decoration: none">BCL — section féminine</a>
+        <a href="Clubs.dc.html" style="color: #B8C0CC; text-decoration: none">USBL — section masculine</a>
+        <a href="Clubs.dc.html" style="color: #B8C0CC; text-decoration: none">Projet commun</a>
+        <a href="Engagements.dc.html" style="color: #B8C0CC; text-decoration: none">Nos engagements</a>
+        <a href="Clubs.dc.html" style="color: #B8C0CC; text-decoration: none">Documents</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <div style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 16px; color: #FFFFFF; text-transform: uppercase; letter-spacing: 0.08em">Jouer</div>
+        <a href="Infos.dc.html" style="color: #B8C0CC; text-decoration: none">S'inscrire</a>
+        <a href="Equipes.dc.html" style="color: #B8C0CC; text-decoration: none">Équipes et créneaux</a>
+        <a href="Matchs.dc.html" style="color: #B8C0CC; text-decoration: none">Matchs et résultats</a>
+        <a href="Infos.dc.html" style="color: #B8C0CC; text-decoration: none">FAQ parents et joueurs</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <div style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 16px; color: #FFFFFF; text-transform: uppercase; letter-spacing: 0.08em">S'engager</div>
+        <a href="Benevoles.dc.html" style="color: #B8C0CC; text-decoration: none">Devenir bénévole</a>
+        <a href="Partenaires.dc.html" style="color: #B8C0CC; text-decoration: none">Devenir partenaire</a>
+        <a href="Evenements.dc.html" style="color: #B8C0CC; text-decoration: none">Événements</a>
+        
+      </div>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; border-top: 1px solid #1B222D; padding-top: 20px; font-size: 14px">
+      <span>© 2026 BCL · USBL</span>
+      <div style="display: flex; flex-wrap: wrap; gap: 20px">
+        <a href="Infos.dc.html#mentions" style="color: #B8C0CC; text-decoration: none">Mentions légales</a>
+        <a href="Infos.dc.html#confidentialite" style="color: #B8C0CC; text-decoration: none">Confidentialité (RGPD)</a>
+        <a href="#" style="color: #B8C0CC; text-decoration: none">Espace administrateur</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":330}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

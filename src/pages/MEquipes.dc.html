@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Équipes — mobile</title>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;background:#F4F2EE}
+</style>
+</helmet>
+<div style="width: 390px; background: #F4F2EE; font-family: 'Barlow', system-ui, sans-serif; color: #0D1117; overflow-x: hidden">
+<dc-import name="MHeader"></dc-import>
+<section style="background: #0D1117; color: #FFFFFF; border-bottom: 5px solid #E0301E; padding: 28px 16px 30px; display: flex; flex-direction: column; gap: 12px">
+<div style="font-size: 13px; color: #B8C0CC"><a href="index.html" style="color: #B8C0CC">Accueil</a> / Équipes</div>
+<h1 style="margin: 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; text-transform: uppercase; font-size: 40px; line-height: 1.04">Équipes &amp; créneaux</h1>
+<p style="margin: 0; font-size: 16px; line-height: 1.5; color: #E9ECF1">Filles et garçons à chaque niveau. Les filles jouent au BCL, les garçons à l’USBL.</p>
+<div role="group" aria-label="Filtrer" style="display: flex; gap: 4px; background: #1B222D; padding: 4px; border-radius: 6px">
+<sc-for list="{{mFilters}}" as="f"><button type="button" onClick="{{f.pick}}" aria-pressed="{{f.pressed}}" style="flex: 1; height: 44px; border: 0; cursor: pointer; border-radius: 4px; background: {{f.bg}}; color: {{f.fg}}; display: flex; align-items: center; justify-content: center; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 15px; text-transform: uppercase">{{f.label}}</button></sc-for>
+</div>
+</section>
+<section style="padding: 28px 16px 0; display: flex; flex-direction: column; gap: 8px">
+<div style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: #4A5260">Planning de la semaine</div>
+<h2 style="margin: 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; text-transform: uppercase; font-size: 34px; line-height: 1.02; color: #0D1117">Trouver un créneau</h2>
+<label style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px">Choisir une équipe<select onChange="{{pickTeamSelect}}" style="height: 48px; border: 2px solid #0D1117; border-radius: 6px; background: #FFFFFF; padding: 0 12px; font: inherit; font-size: 16px; color: #0D1117"><option value="" selected="{{noTeam}}">Toutes les équipes</option><sc-for list="{{teamGroups}}" as="g"><optgroup label="{{g.label}}"><sc-for list="{{g.teams}}" as="t"><option value="{{t.v}}" selected="{{t.sel}}">{{t.label}}</option></sc-for></optgroup></sc-for></select></label>
+<a href="/_blob/7218d6e113d9da81361116e972ec407b" target="_blank" rel="noopener" style="font-weight: 600; font-size: 15px; color: #0D1117; min-height: 40px; display: inline-flex; align-items: center">Télécharger le planning (PDF) →</a>
+<sc-for list="{{mDays}}" as="d">
+<button type="button" onClick="{{d.toggle}}" aria-expanded="{{d.expanded}}" style="width: 100%; border: 0; cursor: pointer; text-align: left; background: {{d.bg}}; color: {{d.fg}}; border-radius: 6px; padding: 12px 14px; display: flex; justify-content: space-between; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 17px; text-transform: uppercase"><span>{{d.name}}</span><span aria-hidden="true" style="color: {{d.signColor}}">{{d.sign}}</span></button>
+<sc-if value="{{d.on}}"><sc-for list="{{d.slots}}" as="s">
+<div style="background: #FFFFFF; border-radius: 6px; overflow: hidden; display: flex"><span style="flex: none; width: 5px; background: {{s.strip}}"></span><div style="flex: 1; padding: 10px 12px; display: flex; justify-content: space-between; gap: 10px; align-items: center"><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; text-transform: uppercase; font-size: 18px; line-height: 1.05">{{s.cat}}</span><span style="font-size: 12px; color: #4A5260">{{s.who}} · {{s.place}}</span></span><span style="font-size: 13px; text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 3px; flex: none"><strong>{{s.time}}</strong><span style="background: {{s.rbg}}; color: {{s.rc}}; font-weight: 700; border-radius: 3px; padding: 1px 6px">{{s.code}}</span></span></div></div>
+</sc-for></sc-if>
+</sc-for>
+<sc-if value="{{noSlot}}"><p style="margin: 0; font-size: 15px; color: #4A5260">Aucun créneau pour cette sélection.</p></sc-if>
+<div style="display: flex; flex-wrap: wrap; gap: 6px; font-size: 12px; margin-top: 6px"><sc-for list="{{legend}}" as="l"><span style="background: {{l.bg}}; color: {{l.c}}; font-weight: 700; border-radius: 3px; padding: 2px 7px">{{l.code}} · {{l.n}}</span></sc-for></div>
+</section>
+<section style="padding: 32px 16px 36px; display: flex; flex-direction: column; gap: 10px">
+<h2 style="margin: 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; text-transform: uppercase; font-size: 34px; line-height: 1.02; color: #0D1117">Les catégories</h2>
+<p style="margin: 0; font-size: 14px; color: #4A5260">Touchez une catégorie pour voir ses équipes, leurs coachs et leurs créneaux.</p>
+<sc-for list="{{mCats}}" as="c">
+<article style="background: #FFFFFF; border-radius: 10px; overflow: hidden">
+<button type="button" onClick="{{c.toggle}}" aria-expanded="{{c.expanded}}" style="width: 100%; border: 0; cursor: pointer; text-align: left; background: {{c.headBg}}; color: {{c.headFg}}; padding: 12px 16px; display: flex; align-items: center; gap: 12px; font-family: inherit"><span style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 30px; line-height: 1; min-width: 92px">{{c.code}}</span><span style="flex: 1; font-size: 13px; color: {{c.subFg}}">{{c.label}} · {{c.count}}</span><span aria-hidden="true" style="font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: 26px; color: #E0301E">{{c.sign}}</span></button>
+<sc-if value="{{c.on}}"><sc-for list="{{c.rows}}" as="r">
+<div style="padding: 12px 16px; border-top: 1px solid #E4E0D8; display: flex; gap: 12px">
+<sc-if value="{{r.photo}}"><a href="{{r.photo}}" target="_blank" rel="noopener" style="flex: none"><img src="{{r.photo}}" alt="Photo de l'équipe {{r.who}}" loading="lazy" style="display: block; width: 96px; height: 64px; border-radius: 6px; object-fit: cover"></a></sc-if>
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 5px">
+<span style="align-self: flex-start; background: {{r.color}}; color: {{r.ink}}; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 13px; text-transform: uppercase; padding: 2px 8px; border-radius: 3px">{{r.who}}</span>
+<span style="font-size: 12px; color: #4A5260">Niveau : {{r.level}}</span>
+<span style="font-size: 13px; color: {{r.coachInk}}"><strong style="color: #0D1117">Coach :</strong> {{r.coach}}</span>
+<sc-for list="{{r.slots}}" as="s"><span style="font-size: 12px; display: flex; gap: 5px; align-items: center"><span style="flex: none; background: {{s.rbg}}; color: {{s.rc}}; font-weight: 700; font-size: 11px; border-radius: 3px; padding: 1px 5px">{{s.code}}</span>{{s.txt}}</span></sc-for>
+<sc-if value="{{r.ffbb}}"><a href="{{r.ffbb}}" target="_blank" rel="noopener" style="font-size: 13px; font-weight: 600; color: #C2361B">{{r.ffbbLabel}}</a></sc-if>
+</div>
+</div>
+</sc-for></sc-if>
+</article>
+</sc-for>
+<div style="background: #E0301E; border-radius: 10px; padding: 20px; display: flex; flex-direction: column; gap: 8px; margin-top: 8px"><h2 style="margin: 0; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; text-transform: uppercase; font-size: 28px; line-height: 1.02; color: #FFFFFF">Envie d’essayer ?</h2><span style="font-size: 15px; color: #FFFFFF">Demandez une séance d’essai.</span><a href="MInfos.dc.html" style="background: #0D1117; color: #FFFFFF;  text-decoration: none; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-style: italic; font-size: 17px; text-transform: uppercase; padding: 0 18px; height: 48px; border-radius: 4px; display: flex; justify-content: center; align-items: center">S’inscrire →</a></div>
+</section>
+<dc-import name="MFooter"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":3600}}'>
+// Version mobile : reprend toutes les données et la logique de la page Équipes (ordinateur)
+const Base = DC.get('Equipes');
+class Component extends Base {
+  constructor(props) { super(props); this.state = Object.assign({}, this.state, { openDay: 'Mardi' }); }
+  renderVals() {
+    const v = super.renderVals();
+    const RED = '#E0301E', GOLD = '#F2C14E';
+    const sexe = this.state.sexe, team = this.state.team;
+    const mFilters = [['tous', 'Tous'], ['f', 'Filles · BCL'], ['m', 'Garçons · USBL']].map(([id, label]) => {
+      const on = sexe === id && !team;
+      return { label, pressed: on ? 'true' : 'false', bg: on ? (id === 'f' ? RED : id === 'm' ? GOLD : '#FFFFFF') : 'transparent',
+        fg: on ? (id === 'f' ? '#FFFFFF' : '#0D1117') : '#E9ECF1', pick: () => this.setState({ sexe: id, team: null }) };
+    });
+    // liste des équipes du menu déroulant, reprise des filtres de la version ordinateur
+    const picks = {};
+    const teamGroups = v.filters.filter((f) => f.teams.length).map((f, gi) => ({
+      label: f.label + ' · ' + f.sub,
+      teams: f.teams.map((t, ti) => { const key = gi + '-' + ti; picks[key] = t.pick; return { v: key, label: t.label, sel: t.bg !== '#F4F2EE' }; })
+    }));
+    const pickTeamSelect = (e) => { const k = e.target.value; if (!k) this.setState({ team: null }); else if (picks[k]) picks[k](); };
+    const allOpen = !!team;
+    const mDays = v.days.map((d) => {
+      const on = allOpen || this.state.openDay === d.name;
+      return { name: d.name, slots: d.slots, on, expanded: on ? 'true' : 'false', sign: on ? '–' : '+',
+        bg: on ? '#0D1117' : '#FFFFFF', fg: on ? '#FFFFFF' : '#0D1117', signColor: on ? '#FFFFFF' : RED,
+        toggle: () => { if (allOpen) return; this.setState({ openDay: on ? '' : d.name }); } };
+    });
+    const mCats = v.cats.map((c) => ({ ...c, on: c.expanded === 'true',
+      rows: c.rows.map((r) => ({ ...r, photo: r.photo || '' })) }));
+    return { ...v, mFilters, teamGroups, pickTeamSelect, noTeam: !team, mDays, mCats, noSlot: mDays.every((d) => !d.slots.length) };
+  }
+}
+</script>
+</body>
+</html>
